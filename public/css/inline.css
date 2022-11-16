@@ -1,0 +1,45 @@
+:root {
+    --theme-color: #2D4A8A;
+  }
+body{
+    background-color: #F3F2EF;
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
+}
+nav{
+    background-color: #fff;
+}
+.navbar-dark .navbar-nav .nav-link{
+    color: #000;
+}
+.navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
+    color:var(--theme-color);
+}
+.osahan-nav-top .navbar-search .form-control {
+    background: #F3F2EF;
+}
+.osahan-nav-top .navbar-search .btn {
+    background: #F3F2EF !important;
+    color: #74828e;
+}
+@media (min-width:768px){
+    .osahan-nav-top .navbar-brand img {
+        height: 51px;
+        margin: -4px 0 0;
+    }
+}
+.header_btn{
+    height: 32px !important;
+}
+
+.btn-outline-primary:hover {
+    color: #fff!important;
+    background-color: var(--theme-color);
+    border-color: var(--theme-color);
+}
+.btn-outline-primary {
+   
+    border-color: var(--theme-color);
+}
+.nav-item {
+    padding: 0 7px;
+}
