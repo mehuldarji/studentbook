@@ -20,10 +20,28 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/inline.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:600%2C400%2C500%7CRoboto:400" rel="stylesheet" property="stylesheet" media="all">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+body{
+    background-color: #fff;
+}
+footer{
+    background-color: #F3F2EF !important;
+}
+.copyright{
+    background-color: #fff;
+    padding: 7px 0;
+}
+.footerDesign{
+    padding: 15px 0;
+    padding-top: 30px;
+}
+    </style>
 </head>
 
 <body>
-
+<div class="loader" ></div>
+@include('include.msg')
     <nav class="navbar navbar-expand navbar-dark  osahan-nav-top p-0">
         <div class="container">
             <a class="navbar-brand mr-2" href="/"><img src="img/logo.png" alt="">
@@ -60,7 +78,7 @@
                 </li>
                 <li class="nav-item">
                 
-                    <a class="nav-link btn btn-outline-primary header_btn" href="connection.html"><span class="d-none d-lg-inline">Sign In</span></a>
+                    <a class="nav-link btn btn-outline-primary header_btn" href="{{ route('login') }}"><span class="d-none d-lg-inline">Sign In</span></a>
                 </li>
                 
                 

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,5 +17,15 @@ use App\Http\Controllers\LandingController;
 
 Route::resource('home', HomeController::class);
 
+// 
+Route::prefix('account')->group(function () {
+    Route::get('profile', [ProfileController::class,'index'])->name('profile.index');
+    Route::get('update-profile', [ProfileController::class, 'update'])->name('profile.update');
+    
+});
+
+
 Route::resource('/', LandingController::class);
 
+
+require __DIR__.'/auth.php';
