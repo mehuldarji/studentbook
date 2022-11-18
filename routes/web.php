@@ -21,6 +21,7 @@ Route::resource('home', HomeController::class);
 Route::prefix('account')->group(function () {
     Route::get('profile', [ProfileController::class,'index'])->name('profile.index');
     Route::get('update-profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('save-profile', [ProfileController::class, 'save'])->name('profile.save');
     
 });
 

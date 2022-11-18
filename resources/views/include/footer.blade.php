@@ -12,11 +12,116 @@
         $(".loader").fadeOut("slow");
 
     });
-   
-//    $(window).load(function() {
-//         console('sada');
-//         $(".loader").fadeOut("slow");
-//     });
+
+    //    $(window).load(function() {
+    //         console('sada');
+    //         $(".loader").fadeOut("slow");
+    //     });
+
+
+
+    // -------------------Common ajax function------------------
+
+
+    function getDataByAjax(url, peram, method, msg) {
+        console.log(url);
+        console.log(peram);
+        console.log(msg);
+        $.ajax({
+            url: url,
+            type: method,
+            data: peram,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            beforeSend: function() {
+                $('.loader').show();
+            },
+            success: function(resp) {
+
+                if (resp.success == 'done') {
+                    showMsg(msg);
+                } else if (resp.success == 'diff') {
+                    showError(resp.msg);
+                } else {
+                    showError('Data processing error, Please try sometime.');
+                }
+                $('.loader').hide();
+            }
+        })
+    }
+
+    function getDataByAjaxImage(url, peram, method, msg) {
+        console.log(url);
+        console.log(peram);
+        console.log(msg);
+        $.ajax({
+            url: url,
+            type: method,
+            data: peram,
+            contentType: false,
+            processData: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            beforeSend: function() {
+                $('.loader').show();
+            },
+            success: function(resp) {
+
+                if (resp.success == 'done') {
+                    showMsg(msg);
+                } else {
+                    showError('Data processing error, Please try sometime.');
+                }
+                $('.loader').hide();
+            }
+        })
+    }
+
+    function checkValidation(key) {
+
+        var input = $('#' + key).val();
+        if (input == '') {
+            $('#' + key).addClass('is-invalid');
+            return false;
+        } else {
+            $('#' + key).removeClass('is-invalid');
+            return true;
+        }
+
+    }
+
+    function showError(msg) {
+        $('#error').html(msg);
+        $('#mbsmessageerror').show();
+
+
+        setTimeout(function() {
+            $("#mbsmessageerror").hide();
+        }, 4000);
+
+
+    }
+
+    function showMsg(msg) {
+
+        $('#success').html(msg);
+        $('#mbsmessagesucesss').show();
+
+        setTimeout(function() {
+            $("#mbsmessagesucesss").hide();
+        }, 4000);
+
+    }
+
+
+
+
+
+
+
+    // ------------------------------------------------------
 </script>
 </body>
 

@@ -6,9 +6,9 @@
             <aside class="col col-xl-3 order-xl-1 col-lg-12 order-lg-1 col-12">
                 <div class="box mb-3 shadow-sm border rounded bg-white profile-box text-center">
                     <div class="py-4 px-3 border-bottom">
-                        <img src="{{ asset('img/p13.png')}}" class="img-fluid mt-2 rounded-circle" alt="Responsive image">
-                        <h5 class="font-weight-bold text-dark mb-1 mt-4">Gurdeep Osahan</h5>
-                        <p class="mb-0 text-muted">UI / UX Designer</p>
+                    <img onerror="this.onerror=null;this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png';" src="{{ asset('upload/users/')}}/{{ $user->photo }}" style="width: 135px; height: 135px;" id="img_prv" class="img-fluid rounded-circle" alt="Responsive image">
+                        <h5 class="font-weight-bold text-dark mb-1 mt-4">{{ $user->name }}</h5>
+                        <p class="mb-0 text-muted">{{ $user->headline }}</p>
                     </div>
                     <div class="d-flex">
                         <div class="col-6 border-right p-3">
@@ -82,9 +82,8 @@
                         <h6 class="m-0">About You</h6>
                     </div>
                     <div class="box-body p-3">
-                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-                        </p>
-                        <p class="mb-0">Find the most qualified people in the most unexpected places. Information for applicants to consider when applying for local positions. The largest community on the web to find and list jobs that aren't restricted by commutes or a specific location.
+                        <p style="    white-space: pre-line;text-align: justify;">
+                        {{ $user->about }}
                         </p>
                     </div>
                 </div>
@@ -93,28 +92,21 @@
                     <div class="box-title border-bottom p-3">
                         <h6 class="m-0">Education</h6>
                     </div>
+                    @if(count($user_education) > 0)
+                        @foreach($user_education as $row)
                     <div class="box-body p-3 border-bottom">
                         <div class="d-flex align-items-top job-item-header pb-2">
                             <div class="mr-2">
-                                <h6 class="font-weight-bold text-dark mb-0">Stanford University</h6>
-                                <div class="text-truncate text-primary">Master’s programmes</div>
-                                <div class="small text-gray-500">Oct 2020 - Present (4 year 7 month) </div>
+                                <h6 class="font-weight-bold text-dark mb-0">{{ $row->institute }}</h6>
+                                <div class="text-truncate text-primary">{{ $row->position }}</div>
+                                <div class="small text-gray-500">{{ date('M Y', strtotime($row->from)) }} - {{ date('M Y', strtotime($row->to)) }}</div>
                             </div>
-                            <img class="img-fluid ml-auto mb-auto" src="{{ asset('img/e1.png')}}" alt="">
+                            <!-- <img class="img-fluid ml-auto mb-auto" src="{{ asset('img/e1.png')}}" alt=""> -->
                         </div>
-                        <p class="mb-0">Find the most qualified people in the most unexpected places. Information for applicants to consider when applying for local positions.</p>
-                    </div>
-                    <div class="box-body p-3">
-                        <div class="d-flex align-items-top job-item-header pb-2">
-                            <div class="mr-2">
-                                <h6 class="font-weight-bold text-dark mb-0">Harvard University</h6>
-                                <div class="text-truncate text-primary">Maths and science education</div>
-                                <div class="small text-gray-500">Oct 2020 - Present (4 year 7 month) </div>
-                            </div>
-                            <img class="img-fluid ml-auto mb-auto" src="{{ asset('img/e2.png')}}" alt="">
-                        </div>
-                        <p class="mb-0">Wualified people in the most unexpected places. Information for applicants to consider when applying for local positions.</p>
-                    </div>
+                         </div>
+                    @endforeach
+                    @endif
+                    
                 </div>
             </main>
             <aside class="col col-xl-3 order-xl-3 col-lg-12 order-lg-3 col-12">

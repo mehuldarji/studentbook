@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" type="image/png" href="{{ asset('img/logo.png') }}">
     <title>{{ config('constants.PROJECT_NAME'); }}</title>
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('vendor/slick/slick.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('vendor/slick/slick-theme.min.css') }}" />
 
@@ -172,18 +172,18 @@
 
                 <li class="nav-item dropdown no-arrow ml-1 osahan-profile-dropdown">
                     <a class="nav-link dropdown-toggle pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="img-profile rounded-circle" src="{{ asset('img/p13.png')}}">
+                        <img class="img-profile rounded-circle" onerror="this.onerror=null;this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png';" src="{{ asset('upload/users/')}}/{{ $user->photo }}">
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right shadow-sm">
                         <div class="p-3 d-flex align-items-center">
                             <div class="dropdown-list-image mr-3">
-                                <img class="rounded-circle" src="{{ asset('img/user.png')}}" alt="">
+                                <img class="rounded-circle" onerror="this.onerror=null;this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png';" src="{{ asset('upload/users/')}}/{{ $user->photo }}" alt="">
                                 <div class="status-indicator bg-success"></div>
                             </div>
                             <div class="font-weight-bold">
                                 <div class="text-truncate">{{auth()->user()->name}}</div>
-                                <div class="small text-gray-500">UI/UX Designer</div>
+                                <div class="small text-gray-500">{{auth()->user()->headline}}</div>
                             </div>
                         </div>
                         <div class="dropdown-divider"></div>

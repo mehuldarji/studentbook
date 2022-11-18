@@ -44,7 +44,7 @@ footer{
 @include('include.msg')
     <nav class="navbar navbar-expand navbar-dark  osahan-nav-top p-0">
         <div class="container">
-            <a class="navbar-brand mr-2" href="/"><img src="img/logo.png" alt="">
+            <a class="navbar-brand mr-2" href="/"><img src="{{ asset('img/logo.png')}}" alt="">
             </a>
             
             <ul class="navbar-nav ml-auto d-flex align-items-center">

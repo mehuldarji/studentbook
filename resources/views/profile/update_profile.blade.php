@@ -7,13 +7,14 @@
             <aside class="col-md-4">
                 <div class="mb-3 border rounded bg-white profile-box text-center w-10">
                     <div class="p-4 d-flex align-items-center">
-                        <img src="{{ asset('img/p13.png')}}" class="img-fluid rounded-circle" alt="Responsive image">
+
+                        <img onerror="this.onerror=null;this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png';" src="{{ asset('upload/users/')}}/{{ $user->photo }}" style="width: 135px; height: 135px;" id="img_prv" class="img-fluid rounded-circle" alt="Responsive image">
                         <div class="p-4">
                             <label data-toggle="tooltip" data-placement="top" data-original-title="Upload New Picture" class="btn btn-info m-0" for="fileAttachmentBtn">
                                 <i class="feather-image"></i>
-                                <input id="fileAttachmentBtn" name="file-attachment" type="file" class="d-none">
+                                <input id="fileAttachmentBtn" name="photo" type="file" class="d-none">
                             </label>
-                            <button data-toggle="tooltip" data-placement="top" data-original-title="Delete" type="submit" class="btn btn-danger"><i class="feather-trash-2"></i></button>
+                            <!-- <button data-toggle="tooltip" data-placement="top" data-original-title="Delete" type="submit" class="btn btn-danger"><i class="feather-trash-2"></i></button> -->
                         </div>
                     </div>
                 </div>
@@ -24,13 +25,13 @@
                             <div class="form-group mb-4">
                                 <label class="mb-1">ABOUT</label>
                                 <div class="position-relative">
-                                    <textarea class="form-control" rows="4" name="text" placeholder="Enter Bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor :)</textarea>
+                                    <textarea class="form-control" rows="4" required name="text" placeholder="Enter Bio" id="about" name="about">{{ $user->about }}</textarea>
                                 </div>
                             </div>
 
                         </div>
                         <div class="overflow-hidden text-center p-3">
-                            <a class="font-weight-bold btn btn-light rounded p-3 d-block" href="#"> SAVE </a>
+                            <a class="font-weight-bold btn btn-light rounded p-3 d-block save_bio"> SAVE </a>
                         </div>
                     </div>
                 </div>
@@ -44,24 +45,52 @@
                         <div class="p-3 border-bottom">
                             <div class="position-relative icon-form-control mb-2">
                                 <i class="feather-instagram position-absolute text-warning"></i>
-                                <input placeholder="Add Instagram link" type="text" class="form-control">
+                                <input placeholder="Add Instagram link" type="url" class="form-control" id="instagram_link" name="instagram_link" value="{{ $user->instagram_link }}">
                             </div>
                             <div class="position-relative icon-form-control mb-2">
                                 <i class="feather-facebook position-absolute text-primary"></i>
-                                <input placeholder="Add Facebook link" type="text" class="form-control">
+                                <input placeholder="Add Facebook link" type="url" class="form-control" id="facebook_link" name="facebook_link" value="{{ $user->facebook_link }}">
                             </div>
                             <div class="position-relative icon-form-control mb-2">
                                 <i class="feather-twitter position-absolute text-info"></i>
-                                <input placeholder="Add Twitter link" type="text" class="form-control">
+                                <input placeholder="Add Twitter link" type="url" class="form-control" id="twitter_link" name="twitter_link" value="{{ $user->twitter_link }}">
                             </div>
                             <div class="position-relative icon-form-control mb-2">
                                 <i class="feather-youtube position-absolute text-danger"></i>
-                                <input placeholder="Add Youtube link" type="text" class="form-control">
+                                <input placeholder="Add Youtube link" type="url" class="form-control" id="youtube_link" name="youtube_link" value="{{ $user->youtube_link }}">
                             </div>
 
                         </div>
                         <div class="overflow-hidden text-center p-3">
-                            <a class="font-weight-bold btn btn-light rounded p-3 d-block" href="#"> Update Social Profiles </a>
+                            <a class="font-weight-bold btn btn-light rounded p-3 d-block save_social" href="#"> Update Social Profiles </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border rounded bg-white mb-3">
+                    <div class="box-title border-bottom p-3">
+                        <h6 class="m-0">Change Password</h6>
+
+                    </div>
+                    <div class="box-body">
+                        <div class="p-3 border-bottom">
+                            <div class="position-relative icon-form-control mb-2">
+                                <i class="feather-lock position-absolute"></i>
+                                <input placeholder="Enter your old password" type="password" class="form-control" id="old_password" name="old_password" value="">
+                            </div>
+                            <div class="position-relative icon-form-control mb-2">
+                                <i class="feather-lock position-absolute"></i>
+                                <input placeholder="Enter your new password" type="password" class="form-control" id="new_password" name="new_password" value="">
+                            </div>
+                            <div class="position-relative icon-form-control mb-2">
+                                <i class="feather-lock position-absolute"></i>
+                                <input placeholder="Enter your confirm password" type="password" class="form-control" id="confirm_password" name="confirm_password" value="">
+                            </div>
+
+
+                        </div>
+                        <div class="overflow-hidden text-center p-3">
+                            <a class="font-weight-bold btn btn-light rounded p-3 d-block change_password" href="#">Update Password </a>
                         </div>
                     </div>
                 </div>
@@ -84,7 +113,7 @@
                                             <span class="text-danger">*</span>
                                         </label>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="name" value="Gurdeep Osahan" placeholder="Enter your name" aria-label="Enter your name" required="" aria-describedby="nameLabel" data-msg="Please enter your name." data-error-class="u-has-error" data-success-class="u-has-success">
+                                            <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" placeholder="Enter your name" aria-label="Enter your name" required="" aria-describedby="nameLabel" data-msg="Please enter your name." data-error-class="u-has-error" data-success-class="u-has-success">
                                             <small class="form-text text-muted">Displayed on your public profile, notifications and other places.</small>
                                         </div>
                                     </div>
@@ -93,12 +122,13 @@
 
                                 <div class="col-sm-6 mb-2">
                                     <div class="js-form-message">
-                                        <label id="usernameLabel" class="form-label">
-                                            Username
+                                        <label id="emailLabel" class="form-label">
+                                            Email address
                                             <span class="text-danger">*</span>
                                         </label>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="username" value="iamosahan" placeholder="Enter your username" aria-label="Enter your username" required="" aria-describedby="usernameLabel" data-msg="Please enter your username." data-error-class="u-has-error" data-success-class="u-has-success">
+                                            <input type="email" class="form-control" id="email" readonly name="email" value="{{ $user->email }}" placeholder="Enter your email address" aria-label="Enter your email address" required="" aria-describedby="emailLabel" data-msg="Please enter a valid email address." data-error-class="u-has-error" data-success-class="u-has-success">
+                                            <small class="form-text text-muted">We'll never share your email with anyone else.</small>
                                         </div>
                                     </div>
                                 </div>
@@ -113,21 +143,26 @@
                                 <div class="col-md-6 mb-3 mb-sm-6">
                                     <div class="js-form-message">
                                         <div class="form-group">
-                                            <select class="form-control custom-select" required="" data-msg="Please select month." data-error-class="u-has-error" data-success-class="u-has-success">
+                                            <select class="form-control custom-select" id="b_month" name="b_month" required="" data-msg="Please select month." data-error-class="u-has-error" data-success-class="u-has-success">
                                                 <option value="">Select month</option>
-                                                <option value="birthMonthSelect1">January</option>
-                                                <option value="birthMonthSelect2">February</option>
-                                                <option value="birthMonthSelect3">March</option>
-                                                <option value="birthMonthSelect4" selected="selected">April</option>
-                                                <option value="birthMonthSelect5">May</option>
-                                                <option value="birthMonthSelect6">June</option>
-                                                <option value="birthMonthSelect7">July</option>
-                                                <option value="birthMonthSelect8">August</option>
-                                                <option value="birthMonthSelect9">September</option>
-                                                <option value="birthMonthSelect10">October</option>
-                                                <option value="birthMonthSelect11">November</option>
-                                                <option value="birthMonthSelect12">December</option>
+                                                <option value="January">January</option>
+                                                <option value="February">February</option>
+                                                <option value="March">March</option>
+                                                <option value="April">April</option>
+                                                <option value="May">May</option>
+                                                <option value="June">June</option>
+                                                <option value="July">July</option>
+                                                <option value="August">August</option>
+                                                <option value="September">September</option>
+                                                <option value="October">October</option>
+                                                <option value="November">November</option>
+                                                <option value="December">December</option>
                                             </select>
+
+                                            <script>
+                                                $('#b_month').val('{{ $user->b_month }}');
+                                            </script>
+
                                         </div>
                                     </div>
                                 </div>
@@ -136,39 +171,14 @@
                                 <div class="col-sm-4 col-md-2 mb-3 mb-sm-6">
                                     <div class="js-form-message">
                                         <div class="form-group">
-                                            <select class="form-control custom-select" required="" data-msg="Please select date." data-error-class="u-has-error" data-success-class="u-has-success">
+                                            <select class="form-control custom-select" id="b_date" name="b_date" required="" data-msg="Please select date." data-error-class="u-has-error" data-success-class="u-has-success">
                                                 <option value="">Select date</option>
-                                                <option value="birthDateSelect1">1</option>
-                                                <option value="birthDateSelect2">2</option>
-                                                <option value="birthDateSelect3">3</option>
-                                                <option value="birthDateSelect4">4</option>
-                                                <option value="birthDateSelect5">5</option>
-                                                <option value="birthDateSelect6">6</option>
-                                                <option value="birthDateSelect7">7</option>
-                                                <option value="birthDateSelect8">8</option>
-                                                <option value="birthDateSelect9">9</option>
-                                                <option value="birthDateSelect10">10</option>
-                                                <option value="birthDateSelect11">11</option>
-                                                <option value="birthDateSelect12" selected="selected">12</option>
-                                                <option value="birthDateSelect13">13</option>
-                                                <option value="birthDateSelect14">14</option>
-                                                <option value="birthDateSelect15">15</option>
-                                                <option value="birthDateSelect16">16</option>
-                                                <option value="birthDateSelect17">17</option>
-                                                <option value="birthDateSelect18">18</option>
-                                                <option value="birthDateSelect19">19</option>
-                                                <option value="birthDateSelect20">20</option>
-                                                <option value="birthDateSelect21">21</option>
-                                                <option value="birthDateSelect22">22</option>
-                                                <option value="birthDateSelect23">23</option>
-                                                <option value="birthDateSelect24">24</option>
-                                                <option value="birthDateSelect25">25</option>
-                                                <option value="birthDateSelect26">26</option>
-                                                <option value="birthDateSelect27">27</option>
-                                                <option value="birthDateSelect28">28</option>
-                                                <option value="birthDateSelect29">29</option>
-                                                <option value="birthDateSelect30">30</option>
-                                                <option value="birthDateSelect31">31</option>
+                                                <?php for ($i = 1; $i <= 31; $i++) {
+                                                ?>
+                                                    <option value="{{$i}}" @if($user->b_date == $i) selected @endif>{{$i}}</option>
+                                                <?php
+                                                } ?>
+
                                             </select>
                                         </div>
                                     </div>
@@ -178,126 +188,13 @@
                                 <div class="col-sm-4 col-md-2 mb-3 mb-sm-6">
                                     <div class="js-form-message">
                                         <div class="form-group">
-                                            <select class="form-control custom-select" required="" data-msg="Please select year." data-error-class="u-has-error" data-success-class="u-has-success">
+                                            <select class="form-control custom-select" id="b_year" name="b_year" required="" data-msg="Please select year." data-error-class="u-has-error" data-success-class="u-has-success">
                                                 <option value="">Select year</option>
-                                                <option value="birthYearSelect1900">1900</option>
-                                                <option value="birthYearSelect1901">1901</option>
-                                                <option value="birthYearSelect1902">1902</option>
-                                                <option value="birthYearSelect1903">1903</option>
-                                                <option value="birthYearSelect1904">1904</option>
-                                                <option value="birthYearSelect1905">1905</option>
-                                                <option value="birthYearSelect1906">1906</option>
-                                                <option value="birthYearSelect1907">1907</option>
-                                                <option value="birthYearSelect1908">1908</option>
-                                                <option value="birthYearSelect1909">1909</option>
-                                                <option value="birthYearSelect1910">1910</option>
-                                                <option value="birthYearSelect1911">1911</option>
-                                                <option value="birthYearSelect1912">1912</option>
-                                                <option value="birthYearSelect1913">1913</option>
-                                                <option value="birthYearSelect1914">1914</option>
-                                                <option value="birthYearSelect1915">1915</option>
-                                                <option value="birthYearSelect1916">1916</option>
-                                                <option value="birthYearSelect1917">1917</option>
-                                                <option value="birthYearSelect1918">1918</option>
-                                                <option value="birthYearSelect1919">1919</option>
-                                                <option value="birthYearSelect1920">1920</option>
-                                                <option value="birthYearSelect1921">1921</option>
-                                                <option value="birthYearSelect1922">1922</option>
-                                                <option value="birthYearSelect1923">1923</option>
-                                                <option value="birthYearSelect1924">1924</option>
-                                                <option value="birthYearSelect1925">1925</option>
-                                                <option value="birthYearSelect1926">1926</option>
-                                                <option value="birthYearSelect1927">1927</option>
-                                                <option value="birthYearSelect1928">1928</option>
-                                                <option value="birthYearSelect1929">1929</option>
-                                                <option value="birthYearSelect1930">1930</option>
-                                                <option value="birthYearSelect1931">1931</option>
-                                                <option value="birthYearSelect1932">1932</option>
-                                                <option value="birthYearSelect1933">1933</option>
-                                                <option value="birthYearSelect1934">1934</option>
-                                                <option value="birthYearSelect1935">1935</option>
-                                                <option value="birthYearSelect1936">1936</option>
-                                                <option value="birthYearSelect1937">1937</option>
-                                                <option value="birthYearSelect1938">1938</option>
-                                                <option value="birthYearSelect1939">1939</option>
-                                                <option value="birthYearSelect1940">1940</option>
-                                                <option value="birthYearSelect1941">1941</option>
-                                                <option value="birthYearSelect1942">1942</option>
-                                                <option value="birthYearSelect1943">1943</option>
-                                                <option value="birthYearSelect1944">1944</option>
-                                                <option value="birthYearSelect1945">1945</option>
-                                                <option value="birthYearSelect1946">1946</option>
-                                                <option value="birthYearSelect1947">1947</option>
-                                                <option value="birthYearSelect1948">1948</option>
-                                                <option value="birthYearSelect1949">1949</option>
-                                                <option value="birthYearSelect1950">1950</option>
-                                                <option value="birthYearSelect1951">1951</option>
-                                                <option value="birthYearSelect1952">1952</option>
-                                                <option value="birthYearSelect1953">1953</option>
-                                                <option value="birthYearSelect1954">1954</option>
-                                                <option value="birthYearSelect1955">1955</option>
-                                                <option value="birthYearSelect1956">1956</option>
-                                                <option value="birthYearSelect1957">1957</option>
-                                                <option value="birthYearSelect1958">1958</option>
-                                                <option value="birthYearSelect1959">1959</option>
-                                                <option value="birthYearSelect1960">1960</option>
-                                                <option value="birthYearSelect1961">1961</option>
-                                                <option value="birthYearSelect1962">1962</option>
-                                                <option value="birthYearSelect1963">1963</option>
-                                                <option value="birthYearSelect1964">1964</option>
-                                                <option value="birthYearSelect1965">1965</option>
-                                                <option value="birthYearSelect1966">1966</option>
-                                                <option value="birthYearSelect1967">1967</option>
-                                                <option value="birthYearSelect1968">1968</option>
-                                                <option value="birthYearSelect1969">1969</option>
-                                                <option value="birthYearSelect1970">1970</option>
-                                                <option value="birthYearSelect1971">1971</option>
-                                                <option value="birthYearSelect1972">1972</option>
-                                                <option value="birthYearSelect1973">1973</option>
-                                                <option value="birthYearSelect1974">1974</option>
-                                                <option value="birthYearSelect1975">1975</option>
-                                                <option value="birthYearSelect1976">1976</option>
-                                                <option value="birthYearSelect1977">1977</option>
-                                                <option value="birthYearSelect1978">1978</option>
-                                                <option value="birthYearSelect1979">1979</option>
-                                                <option value="birthYearSelect1980">1980</option>
-                                                <option value="birthYearSelect1981">1981</option>
-                                                <option value="birthYearSelect1982">1982</option>
-                                                <option value="birthYearSelect1983">1983</option>
-                                                <option value="birthYearSelect1984">1984</option>
-                                                <option value="birthYearSelect1985">1985</option>
-                                                <option value="birthYearSelect1986" selected="selected">1986</option>
-                                                <option value="birthYearSelect1987">1987</option>
-                                                <option value="birthYearSelect1988">1988</option>
-                                                <option value="birthYearSelect1989">1989</option>
-                                                <option value="birthYearSelect1990">1990</option>
-                                                <option value="birthYearSelect1991">1991</option>
-                                                <option value="birthYearSelect1992">1992</option>
-                                                <option value="birthYearSelect1993">1993</option>
-                                                <option value="birthYearSelect1994">1994</option>
-                                                <option value="birthYearSelect1995">1995</option>
-                                                <option value="birthYearSelect1996">1996</option>
-                                                <option value="birthYearSelect1997">1997</option>
-                                                <option value="birthYearSelect1998">1998</option>
-                                                <option value="birthYearSelect1999">1999</option>
-                                                <option value="birthYearSelect2000">2000</option>
-                                                <option value="birthYearSelect2001">2001</option>
-                                                <option value="birthYearSelect2002">2002</option>
-                                                <option value="birthYearSelect2003">2003</option>
-                                                <option value="birthYearSelect2004">2004</option>
-                                                <option value="birthYearSelect2005">2005</option>
-                                                <option value="birthYearSelect2006">2006</option>
-                                                <option value="birthYearSelect2007">2007</option>
-                                                <option value="birthYearSelect2008">2008</option>
-                                                <option value="birthYearSelect2009">2009</option>
-                                                <option value="birthYearSelect2010">2010</option>
-                                                <option value="birthYearSelect2011">2011</option>
-                                                <option value="birthYearSelect2012">2012</option>
-                                                <option value="birthYearSelect2013">2013</option>
-                                                <option value="birthYearSelect2014">2014</option>
-                                                <option value="birthYearSelect2015">2015</option>
-                                                <option value="birthYearSelect2016">2016</option>
-                                                <option value="birthYearSelect2017">2017</option>
+                                                <?php for ($i = 1990; $i <= date('Y'); $i++) {
+                                                ?>
+                                                    <option value="{{$i}}" @if($user->b_year == $i) selected @endif>{{$i}}</option>
+                                                <?php
+                                                } ?>
                                             </select>
                                         </div>
                                     </div>
@@ -307,10 +204,10 @@
                                 <div class="col-sm-4 col-md-2 mb-2">
                                     <div class="js-form-message">
                                         <div class="form-group">
-                                            <select class="form-control custom-select" required="" data-msg="Please select your gender." data-error-class="u-has-error" data-success-class="u-has-success">
-                                                <option value="genderSelect1" selected="">Male</option>
-                                                <option value="genderSelect2">Female</option>
-                                                <option value="genderSelect3">Other</option>
+                                            <select class="form-control custom-select" id="gender" name="gender" required="" data-msg="Please select your gender." data-error-class="u-has-error" data-success-class="u-has-success">
+                                                <option value="Male" @if($user->gender == 'Male') selected @endif>Male</option>
+                                                <option value="Female" @if($user->gender == 'Female') selected @endif>Female</option>
+                                                <option value="Other" @if($user->gender == 'Other') selected @endif>Other</option>
                                             </select>
                                         </div>
                                     </div>
@@ -321,13 +218,12 @@
 
                                 <div class="col-sm-6 mb-2">
                                     <div class="js-form-message">
-                                        <label id="emailLabel" class="form-label">
-                                            Email address
+                                        <label id="organizationLabel" class="form-label">
+                                            Headline
                                             <span class="text-danger">*</span>
                                         </label>
                                         <div class="form-group">
-                                            <input type="email" class="form-control" name="email" value="iamosahan@gmail.com" placeholder="Enter your email address" aria-label="Enter your email address" required="" aria-describedby="emailLabel" data-msg="Please enter a valid email address." data-error-class="u-has-error" data-success-class="u-has-success">
-                                            <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                            <input type="text" class="form-control" id="headline" name="headline" value="{{ $user->headline }}" placeholder="Enter your organization name" aria-label="Enter your organization name" required="" aria-describedby="organizationLabel" data-msg="Please enter your organization name" data-error-class="u-has-error" data-success-class="u-has-success">
                                         </div>
                                     </div>
                                 </div>
@@ -340,41 +236,13 @@
                                             <span class="text-danger">*</span>
                                         </label>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="location" value="Ludhiana, Punjab" placeholder="Enter your location" aria-label="Enter your location" required="" aria-describedby="locationLabel" data-msg="Please enter your location." data-error-class="u-has-error" data-success-class="u-has-success">
+                                            <input type="text" class="form-control" id="location" name="location" value="{{ $user->location }}" placeholder="Enter your location" aria-label="Enter your location" required="" aria-describedby="locationLabel" data-msg="Please enter your location." data-error-class="u-has-error" data-success-class="u-has-success">
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="row">
 
-                                <div class="col-sm-6 mb-2">
-                                    <div class="js-form-message">
-                                        <label id="organizationLabel" class="form-label">
-                                            Organization
-                                            <span class="text-danger">*</span>
-                                        </label>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" name="organization" value="Askbootsrap Ltd." placeholder="Enter your organization name" aria-label="Enter your organization name" required="" aria-describedby="organizationLabel" data-msg="Please enter your organization name" data-error-class="u-has-error" data-success-class="u-has-success">
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-sm-6 mb-2">
-                                    <div class="js-form-message">
-                                        <label id="websiteLabel" class="form-label">
-                                            Website
-                                            <span class="text-danger">*</span>
-                                        </label>
-                                        <div class="form-group">
-                                            <input class="form-control" type="url" name="website" value="https://askbootstrap.com/" placeholder="Enter your website" aria-label="Enter your website" required="" aria-describedby="websiteLabel" data-msg="Password enter a valid website" data-error-class="u-has-error" data-success-class="u-has-success">
-                                            <small class="form-text text-muted">Your home page, blog or company site, e.g. http://example.com</small>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
                             <div class="row">
 
                                 <div class="col-sm-6 mb-2">
@@ -384,7 +252,7 @@
                                             <span class="text-danger">*</span>
                                         </label>
                                         <div class="form-group">
-                                            <input class="form-control" type="tel" name="phoneNumber" value="+91 85680 79956" placeholder="Enter your phone number" aria-label="Enter your phone number" required="" aria-describedby="phoneNumberLabel" data-msg="Please enter a valid phone number" data-error-class="u-has-error" data-success-class="u-has-success">
+                                            <input class="form-control" id="phone" type="tel" name="phone" value="{{ $user->phone }}" placeholder="Enter your phone number" aria-label="Enter your phone number" required="" aria-describedby="phoneNumberLabel" data-msg="Please enter a valid phone number" data-error-class="u-has-error" data-success-class="u-has-success">
                                         </div>
                                     </div>
 
@@ -398,12 +266,12 @@
                                             <span class="text-danger">*</span>
                                         </label>
                                         <div class="form-group">
-                                            <select class="custom-select">
+                                            <select class="custom-select" required id="language" name="language">
                                                 <option value="">Select language</option>
-                                                <option value="languageSelect1" selected="">English</option>
-                                                <option value="languageSelect2">Français</option>
-                                                <option value="languageSelect3">Deutsch</option>
-                                                <option value="languageSelect4">Português</option>
+                                                <option value="English" @if($user->language == 'English') selected @endif>English</option>
+                                                <option value="Français" @if($user->language == 'Français') selected @endif>Français</option>
+                                                <option value="Deutsch" @if($user->language == 'Deutsch') selected @endif>Deutsch</option>
+                                                <option value="Português" @if($user->language == 'Português') selected @endif>Português</option>
                                             </select>
                                         </div>
                                     </div>
@@ -426,60 +294,307 @@
                         <p class="mb-0 mt-0 small">Tell about your education.
                         </p>
                     </div>
-                    <div class="box-body px-3 pt-3 pb-0">
-                        <div class="row">
-                            <div class="col-sm-6 mb-4">
-                                <label id="FROM" class="form-label">FROM</label>
+                    <div class="education-section">
 
-                                <div class="input-group">
-                                    <input type="date" class="form-control" placeholder="From" aria-label="FROM" aria-describedby="FROM">
+
+                        @if(count($user_education) > 0)
+                        @foreach($user_education as $row)
+                        <div class="box-body px-3 pt-3 pb-0 education">
+                            <a href="#"  data-toggle="tooltip" data-placement="top" data-original-title="Delete this education" class="ediucation-delete"><i class="feather-trash  text-danger"></i></a>
+                            <div class="row clearfix">
+                                <div class="col-sm-6 mb-4">
+                                    <label id="FROM" class="form-label">FROM</label>
+
+                                    <div class="input-group">
+                                        <input type="month" class="form-control from" name="from[]" placeholder="From" value="{{ $row->from }}">
+                                    </div>
+
                                 </div>
+                                <div class="col-sm-6 mb-4">
+                                    <label id="TO" class="form-label">TO</label>
 
-                            </div>
-                            <div class="col-sm-6 mb-4">
-                                <label id="TO" class="form-label">TO</label>
+                                    <div class="input-group">
+                                        <input type="month" class="form-control to" name="to[]" value="{{ $row->to }}" placeholder="TO" aria-label="TO" aria-describedby="TO">
+                                    </div>
 
-                                <div class="input-group">
-                                    <input type="date" class="form-control" placeholder="TO" aria-label="TO" aria-describedby="TO">
                                 </div>
-
                             </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6 mb-4">
+                                    <label id="companyLabel" class="form-label">Institute</label>
+
+                                    <div class="input-group">
+                                        <input type="text" class="form-control institute" value="{{ $row->institute }}" name="institute[]" placeholder="Enter your Institute" aria-label="Enter your company title" aria-describedby="companyLabel">
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-6 mb-4">
+                                    <label id="positionLabel" class="form-label">Position</label>
+
+                                    <div class="input-group">
+                                        <input type="text" class="form-control position" value="{{ $row->position }}" name="position[]" placeholder="Enter your position" aria-label="Enter your position" aria-describedby="positionLabel">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <hr />
                         </div>
-                        <div class="row">
-                            <div class="col-sm-6 mb-4">
-                                <label id="companyLabel" class="form-label">Institute</label>
 
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Enter your company title" aria-label="Enter your company title" aria-describedby="companyLabel">
+                        @endforeach
+                        @else
+                        <div class="box-body px-3 pt-3 pb-0 education">
+                            <div class="row">
+                                <div class="col-sm-6 mb-4">
+                                    <label id="FROM" class="form-label">FROM</label>
+
+                                    <div class="input-group">
+                                        <input type="month" class="form-control from" name="from[]" placeholder="From">
+                                    </div>
+
                                 </div>
+                                <div class="col-sm-6 mb-4">
+                                    <label id="TO" class="form-label">TO</label>
 
-                            </div>
-                            <div class="col-sm-6 mb-4">
-                                <label id="positionLabel" class="form-label">Class</label>
+                                    <div class="input-group">
+                                        <input type="month" class="form-control to" name="to[]" placeholder="TO" aria-label="TO" aria-describedby="TO">
+                                    </div>
 
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Enter your position" aria-label="Enter your position" aria-describedby="positionLabel">
                                 </div>
-
                             </div>
+                            <div class="row">
+                                <div class="col-sm-6 mb-4">
+                                    <label id="companyLabel" class="form-label">Institute</label>
+
+                                    <div class="input-group">
+                                        <input type="text" class="form-control institute" name="institute[]" placeholder="Enter your Institute" aria-label="Enter your company title" aria-describedby="companyLabel">
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-6 mb-4">
+                                    <label id="positionLabel" class="form-label">Position</label>
+
+                                    <div class="input-group">
+                                        <input type="text" class="form-control position" name="position[]" placeholder="Enter your position" aria-label="Enter your position" aria-describedby="positionLabel">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <hr />
                         </div>
-                        <div class="col-lg-12 mb-4">
-                            <a class="d-inline-block u-text-muted" href="#">
-                                <span class="mr-1">+</span>
-                                Add phone number
-                            </a>
-                        </div>
+                        @endif
+
+                    </div>
+
+                    <div class="col-lg-12 mb-4">
+                        <a class="d-inline-block u-text-muted clone_education" href="#">
+                            <span class="mr-1">+</span>
+                            Add new education
+                        </a>
                     </div>
                 </div>
 
                 <div class="mb-3 text-right">
-                    <a class="font-weight-bold btn btn-link rounded p-3" href="#"> &nbsp;&nbsp;&nbsp;&nbsp; Cancel &nbsp;&nbsp;&nbsp;&nbsp; </a>
-                    <a class="font-weight-bold btn btn-primary rounded p-3" href="#"> &nbsp;&nbsp;&nbsp;&nbsp; Sava Changes &nbsp;&nbsp;&nbsp;&nbsp; </a>
+                    <a class="font-weight-bold btn btn-link rounded p-3" href="{{ route('profile.index') }}"> &nbsp;&nbsp;&nbsp;&nbsp; Cancel &nbsp;&nbsp;&nbsp;&nbsp; </a>
+                    <a class="font-weight-bold btn btn-primary rounded save_info" href="#"> &nbsp;&nbsp;&nbsp;&nbsp; Save Changes &nbsp;&nbsp;&nbsp;&nbsp; </a>
                 </div>
             </main>
         </div>
     </div>
 </div>
 
+<script>
+    $(document).on('click', '.save_bio', function() {
+        var about = $('#about').val();
+        if (about == '') {
+            showError('Your about is requierd!');
+            return false;
+        }
 
+        var url = '{{ route("profile.save") }}';
+        var peram = {
+            about: about,
+            type: 'about'
+        };
+        getDataByAjax(url, peram, 'POST', 'Save Successfully.');
+
+
+    });
+    $(document).on('click', '.save_social', function() {
+        var youtube_link = $('#youtube_link').val();
+        var twitter_link = $('#twitter_link').val();
+        var facebook_link = $('#facebook_link').val();
+        var instagram_link = $('#instagram_link').val();
+        if (youtube_link == '' && twitter_link == '' && facebook_link == '' && instagram_link == '') {
+            showError('Please enter any one url before save!');
+            return false;
+        }
+
+        var url = '{{ route("profile.save") }}';
+        var peram = {
+            youtube_link: youtube_link,
+            twitter_link: twitter_link,
+            facebook_link: facebook_link,
+            instagram_link: instagram_link,
+            type: 'social'
+        };
+        getDataByAjax(url, peram, 'POST', 'Save Successfully.');
+
+
+    });
+    $(document).on('click', '.change_password', function() {
+        var old_password = $('#old_password').val();
+        var new_password = $('#new_password').val();
+        var confirm_password = $('#confirm_password').val();
+        if (old_password == '' && new_password == '' && confirm_password == '') {
+            showError('Please enter all password field before save!');
+            return false;
+        }
+
+        if (new_password != confirm_password) {
+            showError('Password and confirm password does not match, please enter same password!');
+            return false;
+        }
+
+        var url = '{{ route("profile.save") }}';
+        var peram = {
+            old_password: old_password,
+            new_password: new_password,
+            type: 'password'
+        };
+        getDataByAjax(url, peram, 'POST', 'Password change Successfully.');
+        $('#old_password').val('');
+        $('#new_password').val('');
+        $('#confirm_password').val('');
+
+
+    });
+    $(document).on('click', '.ediucation-delete', function() {
+        $(this).parents('.education').remove();
+        $("html, body").animate({
+            scrollTop: $(document).height()
+        }, 1000);
+    });
+    $(document).on('click', '.save_info', function() {
+        var name = $('#name').val();
+        var email = $('#email').val();
+        var b_month = $('#b_month').val();
+        var b_date = $('#b_date').val();
+        var b_year = $('#b_year').val();
+        var gender = $('#gender').val();
+        var headline = $('#headline').val();
+        var location = $('#location').val();
+        var phone = $('#phone').val();
+        var language = $('#language').val();
+        var from = $("input[name='from[]']").map(function() {
+            return $(this).val();
+        }).get();
+        var to = $("input[name='to[]']").map(function() {
+            return $(this).val();
+        }).get();
+        var institute = $("input[name='institute[]']").map(function() {
+            return $(this).val();
+        }).get();
+        var position = $("input[name='position[]']").map(function() {
+            return $(this).val();
+        }).get();
+        if (name == '' && email == '' && headline == '' && location == '' && phone == '' && language == '' && b_month == '' && b_date == '' && b_year == '' && gender == '') {
+            showError('Please enter any one field value before save!');
+            return false;
+        }
+
+
+
+        checkValidation('name');
+        checkValidation('email');
+        checkValidation('b_month');
+        checkValidation('b_date');
+        checkValidation('b_year');
+        checkValidation('gender');
+        checkValidation('headline');
+        checkValidation('location');
+        checkValidation('phone');
+        checkValidation('language');
+
+
+        var url = '{{ route("profile.save") }}';
+        var peram = {
+            name: name,
+            email: email,
+            b_month: b_month,
+            b_date: b_date,
+            b_year: b_year,
+            gender: gender,
+            headline: headline,
+            location: location,
+            phone: phone,
+            language: language,
+            to: to,
+            from: from,
+            institute: institute,
+            position: position,
+            type: 'info'
+        };
+        if (name != '' && email != '' && headline != '' && location != '' && phone != '' && language != '' && b_month != '' && b_date != '' && b_year != '' && gender != '') {
+            getDataByAjax(url, peram, 'POST', 'Save Successfully.');
+
+        }
+
+
+    });
+
+
+    $('#fileAttachmentBtn').on('change', function(ev) {
+        console.log("here inside");
+
+        var filedata = this.files[0];
+        var imgtype = filedata.type;
+
+        console.log(imgtype);
+        var match = ['image/jpeg', 'image/jpg', 'image/png'];
+
+        if ((imgtype != match[0]) && (imgtype != match[1]) && (imgtype != match[2])) {
+            showError('Please select a valid type image..only jpg jpeg allowed!');
+
+        } else {
+
+
+
+
+            //---image preview
+
+            var reader = new FileReader();
+
+            reader.onload = function(ev) {
+                $('#img_prv').attr('src', ev.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+
+            /// preview end
+
+            //upload
+
+            var postData = new FormData();
+            postData.append('photo', this.files[0]);
+            postData.append('type', 'img');
+
+            var url = '{{ route("profile.save") }}';
+
+            getDataByAjaxImage(url, postData, 'POST', 'Save Successfully.');
+
+
+        }
+
+    });
+
+
+    $(document).on('click', '.clone_education', function() {
+        var educationUI = $('.education:first').clone();
+        var clone = educationUI.clone();
+        $('.education-section').append(clone);
+        $("html, body").animate({
+            scrollTop: $(document).height()
+        }, 1000);
+        $('.education:last input').val('');
+    });
+</script>
 @include('include.footer')
