@@ -24,9 +24,7 @@
 
 
     function getDataByAjax(url, peram, method, msg) {
-        console.log(url);
-        console.log(peram);
-        console.log(msg);
+        
         $.ajax({
             url: url,
             type: method,
@@ -41,6 +39,7 @@
 
                 if (resp.success == 'done') {
                     showMsg(msg);
+                  
                 } else if (resp.success == 'diff') {
                     showError(resp.msg);
                 } else {
@@ -71,6 +70,8 @@
 
                 if (resp.success == 'done') {
                     showMsg(msg);
+                    
+
                 } else {
                     showError('Data processing error, Please try sometime.');
                 }

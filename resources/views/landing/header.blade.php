@@ -36,6 +36,7 @@ footer{
     padding: 15px 0;
     padding-top: 30px;
 }
+
     </style>
 </head>
 

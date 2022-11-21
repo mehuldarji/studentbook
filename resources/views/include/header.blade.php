@@ -22,6 +22,23 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:600%2C400%2C500%7CRoboto:400" rel="stylesheet" property="stylesheet" media="all">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> -->
+
+<style>
+
+.disable-connect-btn{
+    background-color: gainsboro!important;
+    background: gainsboro!important;
+    border-color: gainsboro !important;
+    color: #000 !important;
+    pointer-events: none;
+    outline: none !important;
+    box-shadow : none !important
+}
+.network-item:hover{
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 15%), 0 4px 6px rgb(0 0 0 / 20%);
+    transition: box-shadow 83ms;
+}
+</style>
 </head>
 
 <body>
@@ -65,7 +82,7 @@
                     <a class="nav-link" href="jobs.html"><i class="feather-briefcase mr-2"></i><span class="d-none d-lg-inline">Jobs</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="connection.html"><i class="feather-users mr-2"></i><span class="d-none d-lg-inline">Connection</span></a>
+                    <a class="nav-link" href="{{ route('connection.index') }}"><i class="feather-users mr-2"></i><span class="d-none d-lg-inline">Connection</span></a>
                 </li>
                 
                 <li class="nav-item dropdown no-arrow mx-1 osahan-list-dropdown">
@@ -172,13 +189,13 @@
 
                 <li class="nav-item dropdown no-arrow ml-1 osahan-profile-dropdown">
                     <a class="nav-link dropdown-toggle pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="img-profile rounded-circle" onerror="this.onerror=null;this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png';" src="{{ asset('upload/users/')}}/{{ $user->photo }}">
+                        <img class="img-profile rounded-circle" onerror="this.onerror=null;this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png';" src="{{ asset('upload/users/')}}/{{ auth()->user()->photo }}">
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right shadow-sm">
                         <div class="p-3 d-flex align-items-center">
                             <div class="dropdown-list-image mr-3">
-                                <img class="rounded-circle" onerror="this.onerror=null;this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png';" src="{{ asset('upload/users/')}}/{{ $user->photo }}" alt="">
+                                <img class="rounded-circle" onerror="this.onerror=null;this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png';" src="{{ asset('upload/users/')}}/{{ auth()->user()->photo }}" alt="">
                                 <div class="status-indicator bg-success"></div>
                             </div>
                             <div class="font-weight-bold">
