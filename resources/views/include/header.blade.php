@@ -2,13 +2,18 @@
 <html lang="en">
 
 
+<?php
+$notification = \App\Models\Notification::where('is_read',0)->get();
+
+?>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" href="{{ asset('img/logo.png') }}">
-    <title>{{ config('constants.PROJECT_NAME'); }}</title>
+    <title>{{ config('constant.PROJECT_NAME'); }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('vendor/slick/slick.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('vendor/slick/slick-theme.min.css') }}" />
@@ -43,14 +48,15 @@
 
 <body>
 <div class="loader" ></div>
+<div class="blur-bg"></div>
 @include('include.msg')
     <nav class="navbar navbar-expand navbar-dark  osahan-nav-top p-0">
         <div class="container">
-            <a class="navbar-brand mr-2" href="/"><img src="{{ asset('img/logo.png') }}" alt="">
+            <a class="navbar-brand mr-2" href="/home"><img src="{{ asset('img/logo.png') }}" alt="">
             </a>
             <form class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search">
                 <div class="input-group">
-                    <input type="text" class="form-control shadow-none border-0" placeholder="Search people, jobs & more..." aria-label="Search" aria-describedby="basic-addon2">
+                    <input autocomplete="off" style="width: 325px;" type="text" class="form-control shadow-none border-0 " id="myInput" placeholder="Search people, jobs & more..." aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                         <button class="btn" type="button">
                             <i class="feather-search"></i>
@@ -68,7 +74,7 @@
                     <div class="dropdown-menu dropdown-menu-right p-3 shadow-sm animated--grow-in" aria-labelledby="searchDropdown">
                         <form class="form-inline mr-auto w-100 navbar-search">
                             <div class="input-group">
-                                <input type="text" class="form-control border-0 shadow-none" placeholder="Search people, jobs and more..." aria-label="Search" aria-describedby="basic-addon2">
+                                <input autocomplete="off" type="text" class="form-control border-0 shadow-none" id="myInput" placeholder="Search people, jobs and more..." aria-label="Search" aria-describedby="basic-addon2">
                                 <div class="input-group-append">
                                     <button class="btn" type="button">
                                         <i class="feather-search"></i>
@@ -82,7 +88,7 @@
                     <a class="nav-link" href="jobs.html"><i class="feather-briefcase mr-2"></i><span class="d-none d-lg-inline">Jobs</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('connection.index') }}"><i class="feather-users mr-2"></i><span class="d-none d-lg-inline">Connection</span></a>
+                    <a class="nav-link" href="{{ route('connection.index') }}"><i class="feather-users mr-2"></i><span class="d-none d-lg-inline">My Networks</span></a>
                 </li>
                 
                 <li class="nav-item dropdown no-arrow mx-1 osahan-list-dropdown">
@@ -143,47 +149,31 @@
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="feather-bell"></i>
 
-                        <span class="badge badge-info badge-counter">6</span>
+                        <span class="badge badge-info badge-counter">{{ COUNT($notification) }}</span>
                     </a>
 
                     <div class="dropdown-list dropdown-menu dropdown-menu-right shadow-sm">
                         <h6 class="dropdown-header">
-                            Alerts Center
+                            Notification Center
                         </h6>
+                        @if(!empty($notification))
+                        @foreach($notification as $row)
                         <a class="dropdown-item d-flex align-items-center" href="notifications.html">
                             <div class="mr-3">
                                 <div class="icon-circle bg-primary">
-                                    <i class="feather-download-cloud text-white"></i>
+                                    <i class="feather-bell text-white"></i>
                                 </div>
                             </div>
                             <div>
-                                <div class="small text-gray-500">December 12, 2019</div>
-                                <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                <div class="small text-gray-500">{{ date('F d, Y H:i A', strtotime($row->created_at)) }}</div>
+                                <span class="font-weight-bold">{{ $row->description }}</span>
                             </div>
                         </a>
-                        <a class="dropdown-item d-flex align-items-center" href="notifications.html">
-                            <div class="mr-3">
-                                <div class="icon-circle bg-success">
-                                    <i class="feather-edit text-white"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="small text-gray-500">December 7, 2019</div>
-                                $290.29 has been deposited into your account!
-                            </div>
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center" href="notifications.html">
-                            <div class="mr-3">
-                                <div class="icon-circle bg-warning">
-                                    <i class="feather-folder text-white"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="small text-gray-500">December 2, 2019</div>
-                                Spending Alert: We've noticed unusually high spending for your account.
-                            </div>
-                        </a>
-                        <a class="dropdown-item text-center small text-gray-500" href="notifications.html">Show All Alerts</a>
+
+                        @endforeach
+                        @endif
+                        
+                        <a class="dropdown-item text-center small text-gray-500" href="notifications.html">Show all notification</a>
                     </div>
                 </li>
 
@@ -203,8 +193,8 @@
                                 <div class="small text-gray-500">{{auth()->user()->headline}}</div>
                             </div>
                         </div>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ route('profile.index') }}"><i class="feather-edit mr-1"></i> My Account</a>
+                        <div class="dropdown-divider"></div>, 
+                        <a class="dropdown-item" href="{{ route('profile.index',Crypt::encryptString(auth()->user()->id)) }}"><i class="feather-edit mr-1"></i> My Account</a>
                         <a class="dropdown-item" href="{{ route('profile.update') }}"><i class="feather-user mr-1"></i> Edit Profile</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" onclick="event.preventDefault();

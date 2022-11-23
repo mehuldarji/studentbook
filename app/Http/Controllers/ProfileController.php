@@ -8,6 +8,7 @@ use App\Models\UserEducation;
 use Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Crypt;
 
 class ProfileController extends Controller
 {
@@ -28,10 +29,9 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index($id)
     {
-
-        $user = User::where('id', auth()->user()->id)->first();
+        $user = User::where('id', Crypt::decryptString($id))->first();
         $user_education = UserEducation::where('user_id', auth()->user()->id)->get();
         return view('profile/my_profile', compact('user', 'user_education'));
     }

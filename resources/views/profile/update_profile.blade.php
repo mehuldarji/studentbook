@@ -5,7 +5,7 @@
         <div class="row">
 
             <aside class="col-md-4">
-                <div class="mb-3 border rounded bg-white profile-box text-center w-10">
+                <div class="mb-3  rounded bg-white profile-box text-center w-10">
                     <div class="p-4 d-flex align-items-center">
 
                         <img onerror="this.onerror=null;this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png';" src="{{ asset('upload/users/')}}/{{ $user->photo }}" style="width: 135px; height: 135px;" id="img_prv" class="img-fluid rounded-circle" alt="Responsive image">
@@ -18,7 +18,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="border rounded bg-white mb-3">
+                <div class=" rounded bg-white mb-3">
 
                     <div class="box-body">
                         <div class="p-3 border-bottom">
@@ -35,7 +35,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="border rounded bg-white mb-3">
+                <div class=" rounded bg-white mb-3">
                     <div class="box-title border-bottom p-3">
                         <h6 class="m-0">Social profiles</h6>
                         <p class="mb-0 mt-0 small">Add elsewhere links to your profile.
@@ -67,7 +67,7 @@
                     </div>
                 </div>
 
-                <div class="border rounded bg-white mb-3">
+                <div class=" rounded bg-white mb-3">
                     <div class="box-title border-bottom p-3">
                         <h6 class="m-0">Change Password</h6>
 
@@ -96,7 +96,7 @@
                 </div>
             </aside>
             <main class="col-md-8">
-                <div class="border rounded bg-white mb-3">
+                <div class=" rounded bg-white mb-3">
                     <div class="box-title border-bottom p-3">
                         <h6 class="m-0">Edit Basic Info</h6>
                         <p class="mb-0 mt-0 small">Lorem ipsum dolor sit amet, consecteturs.
@@ -287,7 +287,7 @@
                     </div>
                 </div>
 
-                <div class="border rounded bg-white mb-3">
+                <div class=" rounded bg-white mb-3">
                     <div class="box-title border-bottom p-3">
                         <h6 class="m-0">Education
                         </h6>
@@ -386,7 +386,7 @@
                     </div>
 
                     <div class="col-lg-12 mb-4">
-                        <a class="d-inline-block u-text-muted clone_education" href="#">
+                        <a class="d-inline-block u-text-muted clone_education mb-4" href="#">
                             <span class="mr-1">+</span>
                             Add new education
                         </a>
@@ -394,7 +394,7 @@
                 </div>
 
                 <div class="mb-3 text-right">
-                    <a class="font-weight-bold btn btn-link rounded p-3" href="{{ route('profile.index') }}"> &nbsp;&nbsp;&nbsp;&nbsp; Cancel &nbsp;&nbsp;&nbsp;&nbsp; </a>
+                    <a class="font-weight-bold btn btn-link rounded p-3" href="{{ route('profile.index',Crypt::encryptString(auth()->user()->id)) }}"> &nbsp;&nbsp;&nbsp;&nbsp; Cancel &nbsp;&nbsp;&nbsp;&nbsp; </a>
                     <a class="font-weight-bold btn btn-primary rounded save_info" href="#"> &nbsp;&nbsp;&nbsp;&nbsp; Save Changes &nbsp;&nbsp;&nbsp;&nbsp; </a>
                 </div>
             </main>
@@ -549,7 +549,7 @@
         var filedata = this.files[0];
         var imgtype = filedata.type;
 
-        console.log(imgtype);
+        console.log(filedata);
         var match = ['image/jpeg', 'image/jpg', 'image/png'];
 
         if ((imgtype != match[0]) && (imgtype != match[1]) && (imgtype != match[2])) {

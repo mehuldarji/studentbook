@@ -5,7 +5,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
+<?php
+$folllowers = DB::select('SELECT count(*) as followers FROM `user_connections`  WHERE (connected_id = "' . $row->id . '" OR user_id = "' . $row->id . '") AND status = 1 limit 1');
+$connection_id = DB::select('SELECT * FROM `user_connections` WHERE (user_id = "' . auth()->user()->id . '" AND connected_id = "' . $row->id . '") OR  (user_id = "' . $row->id . '" AND connected_id = "' . auth()->user()->id . '") AND status = 1 limit 1');
 
+?>
 <div class="col-md-4">
 
     <div class="border network-item rounded mb-3">
@@ -22,15 +26,12 @@
         </a>
         <div class="d-flex align-items-center p-3 border-top border-bottom network-item-body">
 
-            <span class="font-weight-bold small text-primary" style="font-size: 13px;">@if($row->followers <= 0) New User in Platform @else {{ $row->followers}} Connections @endif</span>
+            <span class="font-weight-bold small text-primary" style="font-size: 13px;">@if($folllowers[0]->followers <= 0) New User in Platform @else {{ $folllowers[0]->followers}} Connections @endif</span>
         </div>
         <div class="network-item-footer py-3 d-flex text-center">
             <div class="col-12 ">
-                <button type="button" data-id="{{ $row->id }}" class="btn btn-primary btn-sm btn-block connect  @if($row->connection_id) disable-connect-btn @endif"> @if($row->connection_id) <i class="fa fa-clock"></i> &nbsp; Pending @else Connect @endif</button>
+                <button type="button" data-id="{{ $connection_id[0]->id }}" data-msg="Unfollow Successfully" class="btn btn-primary btn-sm btn-block unfollow"> <i class="fa fa-check"></i> &nbsp; Following </button>
             </div>
-            <!-- <div class="col-6 pr-3 pl-1">
-                                                        <button type="button" class="btn btn-outline-primary btn-sm btn-block"> <i class="feather-user-plus"></i> Follow </button>
-                                                    </div> -->
         </div>
     </div>
 
