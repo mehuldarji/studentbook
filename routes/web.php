@@ -19,6 +19,7 @@ Route::resource('/', LandingController::class);
 Route::resource('home', HomeController::class);
 Route::get('suggestion-users', [HomeController::class, 'suggestionUsers'])->name('users.suggestion');
 Route::post('save-post', [HomeController::class, 'savePost'])->name('post.save');
+Route::get('article/{id}', [HomeController::class, 'showArticle'])->name('article.show');
 
 // 
 Route::prefix('account')->group(function () {

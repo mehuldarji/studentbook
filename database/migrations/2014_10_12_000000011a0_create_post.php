@@ -17,8 +17,11 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id')->nullable();
             $table->string('type')->nullable();
+            $table->string('title')->nullable();
             $table->longText('desc')->nullable();
-            $table->longText('poll')->nullable();
+            $table->longText('img')->nullable();
+            $table->longText('que')->nullable();
+            $table->longText('ans')->nullable();
             $table->timestamps();
         });
     }

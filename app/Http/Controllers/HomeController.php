@@ -28,7 +28,7 @@ class HomeController extends Controller
     public function index()
     {
         $connection = DB::Select('SELECT * FROM users WHERE id IN (SELECT ids from (SELECT connected_id as ids FROM `user_connections` a  WHERE user_id = "' . auth()->user()->id . '"  AND status = 1 UNION ALL SELECT user_id as ids FROM `user_connections` a  WHERE connected_id = "' . auth()->user()->id . '"  AND status = 1) as x) ');
-        $post =  Post::join('users', 'users.id', 'posts.user_id')->select('posts.*', 'users.name', 'users.headline', 'users.photo')->orderby('id','desc')->get();
+        $post =  Post::join('users', 'users.id', 'posts.user_id')->select('posts.*', 'users.name', 'users.headline', 'users.photo')->orderby('id', 'desc')->get();
         return view('home/index', compact('connection', 'post'));
     }
 
@@ -48,6 +48,7 @@ class HomeController extends Controller
     public function savePost(Request $request)
     {
         $input = $request->all();
+        // dd($input);
         if ($input['type'] == 'post') {
             $image = $request->file('photo');
             if ($image != '') {
@@ -59,10 +60,16 @@ class HomeController extends Controller
         }
         $insert = new Post();
         $insert->user_id = auth()->user()->id;
-        $insert->desc = $input['post'];
+        if ($input['post'] != '') {
+            $insert->desc = $input['post'];
+        }
+        if (@$input['title'] != '') {
+            $insert->title = $input['title'];
+        }
+
         $insert->type = $input['type'];
-        if ($new_name != '') {
-            $insert->poll = $new_name;
+        if (@$new_name != '') {
+            $insert->img = $new_name;
         }
         $insert->created_at = date('Y-m-d H:i:s');
         $insert->save();
@@ -72,5 +79,10 @@ class HomeController extends Controller
         } else {
             return  response()->json(['success' => 'error']);
         }
+    }
+
+    public function showArticle($id){
+        $article = Post::where('id',Crypt::decryptString($id))->first();
+        return view('home/articalDetail', compact('article'));
     }
 }
