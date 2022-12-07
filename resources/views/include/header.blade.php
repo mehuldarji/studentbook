@@ -92,7 +92,7 @@ $notification = \App\Models\Notification::where('is_read',0)->get();
                 </li>
                 
                 <li class="nav-item dropdown no-arrow mx-1 osahan-list-dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="{{ route('chat.index') }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="feather-message-square"></i>
 
                         <span class="badge badge-danger badge-counter">8</span>
@@ -142,7 +142,7 @@ $notification = \App\Models\Notification::where('is_read',0)->get();
                                 <div class="small text-gray-500">Chicken the Dog · 2w</div>
                             </div>
                         </a>
-                        <a class="dropdown-item text-center small text-gray-500" href="messages.html">Read More Messages</a>
+                        <a class="dropdown-item text-center small text-gray-500" href="{{ route('chat.index') }}">Read More Messages</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown no-arrow mx-1 osahan-list-dropdown">

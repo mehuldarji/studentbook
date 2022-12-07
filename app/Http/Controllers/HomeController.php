@@ -48,7 +48,7 @@ class HomeController extends Controller
     public function savePost(Request $request)
     {
         $input = $request->all();
-        // dd($input);
+        //  dd($input);
         if ($input['type'] == 'post') {
             $image = $request->file('photo');
             if ($image != '') {
@@ -60,11 +60,17 @@ class HomeController extends Controller
         }
         $insert = new Post();
         $insert->user_id = auth()->user()->id;
-        if ($input['post'] != '') {
+        if (@$input['post'] != '') {
             $insert->desc = $input['post'];
         }
         if (@$input['title'] != '') {
             $insert->title = $input['title'];
+        }
+        if (@$input['que'] != '') {
+            $insert->que = $input['que'];
+        }
+        if (@$input['ans'] != '') {
+            $insert->ans = $input['ans'];
         }
 
         $insert->type = $input['type'];

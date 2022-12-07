@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ConnectionController;
+use App\Http\Controllers\ChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +21,15 @@ Route::resource('/', LandingController::class);
 Route::resource('home', HomeController::class);
 Route::get('suggestion-users', [HomeController::class, 'suggestionUsers'])->name('users.suggestion');
 Route::post('save-post', [HomeController::class, 'savePost'])->name('post.save');
+
 Route::get('article/{id}', [HomeController::class, 'showArticle'])->name('article.show');
 
-// 
+
+Route::prefix('user')->group(function () {
+    Route::get('chat', [ChatController::class, 'index'])->name('chat.index');
+});
+
+
 Route::prefix('account')->group(function () {
     Route::get('profile/{id}', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('update-profile', [ProfileController::class, 'update'])->name('profile.update');
