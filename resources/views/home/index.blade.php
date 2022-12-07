@@ -1,5 +1,142 @@
 @include('include.header')
 <script src="https://cdn.ckeditor.com/4.8.0/full-all/ckeditor.js"></script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+
+    .wrapper {
+        /* background: #fff;
+  border-radius: 15px;
+  padding: 25px;
+  max-width: 380px;
+  width: 100%;
+  box-shadow: 0px 5px 10px rgba(0,0,0,0.1); */
+    }
+
+    .wrapper header {
+        font-size: 22px;
+        font-weight: 600;
+    }
+
+    .wrapper .poll-area {
+        margin: 20px 0 15px 0;
+    }
+
+    .poll-area label {
+        display: block;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        padding: 8px 15px;
+        border: 2px solid #e6e6e6;
+        transition: all 0.2s ease;
+    }
+
+    .poll-area label:hover {
+        border-color: #ddd;
+    }
+
+    label.selected {
+        border-color: #0172BC !important;
+    }
+
+    label .row {
+        display: flex;
+        pointer-events: none;
+        justify-content: space-between;
+    }
+
+    label .row .column {
+        display: flex;
+        align-items: center;
+    }
+
+    label .row .circle {
+        height: 19px;
+        width: 19px;
+        display: block;
+        border: 2px solid #ccc;
+        border-radius: 50%;
+        margin-right: 10px;
+        position: relative;
+    }
+
+    label.selected .row .circle {
+        border-color: #0172BC;
+    }
+
+    label .row .circle::after {
+        content: "";
+        height: 11px;
+        width: 11px;
+        background: #0172BC;
+        border-radius: inherit;
+        position: absolute;
+        left: 2px;
+        top: 2px;
+        display: none;
+    }
+
+    .poll-area label:hover .row .circle::after {
+        display: block;
+        background: #e6e6e6;
+    }
+
+    label.selected .row .circle::after {
+        display: block;
+        background: #0172BC !important;
+    }
+
+    label .row span {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    label .row .percent {
+        display: none;
+    }
+
+    label .progress {
+        height: 7px;
+        width: 100%;
+        position: relative;
+        background: #f0f0f0;
+        margin: 8px 0 3px 0;
+        border-radius: 30px;
+        display: none;
+        pointer-events: none;
+    }
+
+    label .progress:after {
+        position: absolute;
+        content: "";
+        height: 100%;
+        background: #ccc;
+        width: calc(1% * var(--w));
+        border-radius: inherit;
+        transition: all 0.2s ease;
+    }
+
+    label.selected .progress::after {
+        background: #0172BC;
+    }
+
+    label.selectall .progress,
+    label.selectall .row .percent {
+        display: block;
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+        display: none;
+    }
+</style>
 <div class="py-4">
     <div class="container">
         <div class="row">
@@ -67,7 +204,19 @@
                         </div>
                         <div class="tab-pane fade" id="poll" role="tabpanel" aria-labelledby="poll-tab">
                             <div class="p-3 w-100">
-                                <textarea placeholder="Write a poll..." class="form-control border-0 p-0 shadow-none" rows="6"></textarea>
+                                <input name="que" required placeholder="Write a poll..." class="que form-control shadow-none" />
+                            </div>
+                            <div class="p-3 w-100">
+                                <input name="ans[]" required placeholder="Write a option A..." class="ans form-control  shadow-none" />
+                            </div>
+                            <div class="p-3 w-100">
+                                <input name="ans[]" required placeholder="Write a option B..." class="ans form-control  shadow-none" />
+                            </div>
+                            <div class="p-3 w-100">
+                                <input name="ans[]" required placeholder="Write a option C..." class="ans form-control  shadow-none" />
+                            </div>
+                            <div class="p-3 w-100">
+                                <input name="ans[]" required placeholder="Write a option D..." class="ans form-control shadow-none" />
                             </div>
 
                             <div class="border-top p-3 d-flex align-items-center">
@@ -79,7 +228,7 @@
                                 </div>
                                 <div class="flex-shrink-1">
 
-                                    <button type="button" class="btn btn-primary btn-sm save_post">Share Post</button>
+                                    <button type="button" data-type="poll" class="btn btn-primary btn-sm save_post">Share Poll</button>
                                 </div>
                             </div>
                         </div>
@@ -121,6 +270,33 @@
                         @endif
                         @if($row->img != '')
                         <img style="width: 510px;margin-top:15px" src="{{ asset('upload/posts') }}/{{ $row->img  }}">
+                        @endif
+
+                        @if($row->type == 'poll')
+                        <div class="wrapper">
+                            <header>{{ $row->que }}</header>
+                            <div class="poll-area">
+                                <input type="checkbox" name="poll" id="opt-1">
+                                <input type="checkbox" name="poll" id="opt-2">
+                                <input type="checkbox" name="poll" id="opt-3">
+                                <input type="checkbox" name="poll" id="opt-4">
+                                <?php
+                                $option = explode(',',$row->ans);
+                                foreach ($option as $row) {
+                                ?>
+                                    <label for="opt-1" class="opt-1">
+                                        <div class="row">
+                                            <div class="column">
+                                                <span class="circle"></span>
+                                                <span class="text"><?= $row ?></span>
+                                            </div>
+                                            <span class="percent">30%</span>
+                                        </div>
+                                        <div class="progress" style='--w:30;'></div>
+                                    </label>
+                                <?php } ?>
+                            </div>
+                        </div>
                         @endif
 
                     </div>
@@ -312,10 +488,31 @@
             msg = 'Article';
         }
 
+        if (type == 'poll') {
+
+            var que = $('.que').val();
+            var ans = $("input[name='ans[]']").map(function() {
+                return $(this).val();
+            }).get();
+
+            if (que == '' && ans == '') {
+                showError('Enter title & Option before save!');
+                return false;
+            }
+
+
+            var postData = new FormData();
+            postData.append('que', que);
+            postData.append('ans', ans);
+            postData.append('type', 'poll');
+
+            msg = 'Poll';
+        }
+
         getDataByAjaxImage(url, postData, 'POST', msg + ' share Successfully.');
-        $('#post').val('');
+        $('.que').val('');
         CKEDITOR.instances.editor.setData('');
-        $('#title').val('');
+        $('.ans').val('');
 
 
 
@@ -380,4 +577,45 @@
             }
         ],
     });
+</script>
+
+
+<script>
+    const options = document.querySelectorAll("label");
+    for (let i = 0; i < options.length; i++) {
+        options[i].addEventListener("click", () => {
+            for (let j = 0; j < options.length; j++) {
+                if (options[j].classList.contains("selected")) {
+                    options[j].classList.remove("selected");
+                }
+            }
+
+            options[i].classList.add("selected");
+            for (let k = 0; k < options.length; k++) {
+                options[k].classList.add("selectall");
+            }
+
+            let forVal = options[i].getAttribute("for");
+            let selectInput = document.querySelector("#" + forVal);
+            let getAtt = selectInput.getAttribute("type");
+            if (getAtt == "checkbox") {
+                selectInput.setAttribute("type", "radio");
+            } else if (selectInput.checked == true) {
+                options[i].classList.remove("selected");
+                selectInput.setAttribute("type", "checkbox");
+            }
+
+            let array = [];
+            for (let l = 0; l < options.length; l++) {
+                if (options[l].classList.contains("selected")) {
+                    array.push(l);
+                }
+            }
+            if (array.length == 0) {
+                for (let m = 0; m < options.length; m++) {
+                    options[m].removeAttribute("class");
+                }
+            }
+        });
+    }
 </script>
