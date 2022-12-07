@@ -26,14 +26,15 @@ class LoginController extends Controller
         if(Hash::check($request->password, $admin->password)){
              $request->session()->put('name',$admin->name);
 
-            return redirect('admin/dashboard');
+            return redirect('admin/dashboard')->with('success', "Login Successfully");
 
           } else{
-            return redirect('admin/login')->with('failed','login failed');
+             return redirect('admin/login')->with('error','Incorrect Password');
              }
         }
         else{
-                return redirect('admin/login')->with('failed','login failed');
+            return redirect('admin/login')->with('error','Incorrect Email Or Password');
+               
       }
     }
     

@@ -55,7 +55,7 @@ class UserController extends Controller
             DB::table('websitetables')->where('id',$request->about_id)->update($about);
 
          
-            return redirect('admin/landing');
+            return redirect('admin/landing')->with('success', "Updated Successfully");
       
 
          }

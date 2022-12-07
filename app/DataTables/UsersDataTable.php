@@ -35,6 +35,9 @@ class UsersDataTable extends DataTable
            ->editColumn('b_date', function ($row) {
                  return $row->b_date .'-'.$row->b_month .'-'.$row->b_year;
             });
+//             ->editColumn('location', function ($row) {
+//                   return $row->phone .'<br>'.$row->location;
+//                   })->escapeColumns([]);
                         
     }
 

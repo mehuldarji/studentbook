@@ -94,6 +94,8 @@
 }
             
 </style>
+
+@include('include/msg')
         
 <body class="app sidebar-mini rtl">
 

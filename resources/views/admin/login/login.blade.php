@@ -1,36 +1,8 @@
 <!doctype html>
 <html lang="en" dir="ltr">
-  <head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="author" content="Spruko Technologies Private Limited">
-		<meta name="keywords" content=" admin, admin template, html template, html5 template, bootstrap admin template, css templates, bootstrap 4 admin template, simple html templates, admin panel template, bootstrap dashboard template, admin dashboard template, simple bootstrap template, responsive html template, template admin bootstrap 4, html admin template, html dashboard template"/>
-		<meta name="msapplication-TileColor" content="#8966f7">
-		<meta name="theme-color" content="#b356d8">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="mobile-web-app-capable" content="yes">
-		<meta name="HandheldFriendly" content="True">
-		<meta name="MobileOptimized" content="320">
-		<link rel="icon" href="{{ asset('/assets_admin/images/brand/logo.png')}}" type="image/x-icon"/>
-		<link rel="shortcut icon" type="image/x-icon" href="{{ asset('/assets_admin/images/brand/logo.png')}}" />
-
-
-		<link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css">
-
-		<link href="../assets_admin/plugins/scroll-bar/jquery.mCustomScrollbar.css" rel="stylesheet" />
-
-		<link href="../assets_admin/css/dashboard.css" rel="stylesheet" />
-		<link href="../assets_admin/css/boxed.css" rel="stylesheet" />
-
-		<link href="../assets_admin/css/dark.css" rel="stylesheet" />
-
-		<link id="color" href="../assets_admin/css/colors/color1.css" rel="stylesheet" />
-
-		<link href="../assets_admin/css/icons.css" rel="stylesheet" />
-
-	</head>
+    
+  @include('admin/include/header')
+  
 	<body class="login-img custom-bg">
 
 		<div class="page">
@@ -78,27 +50,7 @@
 			</div>
 		</div>
 
-		<script src="../assets_admin/js/jquery-3.2.1.min.js"></script>
-
-		<script src="../assets_admin/js/jquery.sparkline.min.js"></script>
-
-		<script src="../assets_admin/js/selectize.min.js"></script>
-
-		<script src="../assets_admin/js/jquery.tablesorter.min.js"></script>
-
-		<script src="../assets_admin/js/circle-progress.min.js"></script>
-
-		<script src="../assets_admin/plugins/rating/jquery.rating-stars.js"></script>
-
-		<script src="../assets_admin/plugins/bootstrap/popper.min.js"></script>
-		<script src="../assets_admin/plugins/bootstrap/js/bootstrap.min.js"></script>
-
-		<script src="../assets_admin/plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
-
-		<script src="../assets_admin/plugins/peitychart/jquery.peity.min.js"></script>
-
-		<script src="../assets_admin/plugins/counters/counterup.min.js"></script>
-		<script src="../assets_admin/plugins/counters/waypoints.min.js"></script>
+		 @include('admin/include/footer')
 
 	</body>
 </html>

@@ -20,6 +20,10 @@ class Adminlogin
        {
            return redirect('admin/login');
        }
+         elseif(session()->has('name')&&($request->path() == 'admin/login'))
+       {
+           return redirect('admin/dashboard');
+       }
         return $next($request);
     }
 }

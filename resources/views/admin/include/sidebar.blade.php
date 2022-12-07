@@ -3,7 +3,6 @@
 $value = \App\Models\Websitetable::where(['id' => 1])->first()->logo;
 ?>
 
-
 <aside class="app-sidebar">
     <div class="app-sidebar__user">
         <img src="{{ asset('/assets_admin/upload/')}}/{{$value}}"   height="130" >
