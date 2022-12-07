@@ -1,0 +1,26 @@
+
+.app {
+    padding: 0px !important;
+}
+.navbar-form.active .input-group-btn {
+    right: 20px !important;
+}
+.horizontal-content {
+    padding: 0px 20px;
+}
+.page {
+    min-height: 100vh !important;
+}
+@media (min-width: 1480px){
+	.horizontal-conatiner .horizontalMenucontainer{
+		max-width:100% !important;
+	}
+}
+@media (max-width: 992px){
+	.app.active.sidebar-gone.active {
+		padding: 0px 0px !important;
+	}
+	.dark-mode .app-header {
+		border: 0px solid rgba(255,255,255,0.1) !important;
+	}
+}

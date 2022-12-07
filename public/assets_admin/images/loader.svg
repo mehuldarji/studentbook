@@ -1,0 +1,43 @@
+<svg class="lds" width="100px"  height="100px"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" style="background: none;"><!--?xml version="1.0" encoding="utf-8"?--><!--Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)--><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" style="transform-origin: 50px 50px 0px;" xml:space="preserve"><g style="transform-origin: 50px 50px 0px;"><g style="transform-origin: 50px 50px 0px; transform: scale(0.6);"><g style="transform-origin: 50px 50px 0px;"><g><g class="ld ldt-slide-px-top-in" style="transform-origin: 50px 50px 0px; animation-duration: 1s; animation-delay: 0s; animation-direction: normal;"><path style="fill: rgb(230, 226, 243);" d="M74.578,10C71.497,10,69,12.497,69,15.578V67v17.422C69,87.503,71.497,90,74.578,90h10.844 C88.503,90,91,87.503,91,84.422V67V15.578C91,12.497,88.503,10,85.422,10H74.578z" fill="#e6e2f3"></path></g><g class="ld ldt-slide-px-top-in" style="transform-origin: 50px 50px 0px; animation-duration: 1s; animation-delay: 0.0666667s; animation-direction: normal;"><path style="fill: rgb(230, 226, 243);" d="M44.578,10C41.497,10,39,12.497,39,15.578V33v51.422C39,87.503,41.497,90,44.578,90h10.844 C58.503,90,61,87.503,61,84.422V33V15.578C61,12.497,58.503,10,55.422,10H44.578z" fill="#e6e2f3"></path></g><g class="ld ldt-slide-px-top-in" style="transform-origin: 50px 50px 0px; animation-duration: 1s; animation-delay: 0.133333s; animation-direction: normal;"><path style="fill: rgb(230, 226, 243);" d="M14.578,10C11.497,10,9,12.497,9,15.578V50v34.422C9,87.503,11.497,90,14.578,90h10.844 C28.503,90,31,87.503,31,84.422V50V15.578C31,12.497,28.503,10,25.422,10H14.578z" fill="#e6e2f3"></path></g><g class="ld ldt-slide-px-top-in" style="transform-origin: 50px 50px 0px; animation-duration: 1s; animation-delay: 0.2s; animation-direction: normal;"><path style="fill: rgb(137, 102, 247);" d="M61,84.422V38.578C61,35.497,58.503,33,55.422,33H44.578C41.497,33,39,35.497,39,38.578v45.844 C39,87.503,41.497,90,44.578,90h10.844C58.503,90,61,87.503,61,84.422z" fill="#8966f7"></path></g><g class="ld ldt-slide-px-top-in" style="transform-origin: 50px 50px 0px; animation-duration: 1s; animation-delay: 0.266667s; animation-direction: normal;"><path style="fill: rgb(67, 215, 239);" d="M91,84.422V72.578C91,69.497,88.503,67,85.422,67H74.578C71.497,67,69,69.497,69,72.578v11.844 C69,87.503,71.497,90,74.578,90h10.844C88.503,90,91,87.503,91,84.422z" fill="#43d7ef"></path></g><g class="ld ldt-slide-px-top-in" style="transform-origin: 50px 50px 0px; animation-duration: 1s; animation-delay: 0.333333s; animation-direction: normal;"><path style="fill: rgb(191, 105, 226);" d="M31,84.422V55.578C31,52.497,28.503,50,25.422,50H14.578C11.497,50,9,52.497,9,55.578v28.844 C9,87.503,11.497,90,14.578,90h10.844C28.503,90,31,87.503,31,84.422z" fill="#bf69e2"></path></g><metadata xmlns:d="https://loading.io/stock/" class="ld ldt-slide-px-top-in" style="transform-origin: 50px 50px 0px; animation-duration: 3s; animation-delay: 0.4s; animation-direction: normal;">
+<d:name class="ld ldt-slide-px-top-in" style="transform-origin: 50px 50px 0px; animation-duration: 3s; animation-delay: 0.466667s; animation-direction: normal;">bar</d:name>
+<d:tags class="ld ldt-slide-px-top-in" style="transform-origin: 50px 50px 0px; animation-duration: 1s; animation-delay: 0.533333s; animation-direction: normal;">bar,column,cylinder,percent,progress</d:tags>
+<d:license class="ld ldt-slide-px-top-in" style="transform-origin: 50px 50px 0px; animation-duration: 1s; animation-delay: 0.6s; animation-direction: normal;">cc-by</d:license>
+<d:slug class="ld ldt-slide-px-top-in" style="transform-origin: 50px 50px 0px; animation-duration: 1s; animation-delay: 0.666667s; animation-direction: normal;">3vqjkk</d:slug>
+</metadata></g></g></g></g><style type="text/css" class="ld ldt-slide-px-top-in" style="transform-origin: 50px 50px 0px; animation-duration: 1s; animation-delay: 0.733333s; animation-direction: normal;">@keyframes ldt-slide-px-top-in {
+  0% {
+    -webkit-transform: translate(0, -200px);
+    transform: translate(0, -200px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes ldt-slide-px-top-in {
+  0% {
+    -webkit-transform: translate(0, -200px);
+    transform: translate(0, -200px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+.ldt-slide-px-top-in {
+  -webkit-transform: translate(0, -200px);
+  transform: translate(0, -200px);
+  opacity: 0;
+  -webkit-animation: ldt-slide-px-top-in 10s cubic-bezier(0, 0.5, 0.5, 1) forwards;
+  animation: ldt-slide-px-top-in 10s cubic-bezier(0, 0.5, 0.5, 1) forwards;
+}
+</style></svg></svg>

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e69751cf24629054bb2d375cf2d849c6",
+    "content-hash": "6160c2244fc8b2186a1ba0cde4cb9b64",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -6786,16 +6786,16 @@
         },
         {
             "name": "yajra/laravel-datatables-oracle",
-            "version": "v10.1.4",
+            "version": "v10.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yajra/laravel-datatables.git",
-                "reference": "a311684b1e80e5ae12bef6a034a714cc4818aad8"
+                "reference": "8c909eae598fc487deeb252b912cf32b4d1bc803"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yajra/laravel-datatables/zipball/a311684b1e80e5ae12bef6a034a714cc4818aad8",
-                "reference": "a311684b1e80e5ae12bef6a034a714cc4818aad8",
+                "url": "https://api.github.com/repos/yajra/laravel-datatables/zipball/8c909eae598fc487deeb252b912cf32b4d1bc803",
+                "reference": "8c909eae598fc487deeb252b912cf32b4d1bc803",
                 "shasum": ""
             },
             "require": {
@@ -6857,7 +6857,7 @@
             ],
             "support": {
                 "issues": "https://github.com/yajra/laravel-datatables/issues",
-                "source": "https://github.com/yajra/laravel-datatables/tree/v10.1.4"
+                "source": "https://github.com/yajra/laravel-datatables/tree/v10.2.0"
             },
             "funding": [
                 {
@@ -6873,7 +6873,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2022-09-27T00:22:05+00:00"
+            "time": "2022-11-03T04:25:32+00:00"
         }
     ],
     "packages-dev": [
@@ -9482,5 +9482,5 @@
         "php": "^8.0.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }

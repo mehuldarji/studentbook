@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ConnectionController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,7 +40,8 @@ Route::prefix('account')->group(function () {
 
 
 
-
+require __DIR__ . '/admin.php';
 
 
 require __DIR__ . '/auth.php';
+
