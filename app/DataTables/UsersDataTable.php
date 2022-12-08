@@ -9,32 +9,31 @@ use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 
-class UsersDataTable extends DataTable
-{
+class UsersDataTable extends DataTable {
+
     /**
      * Build DataTable class.
      *
      * @param QueryBuilder $query Results from query() method.
      * @return \Yajra\DataTables\EloquentDataTable
      */
-    public function dataTable(QueryBuilder $query): EloquentDataTable
-    {
-        
+    public function dataTable(QueryBuilder $query): EloquentDataTable {
+
         return datatables()
-            ->eloquent($query)
-            ->addColumn('action', function($row) {
-                return '<a href="'.$row->youtube_link.'" ><button type="button" class="rounded-circle btn btn-icon btn-youtube"><i class="fab fa-youtube"></i></button></a>
-                        <a href="'.$row->twitter_link.'"><button type="button" class="rounded-circle btn btn-icon btn-twitter"><i class="fab fa-twitter"></i></button></a>
-                        <a href="'.$row->facebook_link.'"><button type="button" class="rounded-circle btn btn-icon btn-facebook"><i class="fab fa-facebook"></i></button></a>
-                        <a href="'.$row->instagram_link.'"><button type="button" class="rounded-circle btn btn-icon btn-instagram"><i class="fab fa-instagram"></i></button></a>'; })
+                        ->eloquent($query)
+                        ->addColumn('action', function($row) {
+                            return '<a href="' . $row->youtube_link . '" ><button type="button" class="rounded-circle btn btn-icon btn-youtube"><i class="fab fa-youtube"></i></button></a>
+                        <a href="' . $row->twitter_link . '"><button type="button" class="rounded-circle btn btn-icon btn-twitter"><i class="fab fa-twitter"></i></button></a>
+                        <a href="' . $row->facebook_link . '"><button type="button" class="rounded-circle btn btn-icon btn-facebook"><i class="fab fa-facebook"></i></button></a>
+                        <a href="' . $row->instagram_link . '"><button type="button" class="rounded-circle btn btn-icon btn-instagram"><i class="fab fa-instagram"></i></button></a>';
+                        })
+                        ->addColumn('name', function ($img) {
+                            return '<img src="../upload/users/' . $img->photo . '" width="40" class="avatar-md brround" >&nbsp &nbsp' . $img->name;
+                        })->rawColumns(['name', 'action'])
+                        ->editColumn('b_date', function ($row) {
+                            return $row->b_date . '-' . $row->b_month . '-' . $row->b_year;
+                        });
                         
-              ->addColumn('name', function ($img) {
-                    return '<img src="../upload/users/'.$img->photo.'" width="40" class="avatar-md brround" >&nbsp &nbsp'.$img->name;
-                    })->rawColumns(['name', 'action'])
-                            
-           ->editColumn('b_date', function ($row) {
-                 return $row->b_date .'-'.$row->b_month .'-'.$row->b_year;
-            });
 //             ->editColumn('location', function ($row) {
 //                   return $row->phone .'<br>'.$row->location;
 //                   })->escapeColumns([]);
@@ -47,8 +46,7 @@ class UsersDataTable extends DataTable
      * @param \App\Models\User $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(User $model): QueryBuilder
-    {
+    public function query(User $model): QueryBuilder {
         return $model->newQuery();
     }
 
@@ -57,14 +55,12 @@ class UsersDataTable extends DataTable
      *
      * @return \Yajra\DataTables\Html\Builder
      */
-    public function html(): HtmlBuilder
-    {
+    public function html(): HtmlBuilder {
         return $this->builder()
-                    ->setTableId('users-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax();
+                        ->setTableId('users-table')
+                        ->columns($this->getColumns())
+                        ->minifiedAjax();
 //                    ->dom('Bfrtip')
-                   
     }
 
     /**
@@ -72,8 +68,7 @@ class UsersDataTable extends DataTable
      *
      * @return array
      */
-    protected function getColumns(): array
-    {
+    protected function getColumns(): array {
         return [
             Column::make('name'),
             Column::make('email'),
@@ -81,8 +76,6 @@ class UsersDataTable extends DataTable
             Column::make('phone'),
             Column::make('location'),
             Column::make('action')->title('Link'),
-
-           
         ];
     }
 
@@ -91,8 +84,8 @@ class UsersDataTable extends DataTable
      *
      * @return string
      */
-    protected function filename(): string
-    {
+    protected function filename(): string {
         return 'Users_' . date('YmdHis');
     }
+
 }
