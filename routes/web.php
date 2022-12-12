@@ -27,6 +27,7 @@ Route::get('article/{id}', [HomeController::class, 'showArticle'])->name('articl
 
 Route::prefix('user')->group(function () {
     Route::get('chat', [ChatController::class, 'index'])->name('chat.index');
+    Route::post('get-user-chat', [ChatController::class, 'getUserChat'])->name('chat.get');
 });
 
 

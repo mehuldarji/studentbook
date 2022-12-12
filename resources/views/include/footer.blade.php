@@ -50,6 +50,8 @@
         })
     }
 
+   
+
     function getDataByAjaxImage(url, peram, method, msg) {
 
         $.ajax({
@@ -198,7 +200,7 @@
                         /*insert the value for the autocomplete text field:*/
                         inp.value = this.getElementsByTagName("input")[0].value;
                         var id = $(this).attr('id');
-                        window.location.href = "/account/profile/" + id; 
+                        window.location.href = "/account/profile/" + id;
                         /*close the list of autocompleted values,
                         (or any other open lists of autocompleted values:*/
                         closeAllLists();

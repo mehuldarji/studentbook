@@ -36,6 +36,7 @@
         padding: 8px 15px;
         border: 2px solid #e6e6e6;
         transition: all 0.2s ease;
+        cursor: pointer;
     }
 
     .poll-area label:hover {

@@ -1,18 +1,167 @@
 @include('include.header')
 <style>
-.dd-flex{
-    display: flex;
+    .dd-flex {
+        display: flex;
+    }
+
+    .userlist {
+        cursor: pointer;
+    }
+
+    .toMsg {
+
+        padding: 15px;
+        border-radius: 15px;
+        background-color: #FFF !important;
+        padding: 10px 20px;
+        border-radius: 20px 20px 20px 0;
+        margin: 13px 100px 13px 0px;
+        text-align: left;
+    }
+
+    .toMsg p {
+        margin-bottom: 7px;
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+    }
+
+    .fromMsg p {
+        margin-bottom: 7px;
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+    }
+
+    .fromMsg {
+        background: #275570;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 20px 20px 0;
+        margin-left: 30px;
+        background: #D4E0E6;
+        color: #275570;
+        padding: 10px 20px;
+        border-radius: 20px 20px 0;
+        margin-left: 30px;
+        margin: 13px 0 13px 100px;
+        text-align: left;
+    }
+
+    .userActive {
+        background: #F3F2EF;
+        color: #000 !important;
+    }
+
+    .userActive .text-black-50 {
+        color: #000 !important;
+    }
+
+    .userActive .small {
+        color: #000 !important;
+    }
+
+    .userActive i {
+        color: #000 !important;
+    }
+    .msg_card_body {
+    overflow-y: auto;
 }
-    </style>
+.msg_card_body{
+    height: 322px;
+    overflow-y: scroll;
+}
+.chat-box-single-line {
+    height: 12px;
+    margin: 7px 0 30px;
+    position: relative;
+    text-align: center;
+}
+.chatbox abbr.timestamp {
+    background: rgb(137, 102, 247, 0.8);
+}
+.chatbox abbr.timestamp {
+    padding: 4px 14px;
+    border-radius: 4px;
+    color: #fff;
+}
+.chatbox .justify-content-start {
+    margin-bottom: 25px;
+}
+.chatbox .img_cont_msg {
+    height: 40px;
+    width: 40px;
+    display: contents;
+}
+.chatbox .user_img_msg {
+    height: 40px;
+    width: 40px;
+    border: 1.5px solid #f5f6fa;
+}
+.chatbox .msg_cotainer {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+    background-color: #f5f6fb;
+    padding: 10px;
+    position: relative;
+}
+.chatbox .msg_time {
+    position: absolute;
+    left: 0;
+    bottom: -18px;
+    color: #3a374e;
+    font-size: 10px;
+}
+.chatbox .justify-content-end {
+    margin-bottom: 25px;
+}
+.chatbox .msg_cotainer_send {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 10px;
+    background-color: #f1f3ff;
+    padding: 10px;
+    position: relative;
+}
+.chatbox .msg_time_send {
+    position: absolute;
+    right: 0;
+    bottom: -18px;
+    color: #3a374e;
+    font-size: 10px;
+}
+.chatbox .img_cont_msg {
+    height: 40px;
+    width: 40px;
+    display: contents;
+}
+.chatbox .user_img_msg {
+    height: 40px;
+    width: 40px;
+    border: 1.5px solid #f5f6fa;
+}
+.chatbox .img_cont {
+    position: relative;
+    height: 50px;
+    width: 50px;
+}
+.chatbox .user_img {
+    height: 50px;
+    width: 50px;
+    border: 1.5px solid #f5f6fa;
+}
+.chatbox h4{
+    font-size: 1.125rem;
+}
+</style>
 <div class="py-4">
     <div class="container">
         <div class="row">
 
-            <main class="col col-xl-9 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
+            <main class="col col-xl-12 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12" id="myChat">
                 <div class="box shadow-sm rounded bg-white mb-3 osahan-chat">
                     <h5 class="pl-3 pt-3 pr-3 border-bottom mb-0 pb-3">Messaging</h5>
                     <div class="row m-0">
-                        <div class="border-right col-lg-5 col-xl-4 px-0">
+                        <div class="border-right col-lg-5 col-xl-3 px-0">
                             <div class="osahan-chat-left">
                                 <div class="position-relative icon-form-control p-3 border-bottom">
                                     <i class="feather-search position-absolute"></i>
@@ -22,14 +171,33 @@
                                     @if(!empty($user))
                                     @foreach($user as $row)
                                     @if(auth()->user()->id != $row->id)
-                                    <div class="p-3 dd-flex align-items-center border-bottom osahan-post-header overflow-hidden userlist">
+
+                                    <?php
+                                    $seconds_ago = (time() - strtotime($row->dates));
+                                    $timeago = "";
+                                    if ($seconds_ago >= 31536000) {
+                                        $timeago =   intval($seconds_ago / 31536000) . "y";
+                                    } elseif ($seconds_ago >= 2419200) {
+                                        $timeago =   intval($seconds_ago / 2419200) . "m";
+                                    } elseif ($seconds_ago >= 86400) {
+                                        $timeago =  intval($seconds_ago / 86400) . "d";
+                                    } elseif ($seconds_ago >= 3600) {
+                                        $timeago =  intval($seconds_ago / 3600) . "h";
+                                    } elseif ($seconds_ago >= 60) {
+                                        $timeago =  intval($seconds_ago / 60) . "m";
+                                    } else {
+                                        $timeago =  "1m";
+                                    }
+
+                                    ?>
+                                    <div data-id="{{$row->id}}" class="p-3 dd-flex align-items-center border-bottom osahan-post-header overflow-hidden userlist">
                                         <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="{{ asset('upload/users/')}}/{{ $row->photo }}" alt=""></div>
                                         <div class="font-weight-bold mr-1 overflow-hidden">
                                             <div class="text-truncate">{{$row->name}}</div>
-                                            <div class="small text-truncate overflow-hidden text-black-50"><i class="feather-check text-primary"></i> Pellentesque semper ex diam, at tristique ipsum varius sed. Pellentesque non metus ullamcorper</div>
+                                            <div class="small text-truncate overflow-hidden text-black-50"><i class="feather-check text-primary"></i> {{ $row->body }}</div>
                                         </div>
                                         <span class="ml-auto mb-auto">
-                                            <div class="text-right text-muted pt-1 small">00:21PM</div>
+                                            <div class="text-right text-muted pt-1 small">{{ $timeago }}</div>
                                         </span>
                                     </div>
                                     @endif
@@ -38,171 +206,83 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-7 col-xl-8 px-0">
-                            <div class="p-3 d-flex align-items-center  border-bottom osahan-post-header">
-                                <div class="font-weight-bold mr-1 overflow-hidden">
-                                    <div class="text-truncate">Carl Jenkins
-                                    </div>
-                                    <div class="small text-truncate overflow-hidden text-black-50">Askbootstap.com - Become a Product Manager with super power</div>
-                                </div>
-                                <span class="ml-auto">
-                                    <button type="button" class="btn btn-light btn-sm rounded">
-                                        <i class="feather-phone"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-light btn-sm rounded">
-                                        <i class="feather-video"></i>
-                                    </button>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-light btn-sm rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="feather-more-vertical"></i>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <button class="dropdown-item" type="button"><i class="feather-trash"></i> Delete</button>
-                                            <button class="dropdown-item" type="button"><i class="feather-x-circle"></i> Turn Off</button>
-                                        </div>
-                                    </div>
-                                </span>
-                            </div>
-                            <div class="osahan-chat-box p-3 border-top border-bottom bg-light">
-                                <div class="text-center my-3">
-                                    <span class="px-3 py-2 small bg-white shadow-sm  rounded">DEC 21, 2020</span>
-                                </div>
-                                <div class="d-flex align-items-center osahan-post-header">
-                                    <div class="dropdown-list-image mr-3 mb-auto"><img class="rounded-circle" src="{{ asset('img/p1.png')}}" alt=""></div>
-                                    <div class="mr-1">
-                                        <div class="text-truncate h6 mb-3">Carl Jenkins
-                                        </div>
-                                        <p>Hi Marie</p>
-                                        <p>welcome to Live Chat! My name is Jason. How can I help you today?
-                                            <a href="#"><span class="__cf_email__" data-cfemail="c5aca4a8aab6a4ada4ab85a2a8a4aca9eba6aaa8">[email&#160;protected]</span></a>
-                                        </p>
-                                    </div>
-                                    <span class="ml-auto mb-auto">
-                                        <div class="text-right text-muted pt-1 small">00:21PM</div>
-                                    </span>
-                                </div>
-                                <div class="text-center my-3">
-                                    <span class="px-3 py-2 small bg-white shadow-sm rounded">DEC 22, 2020</span>
-                                </div>
-                                <div class="d-flex align-items-center osahan-post-header">
-                                    <div class="dropdown-list-image mr-3 mb-auto"><img class="rounded-circle" src="{{ asset('img/p8.png')}}" alt=""></div>
-                                    <div class="mr-1">
-                                        <div class="text-truncate h6 mb-3">Jack P. Angulo
-                                        </div>
-                                        <p>Hi, I wanted to check my order status. My order number is 0009483021 😀</p>
-                                    </div>
-                                    <span class="ml-auto mb-auto">
-                                        <div class="text-right text-muted pt-1 small">00:21PM</div>
-                                    </span>
-                                </div>
-                                <div class="text-center my-3">
-                                    <span class="px-3 py-2 small bg-white shadow-sm rounded">DEC 23, 2020</span>
-                                </div>
-                                <div class="d-flex align-items-center osahan-post-header">
-                                    <div class="dropdown-list-image mr-3 mb-auto"><img class="rounded-circle" src="{{ asset('img/p1.png')}}" alt=""></div>
-                                    <div class="mr-1">
-                                        <div class="text-truncate h6 mb-3">Carl Jenkins
-                                        </div>
-                                        <p>Is there anything else that I can do for you?</p>
-                                        <p>wI understand your concern… I wouldn’t want my child’s gift to arrive late either. It looks like your order is set to arrive in 2 business days, so it should arrive by Friday, just in time!</p>
-                                    </div>
-                                    <span class="ml-auto mb-auto">
-                                        <div class="text-right text-muted pt-1 small">00:21PM</div>
-                                    </span>
-                                </div>
-                                <div class="text-center my-3">
-                                    <span class="px-3 py-2 small bg-white shadow-sm rounded">DEC 24, 2020</span>
-                                </div>
-                                <div class="d-flex align-items-center osahan-post-header">
-                                    <div class="dropdown-list-image mr-3 mb-auto"><img class="rounded-circle" src="{{ asset('img/p8.png')}}" alt=""></div>
-                                    <div class="mr-1">
-                                        <div class="text-truncate h6 mb-3">Jack P. Angulo
-                                        </div>
-                                        <p>Great, thank you! Yes, I also wanted to make sure I entered the right shipping address. My address is 12390 Mulberry Ln, Coral Springs, FL 33067. Is that where it’s being shipped to?
-                                        </p>
-                                    </div>
-                                    <span class="ml-auto mb-auto">
-                                        <div class="text-right text-muted pt-1 small">00:21PM</div>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="w-100 border-top border-bottom">
-                                <textarea placeholder="Write a message…" class="form-control border-0 p-3 shadow-none" rows="2"></textarea>
-                            </div>
-                            <div class="p-3 d-flex align-items-center">
-                                <div class="overflow-hidden">
-                                    <button type="button" class="btn btn-light btn-sm rounded">
-                                        <i class="feather-image"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-light btn-sm rounded">
-                                        <i class="feather-paperclip"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-light btn-sm rounded">
-                                        <i class="feather-camera"></i>
-                                    </button>
-                                </div>
-                                <span class="ml-auto">
-                                    <button type="button" class="btn btn-primary btn-sm rounded">
-                                        <i class="feather-send"></i> Send
-                                    </button>
-                                </span>
-                            </div>
+                        <div class="col-lg-9 col-xl-9 px-0 chatbox" style="opacity: 1 !important">
+                         
                         </div>
                     </div>
                 </div>
             </main>
-            <aside class="col col-xl-3 order-xl-2 col-lg-12 order-lg-2 col-12">
-                <div class="box mb-3 shadow-sm border rounded bg-white list-sidebar">
-                    <div class="box-title p-3">
-                        <h6 class="m-0">Manage my network</h6>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <a href="#">
-                            <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i class="feather-users mr-2 text-dark"></i> Connections <span class="ml-auto font-weight-bold">{{ count($connection) }}</span></li>
-                        </a>
-                        <a href="#">
-                            <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i class="feather-book mr-2 text-dark"></i> Invitation Sent <span class="ml-auto font-weight-bold">{{ count($invitation_send) }}</span></li>
-                        </a>
-                        <a href="#">
-                            <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i class="feather-book mr-2 text-dark"></i> Invitation Recived <span class="ml-auto font-weight-bold">{{ count($invitation_recived) }}</span></li>
-                        </a>
-                        <a href="#">
-                            <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i class="feather-user-check mr-2 text-dark"></i> Company I Follow <span class="ml-auto font-weight-bold">0</span></li>
-                        </a>
 
-                        <a href="#">
-                            <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i class="feather-clipboard mr-2 text-dark"></i> Page <span class="ml-auto font-weight-bold">0</span></li>
-                        </a>
-                        <a href="#">
-                            <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i class="feather-tag mr-2 text-dark"></i> Hashtag <span class="ml-auto font-weight-bold">0</span></li>
-                        </a>
-                    </ul>
-                </div>
-                <div class="box shadow-sm mb-3 border rounded bg-white ads-box text-center">
-                    <div class="image-overlap-2 pt-4">
-                        <img src="{{ asset('img/logo.png') }}" class="img-fluid rounded-circle shadow-sm" alt="Responsive image">
-                        <img onerror="this.onerror=null;this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png';" src="{{ asset('upload/users/')}}/{{ auth()->user()->photo }}" class="img-fluid rounded-circle shadow-sm" alt="Responsive image">
-                    </div>
-                    <div class="p-3 border-bottom">
-                        <h6 class="text-dark">{{auth()->user()->name}}, grow your career by following <span class="font-weight-bold"> {{ config('constant.PROJECT_NAME'); }}</span></h6>
-                        <p class="mb-0 text-muted">Stay up-to industry trends!</p>
-                    </div>
-                    <!-- <div class="p-3">
-                        <button type="button" class="btn btn-outline-primary btn-sm pl-4 pr-4"> FOLLOW </button>
-                    </div> -->
-                </div>
-            </aside>
         </div>
     </div>
 </div>
 @include('include.footer')
 <script>
- $("#Serach").on("keyup", function() {
+    $(window).bind("load", function() {
+        $('.userlist:eq(0)').click();
+    });
+
+
+    $("#Serach").on("keyup", function() {
         var value = $(this).val().toLowerCase();
         console.log(value);
         $("#chatList .userlist").filter(function() {
-            
+
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
     });
-    </script>
+    $(".userlist").on("click", function() {
+        $('.userlist').removeClass('userActive');
+        $(this).addClass('userActive');
+        var url = '{{ route("chat.get") }}';
+        var peram = {
+            user_id: $(this).attr('data-id'),
+        };
+
+        var user_id = $(this).attr('data-id');
+        var method = 'POST';
+        $.ajax({
+            url: url,
+            type: method,
+            data: peram,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+
+            success: function(resp) {
+                console.log(resp);
+
+                if (resp.success == 'done') {
+                    $('.chatbox').html(resp.html);
+
+                } else if (resp.success == 'diff') {
+                    showError(resp.msg);
+                } else {
+                    showError('Data processing error, Please try sometime.');
+                }
+
+            }
+        })
+        $('.chatbox').fadeOut();
+
+        $('.chatbox').fadeIn();
+        $('#bottom').focus();
+        $('.msg_card_body').animate({scrollTop: $('.msg_card_body').prop("scrollHeight")}, 0);
+    });
+</script>
+
+<script>
+    var elem = document.getElementById("myChat");
+
+    function openFullscreen() {
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) {
+            /* Safari */
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+            /* IE11 */
+            elem.msRequestFullscreen();
+        }
+    }
+</script>
