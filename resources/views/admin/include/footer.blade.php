@@ -2,15 +2,15 @@
 $value = \App\Models\Websitetable::where(['id' => 1])->first()->about_description;
 ?>
 
-<footer class="footer">
-							<div class="container">
-								<div class="row align-items-center flex-row-reverse">
-									<div class="col-md-12 col-sm-12 text-center">
-										{{$value}}
-									</div>
-								</div>
-							</div>
-						</footer>
+    <footer class="footer">
+        <div class="container">
+            <div class="row align-items-center flex-row-reverse">
+                <div class="col-md-12 col-sm-12 text-center">
+                    {{$value}}
+                </div>
+            </div>
+        </div>
+    </footer>
 
 		<!-- JQuery min js -->
                 <script src="{{ asset('assets_admin/js/jquery-3.2.1.min.js') }}"></script>
@@ -85,6 +85,13 @@ $value = \App\Models\Websitetable::where(['id' => 1])->first()->about_descriptio
                 <!-- file uploads js -->
                 <script src="{{ asset('assets_admin/plugins/fileuploads/js/dropify.js') }}"></script>
                 <script src="{{ asset('assets_admin/plugins/fileuploads/js/dropify-demo.js') }}"></script>
+                
+                <!-- Chart js -->
+                 <script src="{{ asset('assets_admin/plugins/chart.js/chart.min.js') }}"></script>
+                <script src="{{ asset('assets_admin/plugins/chart.js/chart.extension.js') }}"></script>
+
+		<!-- Custom-->
+                <script src="{{ asset('assets_admin/js/index4.js') }}"></script>
 
 <!--		File-Uploads Js
 		<script src="../assets_admin/plugins/fancyuploder/jquery.ui.widget.js"></script>

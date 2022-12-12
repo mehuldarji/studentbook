@@ -8962,7 +8962,7 @@ a.bg-dark:hover, a.bg-dark:focus, button.bg-dark:hover, button.bg-dark:focus {
 }
 /*------ 30. Widths, Margins & Paddings -------*/
 
-.w-1 {
+.w-10 {
 	width: 10% !important;
 }
 .w-15 {
@@ -9023,7 +9023,7 @@ a.bg-dark:hover, a.bg-dark:focus, button.bg-dark:hover, button.bg-dark:focus {
 	width: auto !important;
 }
 .w-0 {
-	width: 0 !important;
+	width: 0.20rem !important;
 }
 .w-1 {
 	width: 0.25rem !important;
