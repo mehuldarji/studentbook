@@ -62,96 +62,144 @@
     .userActive i {
         color: #000 !important;
     }
+
     .msg_card_body {
-    overflow-y: auto;
-}
-.msg_card_body{
-    height: 322px;
-    overflow-y: scroll;
-}
-.chat-box-single-line {
-    height: 12px;
-    margin: 7px 0 30px;
-    position: relative;
-    text-align: center;
-}
-.chatbox abbr.timestamp {
-    background: rgb(137, 102, 247, 0.8);
-}
-.chatbox abbr.timestamp {
-    padding: 4px 14px;
-    border-radius: 4px;
-    color: #fff;
-}
-.chatbox .justify-content-start {
-    margin-bottom: 25px;
-}
-.chatbox .img_cont_msg {
-    height: 40px;
-    width: 40px;
-    display: contents;
-}
-.chatbox .user_img_msg {
-    height: 40px;
-    width: 40px;
-    border: 1.5px solid #f5f6fa;
-}
-.chatbox .msg_cotainer {
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: 10px;
-    background-color: #f5f6fb;
-    padding: 10px;
-    position: relative;
-}
-.chatbox .msg_time {
-    position: absolute;
-    left: 0;
-    bottom: -18px;
-    color: #3a374e;
-    font-size: 10px;
-}
-.chatbox .justify-content-end {
-    margin-bottom: 25px;
-}
-.chatbox .msg_cotainer_send {
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-right: 10px;
-    background-color: #f1f3ff;
-    padding: 10px;
-    position: relative;
-}
-.chatbox .msg_time_send {
-    position: absolute;
-    right: 0;
-    bottom: -18px;
-    color: #3a374e;
-    font-size: 10px;
-}
-.chatbox .img_cont_msg {
-    height: 40px;
-    width: 40px;
-    display: contents;
-}
-.chatbox .user_img_msg {
-    height: 40px;
-    width: 40px;
-    border: 1.5px solid #f5f6fa;
-}
-.chatbox .img_cont {
-    position: relative;
-    height: 50px;
-    width: 50px;
-}
-.chatbox .user_img {
-    height: 50px;
-    width: 50px;
-    border: 1.5px solid #f5f6fa;
-}
-.chatbox h4{
-    font-size: 1.125rem;
-}
+        overflow-y: auto;
+    }
+
+    .msg_card_body {
+        height: 322px;
+        overflow-y: scroll;
+    }
+
+    .chat-box-single-line {
+        height: 12px;
+        margin: 7px 0 30px;
+        position: relative;
+        text-align: center;
+    }
+
+    .chatbox abbr.timestamp {
+        background: rgb(137, 102, 247, 0.8);
+    }
+
+    .chatbox abbr.timestamp {
+        padding: 4px 14px;
+        border-radius: 4px;
+        color: #fff;
+    }
+
+    .chatbox .justify-content-start {
+        margin-bottom: 25px;
+    }
+
+    .chatbox .img_cont_msg {
+        height: 40px;
+        width: 40px;
+        display: contents;
+    }
+
+    .chatbox .user_img_msg {
+        height: 40px;
+        width: 40px;
+        border: 1.5px solid #f5f6fa;
+    }
+
+    .chatbox .msg_cotainer {
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 10px;
+        background-color: #F2F6F9;
+        padding: 10px;
+        position: relative;
+        border-radius: 10px 10px 10px 0px;
+        min-width: 65px;
+    }
+
+    .chatbox .msg_time {
+        position: absolute;
+        left: 0;
+        bottom: -18px;
+        color: #3a374e;
+        font-size: 10px;
+    }
+
+    .chatbox .justify-content-end {
+        margin-bottom: 25px;
+    }
+
+    .chatbox .msg_cotainer_send {
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-right: 10px;
+        background-color: #0172bd2b;
+        padding: 10px;
+        position: relative;
+        border-radius: 10px 10px 0px 10px;
+        min-width: 65px;
+    }
+
+    .chatbox .msg_time_send {
+        position: absolute;
+        right: 0;
+        bottom: -18px;
+        color: #3a374e;
+        font-size: 10px;
+    }
+
+    .chatbox .img_cont_msg {
+        height: 40px;
+        width: 40px;
+        display: contents;
+    }
+
+    .chatbox .user_img_msg {
+        height: 40px;
+        width: 40px;
+        border: 1.5px solid #f5f6fa;
+    }
+
+    .chatbox .img_cont {
+        position: relative;
+        height: 50px;
+        width: 50px;
+    }
+
+    .chatbox .user_img {
+        height: 50px;
+        width: 50px;
+        border: 1.5px solid #f5f6fa;
+    }
+
+    .chatbox h4 {
+        font-size: 1.125rem;
+    }
+
+
+    .msg_card_body {
+
+        height: 322px;
+        overflow-y: scroll;
+        margin-bottom: 15px;
+    }
+
+    .overflow {
+        height: 322px;
+    }
+
+    .scroll-3::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px #F3F2EF;
+        background-color: #F3F2EF;
+    }
+
+    .scroll-3::-webkit-scrollbar-thumb {
+        background-color: #0172BA;
+    }
+
+    .scroll-3::-webkit-scrollbar {
+        width: 5px;
+        background-color: #F3F2EF;
+    }
 </style>
 <div class="py-4">
     <div class="container">
@@ -167,7 +215,7 @@
                                     <i class="feather-search position-absolute"></i>
                                     <input placeholder="Search messages" type="text" class="form-control" id="Serach">
                                 </div>
-                                <div class="osahan-chat-list" id="chatList">
+                                <div class="osahan-chat-list scroll-3" id="chatList">
                                     @if(!empty($user))
                                     @foreach($user as $row)
                                     @if(auth()->user()->id != $row->id)
@@ -206,8 +254,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-9 col-xl-9 px-0 chatbox" style="opacity: 1 !important">
-                         
+                        <div class="col-lg-9 col-xl-9 px-0 chatbox " style="opacity: 1 !important">
+
                         </div>
                     </div>
                 </div>
@@ -218,6 +266,8 @@
 </div>
 @include('include.footer')
 <script>
+   
+
     $(window).bind("load", function() {
         $('.userlist:eq(0)').click();
     });
@@ -250,7 +300,7 @@
             },
 
             success: function(resp) {
-                console.log(resp);
+                // console.log(resp);
 
                 if (resp.success == 'done') {
                     $('.chatbox').html(resp.html);
@@ -267,22 +317,61 @@
 
         $('.chatbox').fadeIn();
         $('#bottom').focus();
-        $('.msg_card_body').animate({scrollTop: $('.msg_card_body').prop("scrollHeight")}, 0);
+        $('.msg_card_body').animate({
+            scrollTop: $('.msg_card_body').prop("scrollHeight")
+        }, 0);
     });
+
+    $(document).on('click', '.send_message', function() {
+        sendMessage();
+    });
+
+    $("textarea").on("keydown", function(event) {
+        alert('ads');
+        if (event.which == 13) {
+            $(".send_message").trigger('click');
+        }
+    });
+
+    function sendMessage() {
+        var body = $('#body').val();
+        var to_id = $('#to_id').val();
+        var url = '{{ route("chat.sendMessage") }}';
+        var peram = {
+            body: body,
+            to_id: to_id
+        };
+        getDataByAjaxWithoutLoader(url, peram, 'POST', '');
+        appendMsg(body);
+        $('#body').val('');
+        $('#bottom').focus();
+        $('.msg_card_body').animate({
+            scrollTop: $('.msg_card_body').prop("scrollHeight")
+        }, 0);
+       
+
+       
+    }
+
+
+
+    function appendMsg(body, send) {
+        // console.log(send);
+        // if (send == 'yes') {
+            var appendHtml = '<div class="d-flex justify-content-end "><div class="msg_cotainer_send">' + body + '<span class="msg_time_send"> ' + moment(new Date(), 'ddd DD-MMM-YYYY, hh:mm A').format('hh:mm A') + '</span></div> <div class="img_cont_msg">  <img src="{{ asset("upload/users") }}/{{ auth()->user()->photo }}" class="rounded-circle user_img_msg" alt="img"> </div></div>';
+
+        // } else {
+        //     var appendHtml = '<div class="d-flex justify-content-start"> <div class="img_cont_msg"> <img src="http://127.0.0.1:8000/upload/users/478994035.png" class="rounded-circle user_img_msg" alt="img"></div><div class="msg_cotainer"> ' + body + '<span class="msg_time"> ' + moment(new Date(), 'ddd DD-MMM-YYYY, hh:mm A').format('hh:mm A') + '</span></div>';
+
+        // }
+        $('.overflow').append(appendHtml);
+    }
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
 <script>
-    var elem = document.getElementById("myChat");
+    // handle incoming messages
 
-    function openFullscreen() {
-        if (elem.requestFullscreen) {
-            elem.requestFullscreen();
-        } else if (elem.webkitRequestFullscreen) {
-            /* Safari */
-            elem.webkitRequestFullscreen();
-        } else if (elem.msRequestFullscreen) {
-            /* IE11 */
-            elem.msRequestFullscreen();
-        }
-    }
+
+    // show message in div#messages
 </script>

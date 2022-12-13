@@ -38,10 +38,14 @@
             success: function(resp) {
 
                 if (resp.success == 'done') {
-                    showMsg(msg);
+                    if (msg != '') {
+                        showMsg(msg);
+                    }
 
                 } else if (resp.success == 'diff') {
-                    showError(resp.msg);
+                    if (resp.msg != '') {
+                        showError(resp.msg);
+                    }
                 } else {
                     showError('Data processing error, Please try sometime.');
                 }
@@ -50,7 +54,36 @@
         })
     }
 
-   
+    function getDataByAjaxWithoutLoader(url, peram, method, msg) {
+
+        $.ajax({
+            url: url,
+            type: method,
+            data: peram,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+
+            success: function(resp) {
+
+                if (resp.success == 'done') {
+                    if (msg != '') {
+                        showMsg(msg);
+                    }
+
+                } else if (resp.success == 'diff') {
+                    if (resp.msg != '') {
+                        showError(resp.msg);
+                    }
+                } else {
+                    showError('Data processing error, Please try sometime.');
+                }
+
+            }
+        })
+    }
+
+
 
     function getDataByAjaxImage(url, peram, method, msg) {
 

@@ -9,9 +9,7 @@
         </div>
     </div>
     <span class="ml-auto">
-        <button type="button" class="btn btn-light btn-sm rounded" onclick="openFullscreen();">
-            <i class="fa fa-expand"></i>
-        </button>
+
 
         <div class="btn-group">
             <button type="button" class="btn btn-light btn-sm rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -25,7 +23,10 @@
 </div>
 
 
-<div class="card-body msg_card_body">
+                                        
+                                     
+<div class="card-body msg_card_body scroll-3">
+<div class="overflow">
     <?php $t = 0;
     $display = 'N';
     $previousValue = '';
@@ -77,14 +78,15 @@
     <?php $t++; ?>
     @endforeach
     @endif
-    <div id="bottom" tabindex='1'>
-                    
-                    </div>
+    
+</div>
+<div id="bottom"></div>
 </div>
 
 
 <div class="w-100 border-top border-bottom">
-    <textarea placeholder="Write a message…" class="form-control border-0 p-3 shadow-none" rows="2"></textarea>
+    <input type="hidden" name="to_id" id="to_id" value="{{ $getData->id }}">
+    <textarea id="body" placeholder="Write a message…" name="body" class="form-control border-0 p-3 shadow-none" rows="1"></textarea>
 </div>
 <div class="p-3 d-flex align-items-center">
     <div class="overflow-hidden">
@@ -99,7 +101,7 @@
         </button>
     </div>
     <span class="ml-auto">
-        <button type="button" class="btn btn-primary btn-sm rounded">
+        <button type="button" class="btn btn-primary btn-sm rounded send_message">
             <i class="feather-send"></i> Send
         </button>
     </span>
