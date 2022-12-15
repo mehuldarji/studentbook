@@ -26,7 +26,7 @@
                                         
                                      
 <div class="card-body msg_card_body scroll-3">
-<div class="overflow">
+<div class="overflow" id="message-box">
     <?php $t = 0;
     $display = 'N';
     $previousValue = '';
@@ -80,13 +80,16 @@
     @endif
     
 </div>
+<div id="typing"></div>
 <div id="bottom"></div>
 </div>
 
 
-<div class="w-100 border-top border-bottom">
+<div class="w-100 border-top border-bottom" id="SendMsgDiv">
     <input type="hidden" name="to_id" id="to_id" value="{{ $getData->id }}">
-    <textarea id="body" placeholder="Write a message…" name="body" class="form-control border-0 p-3 shadow-none" rows="1"></textarea>
+    <input type="hidden" name="photo" id="photo" value="{{ auth()->user()->photo }}">
+    <textarea autofocus="" data-emojiable="true" data-emoji-input="unicode" rows="1" autocomplete="off" id="body" name="body" class="form-control border-0 p-3 shadow-none" placeholder="Type your message..." style="resize:none"></textarea>
+    <!-- <textarea id="body" placeholder/="Write a message…" name="body" class="form-control border-0 p-3 shadow-none" rows="1"></textarea> -->
 </div>
 <div class="p-3 d-flex align-items-center">
     <div class="overflow-hidden">
@@ -101,8 +104,9 @@
         </button>
     </div>
     <span class="ml-auto">
-        <button type="button" class="btn btn-primary btn-sm rounded send_message">
+        <button type="button" class="btn btn-primary btn-sm rounded send_message" id="send-message">
             <i class="feather-send"></i> Send
         </button>
     </span>
 </div>
+

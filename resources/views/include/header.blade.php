@@ -90,61 +90,11 @@ $notification = \App\Models\Notification::where('is_read',0)->get();
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('connection.index') }}"><i class="feather-users mr-2"></i><span class="d-none d-lg-inline">My Networks</span></a>
                 </li>
-                
-                <li class="nav-item dropdown no-arrow mx-1 osahan-list-dropdown">
-                    <a class="nav-link dropdown-toggle" href="{{ route('chat.index') }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="feather-message-square"></i>
-
-                        <span class="badge badge-danger badge-counter">8</span>
-                    </a>
-
-                    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow-sm">
-                        <h6 class="dropdown-header">
-                            Message Center
-                        </h6>
-                        <a class="dropdown-item d-flex align-items-center" href="messages.html">
-                            <div class="dropdown-list-image mr-3">
-                                <img class="rounded-circle" src="{{ asset('img/p1.png')}}" alt="">
-                                <div class="status-indicator bg-success"></div>
-                            </div>
-                            <div class="font-weight-bold overflow-hidden">
-                                <div class="text-truncate">Hi there! I am wondering if you can help me with a problem I've been having.</div>
-                                <div class="small text-gray-500">Emily Fowler · 58m</div>
-                            </div>
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center" href="messages.html">
-                            <div class="dropdown-list-image mr-3">
-                                <img class="rounded-circle" src="{{ asset('img/p2.png')}}" alt="">
-                                <div class="status-indicator"></div>
-                            </div>
-                            <div class="overflow-hidden">
-                                <div class="text-truncate">I have the photos that you ordered last month, how would you like them sent to you?</div>
-                                <div class="small text-gray-500">Jae Chun · 1d</div>
-                            </div>
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center" href="messages.html">
-                            <div class="dropdown-list-image mr-3">
-                                <img class="rounded-circle" src="{{ asset('img/p3.png')}}" alt="">
-                                <div class="status-indicator bg-warning"></div>
-                            </div>
-                            <div class="overflow-hidden">
-                                <div class="text-truncate">Last month's report looks great, I am very happy with the progress so far, keep up the good work!</div>
-                                <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                            </div>
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center" href="messages.html">
-                            <div class="dropdown-list-image mr-3">
-                                <img class="rounded-circle" src="{{ asset('img/p4.png')}}" alt="">
-                                <div class="status-indicator bg-success"></div>
-                            </div>
-                            <div class="overflow-hidden">
-                                <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</div>
-                                <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                            </div>
-                        </a>
-                        <a class="dropdown-item text-center small text-gray-500" href="{{ route('chat.index') }}">Read More Messages</a>
-                    </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('chat.index') }}"><i class="feather-message-square mr-2"></i><span class="d-none d-lg-inline">Message</span></a>
                 </li>
+                
+                
                 <li class="nav-item dropdown no-arrow mx-1 osahan-list-dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="feather-bell"></i>

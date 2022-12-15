@@ -1,4 +1,7 @@
 @include('include.header')
+<script src="http://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+<script src="{{ asset('/js/socket.io.js') }}"></script>
+
 <style>
     .dd-flex {
         display: flex;
@@ -9,7 +12,6 @@
     }
 
     .toMsg {
-
         padding: 15px;
         border-radius: 15px;
         background-color: #FFF !important;
@@ -175,9 +177,7 @@
         font-size: 1.125rem;
     }
 
-
     .msg_card_body {
-
         height: 322px;
         overflow-y: scroll;
         margin-bottom: 15px;
@@ -189,11 +189,11 @@
 
     .scroll-3::-webkit-scrollbar-track {
         -webkit-box-shadow: inset 0 0 6px #F3F2EF;
-        background-color: #F3F2EF;
+        background-color: #fff;
     }
 
     .scroll-3::-webkit-scrollbar-thumb {
-        background-color: #0172BA;
+        background-color: #fff;
     }
 
     .scroll-3::-webkit-scrollbar {
@@ -236,7 +236,6 @@
                                     } else {
                                         $timeago =  "1m";
                                     }
-
                                     ?>
                                     <div data-id="{{$row->id}}" class="p-3 dd-flex align-items-center border-bottom osahan-post-header overflow-hidden userlist">
                                         <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="{{ asset('upload/users/')}}/{{ $row->photo }}" alt=""></div>
@@ -264,23 +263,160 @@
         </div>
     </div>
 </div>
-@include('include.footer')
-<script>
-   
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+
+<script language="javascript" type="text/javascript">
+    const socketProtocol = (window.location.protocol === 'https:' ? 'wss:' : 'ws:')
+    const port = 3000;
+    const wsUri = `${socketProtocol}//${window.location.hostname}:${port}`;
+    var socket = io.connect(wsUri);
+
+    // get dom elements
+    var message = document.getElementById("body");
+    var message_input = document.getElementById("body");
+    var sendBtn = document.getElementById("send-message");
+    var messages = document.getElementById("overflow");
+
+
+    // appendMsg(body);
+    // Listen for “chat” events
+    socket.on("chat", function(data) {
+        console.log('recived',data);
+        data = JSON.parse(data);
+        if ('{{auth()->user()->id}}' == data.from_id) {
+            var send = 'yes';
+        }else{
+            var send = 'no';
+        }
+        if ('{{auth()->user()->id}}' != data.from_id) {
+            appendMsg(data.message, send, data.photo);
+        }
+
+
+    });
+    $(document).on('keydown', '#body', function(e) {
+    
+      
+        if(e.which!=13){
+          typing=true
+          console.log({user:'salman', typing:true});
+          socket.emit("typing", JSON.stringify({user:'salman', typing:true}));
+         
+        //   clearTimeout(timeout)
+        
+        }else{
+        //   clearTimeout(timeout)
+        //   typingTimeout()
+          //sendMessage() function will be called once the user hits enter
+         
+        }
+      })
+
+    socket.on('typing', (data) => {
+
+        console.log('data',data);
+    // if (data.typing == true) {
+      $('#typing').html(`typing...`);
+    // }
+
+    // }else {
+    //   $('#typing').html("");
+    // }
+
+  })
+  
+
+    $(document).on('click', '#send-message', function() {
+        send_message();
+    });
+    $(document).on('keydown', '#body', function() {
+        if (event.which == 13) {
+            send_message();
+        }
+    });
+    // //User hits enter key 
+
+    // //Send message
+    function send_message() {
+        // alert('cliekc');
+        var message_input = $('#body'); //user message text
+        var name_input = '{{ auth()->user()->name }}';
+
+
+        if (message_input.val() == "") { //emtpy message?
+            alert('enter msg.');
+            return false;
+        }
+
+        //prepare json data
+
+        var msg = {
+            message: message_input.val(),
+            name: name_input + " " + new Date().toLocaleString(),
+            color: '#000',
+            type: 'usermsg'
+        };
+        var body = message_input.val();
+        var to_id = $('#to_id').val();
+        var photo = $('#photo').val();
+        var from_id = '{{ auth()->user()->id }}';
+        var url = '{{ route("chat.sendMessage") }}';
+        var peram = {
+            body: body,
+            to_id: to_id
+        };
+        getDataByAjaxWithoutLoader(url, peram, 'POST', '');
+        if ('{{auth()->user()->id}}' == from_id) {
+            var send = 'yes';
+        }else{
+            var send = 'no';
+        }
+
+        if ('{{auth()->user()->id}}' == from_id) {
+        appendMsg(body, send,'{{auth()->user()->photo}}');
+        }
+
+        $('#bottom').focus();
+        $('.msg_card_body').animate({
+            scrollTop: $('.msg_card_body').prop("scrollHeight")
+        }, 0);
+
+        var msg = {
+            message: message_input.val(),
+            name: name_input,
+            type: 'usermsg',
+            to_id: to_id,
+            from_id: from_id,
+            photo: photo,
+        };
+        console.log(msg);
+        message_input.val('');
+       
+            socket.emit("chat", JSON.stringify(msg));
+        
+        // mySocket.send(JSON.stringify(msg));
+         //reset message input
+    }
+
+
 
     $(window).bind("load", function() {
         $('.userlist:eq(0)').click();
     });
 
-
     $("#Serach").on("keyup", function() {
         var value = $(this).val().toLowerCase();
         console.log(value);
         $("#chatList .userlist").filter(function() {
-
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
     });
+
     $(".userlist").on("click", function() {
         $('.userlist').removeClass('userActive');
         $(this).addClass('userActive');
@@ -288,7 +424,6 @@
         var peram = {
             user_id: $(this).attr('data-id'),
         };
-
         var user_id = $(this).attr('data-id');
         var method = 'POST';
         $.ajax({
@@ -298,80 +433,36 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-
             success: function(resp) {
                 // console.log(resp);
-
                 if (resp.success == 'done') {
                     $('.chatbox').html(resp.html);
-
                 } else if (resp.success == 'diff') {
                     showError(resp.msg);
                 } else {
                     showError('Data processing error, Please try sometime.');
                 }
-
             }
         })
-        $('.chatbox').fadeOut();
-
-        $('.chatbox').fadeIn();
+        // $('.chatbox').fadeOut();
+        // $('.chatbox').fadeIn();
         $('#bottom').focus();
         $('.msg_card_body').animate({
             scrollTop: $('.msg_card_body').prop("scrollHeight")
         }, 0);
     });
 
-    $(document).on('click', '.send_message', function() {
-        sendMessage();
-    });
 
-    $("textarea").on("keydown", function(event) {
-        alert('ads');
-        if (event.which == 13) {
-            $(".send_message").trigger('click');
+
+    function appendMsg(body, send,photo) {
+        console.log(send);
+        if (send == 'yes') {
+            var appendHtml = '<div class="d-flex justify-content-end "><div class="msg_cotainer_send">' + body + '<span class="msg_time_send"> ' + moment(new Date(), 'ddd DD-MMM-YYYY, hh:mm A').format('hh:mm A') + '</span></div> <div class="img_cont_msg">  <img src="{{ asset("upload/users") }}/'+ photo +'" class="rounded-circle user_img_msg" alt="img"> </div></div>';
+        } else {
+            var appendHtml = '<div class="d-flex justify-content-start"> <div class="img_cont_msg"> <img src="{{ asset("upload/users") }}/'+ photo +'" class="rounded-circle user_img_msg" alt="img"></div><div class="msg_cotainer"> ' + body + '<span class="msg_time"> ' + moment(new Date(), 'ddd DD-MMM-YYYY, hh:mm A').format('hh:mm A') + '</span></div>';
         }
-    });
-
-    function sendMessage() {
-        var body = $('#body').val();
-        var to_id = $('#to_id').val();
-        var url = '{{ route("chat.sendMessage") }}';
-        var peram = {
-            body: body,
-            to_id: to_id
-        };
-        getDataByAjaxWithoutLoader(url, peram, 'POST', '');
-        appendMsg(body);
-        $('#body').val('');
-        $('#bottom').focus();
-        $('.msg_card_body').animate({
-            scrollTop: $('.msg_card_body').prop("scrollHeight")
-        }, 0);
-       
-
-       
-    }
-
-
-
-    function appendMsg(body, send) {
-        // console.log(send);
-        // if (send == 'yes') {
-            var appendHtml = '<div class="d-flex justify-content-end "><div class="msg_cotainer_send">' + body + '<span class="msg_time_send"> ' + moment(new Date(), 'ddd DD-MMM-YYYY, hh:mm A').format('hh:mm A') + '</span></div> <div class="img_cont_msg">  <img src="{{ asset("upload/users") }}/{{ auth()->user()->photo }}" class="rounded-circle user_img_msg" alt="img"> </div></div>';
-
-        // } else {
-        //     var appendHtml = '<div class="d-flex justify-content-start"> <div class="img_cont_msg"> <img src="http://127.0.0.1:8000/upload/users/478994035.png" class="rounded-circle user_img_msg" alt="img"></div><div class="msg_cotainer"> ' + body + '<span class="msg_time"> ' + moment(new Date(), 'ddd DD-MMM-YYYY, hh:mm A').format('hh:mm A') + '</span></div>';
-
-        // }
         $('.overflow').append(appendHtml);
     }
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
-<script>
-    // handle incoming messages
-
-
-    // show message in div#messages
-</script>
+@include('include.footer')

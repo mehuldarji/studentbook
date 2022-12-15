@@ -183,6 +183,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 		
 		Yajra\DataTables\DataTablesServiceProvider::class,
+        BeyondCode\LaravelWebSockets\WebSocketsServiceProvider::class,
 
         /*
          * Package Service Providers...
