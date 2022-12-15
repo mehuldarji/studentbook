@@ -49,7 +49,7 @@
                                 </div>
                                 <!--<small class="mb-2 text-muted fs-14">Analytics for Last month</small>-->
                                 <div class="progress progress-xs h-1 mt-1">
-                                    <div class="progress-bar bg-primary w-{{round(($user_count*2)/10)*5}}" role="progressbar"></div>
+                                    <div class="progress-bar bg-primary w-{{round($user_count/5)*5}}" role="progressbar"></div>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                                 </div>
                                 <small class="mb-2 text-muted fs-14">Analytics for Last month</small>
                                 <div class="progress progress-xs h-1 mt-1">
-                                    <div class="progress-bar bg-purple w-80 " role="progressbar"></div>
+                                    <div class="progress-bar bg-purple w-{{round($user_count/5)*5}} " role="progressbar"></div>
                                 </div>
                             </div>
                         </div>
@@ -143,9 +143,8 @@
                                     @if($count >=1 && $count<= 10)
                                     <div class="progress-bar w-{{$count}} bg-primary"></div>
                                     @else
-                                    <div class="progress-bar w-{{round(($count*2)/10)*5}} bg-primary"></div>
-                                    @endif
-                                    
+                                    <div class="progress-bar w-{{round($count/5)*5}} bg-primary"></div>
+                                    @endif                                    
                                 </div>
                             </div>
                             <div class="col-lg-2">
@@ -153,97 +152,8 @@
                             </div>
                         </div>
                         @endforeach
-<!--                        <div class="row mb-4">
-                            <div class="col-lg-3 text-lg-right">
-                                <h5 class="mb-0 mt-1">United Kingdom</h5>
-                            </div>
-                            <div class="col-lg-7">
-                                <div class="progress progress-md mt-1 mb-0">
-                                    <div class="progress-bar w-50 bg-primary"></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <h4 class="mb-0 font-weight-semibold text-dark mt-1">6,458</h4>
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col-lg-3 text-lg-right">
-                                <h5 class="mb-0 mt-1">Poland</h5>
-                            </div>
-                            <div class="col-lg-7">
-                                <div class="progress progress-md mt-1 mb-0">
-                                    <div class="progress-bar w-20 bg-primary"></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <h4 class="mb-0 font-weight-semibold text-dark mt-1">2,548</h4>
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col-lg-3 text-lg-right">
-                                <h5 class="mb-0 mt-1">Germany</h5>
-                            </div>
-                            <div class="col-lg-7">
-                                <div class="progress progress-md mt-1 mb-0">
-                                    <div class="progress-bar w-60 bg-primary"></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <h4 class="mb-0 font-weight-semibold text-dark mt-1">8,456</h4>
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col-lg-3 text-lg-right">
-                                <h5 class="mb-0 mt-1">Russia</h5>
-                            </div>
-                            <div class="col-lg-7">
-                                <div class="progress progress-md mt-1 mb-0">
-                                    <div class="progress-bar w-40 bg-primary"></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <h4 class="mb-0 font-weight-semibold text-dark mt-1">7,548</h4>
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col-lg-3 text-lg-right">
-                                <h5 class="mb-0 mt-1">India</h5>
-                            </div>
-                            <div class="col-lg-7">
-                                <div class="progress progress-md mt-1 mb-0">
-                                    <div class="progress-bar w-70 bg-primary"></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <h4 class="mb-0 font-weight-semibold text-dark mt-1">9,732</h4>
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col-lg-3 text-lg-right">
-                                <h5 class="mb-0 mt-1">North Koreia</h5>
-                            </div>
-                            <div class="col-lg-7">
-                                <div class="progress progress-md mt-1 mb-0">
-                                    <div class="progress-bar w-30 bg-primary"></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <h4 class="mb-0 font-weight-semibold text-dark mt-1">3,875</h4>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-3 text-lg-right">
-                                <h5 class="mb-0 mt-1">China</h5>
-                            </div>
-                            <div class="col-lg-7">
-                                <div class="progress progress-md mt-1 mb-0">
-                                    <div class="progress-bar w-70 bg-primary"></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <h4 class="mb-0 font-weight-semibold text-dark mt-1">8,958</h4>
-                            </div>
-                        </div>-->
+
+                        
                     </div>
                 </div>
             </div>
@@ -256,10 +166,11 @@
 
 
 </body>
+
+
 <script>
 
-
-var ctx = document.getElementById("chart");
+ var ctx = document.getElementById("chart");
  var month = <?php echo $month; ?>;
 	var myChart = new Chart(ctx, {
 		type: 'bar',
@@ -274,7 +185,7 @@ var ctx = document.getElementById("chart");
 				borderWidth: 0,
 				pointStyle: 'circle',
 				pointBorderColor: 'transparent',
-				pointBackgroundColor: '#8966f7',
+				pointBackgroundColor: '#8966f7'
 
 			}]
 		},
@@ -288,20 +199,20 @@ var ctx = document.getElementById("chart");
 				bodyFontColor: '#807b90',
 				backgroundColor: '#fff',
 				cornerRadius: 0,
-				intersect: false,
+				intersect: false
 			},
 			legend: {
 				display: false,
 				labels: {
 					usePointStyle: true,
-					fontFamily: 'Montserrat',
-				},
+					fontFamily: 'Montserrat'
+				}
 			},
 			scales: {
 				xAxes: [{
 					barPercentage: 0.2,
 					ticks: {
-						fontColor: "black",
+						fontColor: "black"
 
 					 },
 					display: true,
@@ -318,7 +229,7 @@ var ctx = document.getElementById("chart");
 				}],
 				yAxes: [{
 					ticks: {
-						fontColor: "black",
+						fontColor: "black"
 					 },
 					display: true,
 					gridLines: {
@@ -339,7 +250,6 @@ var ctx = document.getElementById("chart");
 			}
 		}
 	});
-	/*---ChartJS (#sales-chart) closed---*/
 
 
 </script>
