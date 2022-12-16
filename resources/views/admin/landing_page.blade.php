@@ -18,9 +18,9 @@
             <div class="col-lg-12">
                 <form method="POST" class="card" action="{{ route('admin.update-page') }}" enctype="multipart/form-data" >
                     @csrf
-                    <div class="card-header">
+<!--                    <div class="card-header">
                         <h3 class="card-title">Landing Page</h3>
-                    </div>
+                    </div>-->
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-2 col-sm-4">

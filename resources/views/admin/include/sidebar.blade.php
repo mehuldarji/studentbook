@@ -26,6 +26,21 @@ $value = \App\Models\Websitetable::where(['id' => 1])->first()->logo;
         <li class="slide">
             <a class="side-menu__item" href="{{ route('admin.landing')  }}"><i class="side-menu__icon si si-layers"></i><span class="side-menu__label">Landing Page</span></a>
         </li>
+        <li class="slide">
+            <a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-briefcase"></i><span class="side-menu__label">Post</span><i class="angle fas fa-angle-right"></i></a>
+            <ul class="slide-menu">
+                    <li>
+                            <a href="{{ route('admin.title')  }}" class="slide-item">Title</a>
+                    </li>
+                    <li>
+                            <a href="{{ route('admin.description')  }}" class="slide-item">Description</a>
+                    </li>
+                    <li>
+                            <a href="{{ route('admin.youtube-url')  }}" class="slide-item">YouTube URL</a>
+                    </li>
+            </ul>
+        </li>
+        
     </ul>
 </aside>
 
