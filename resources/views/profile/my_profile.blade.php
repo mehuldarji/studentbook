@@ -21,11 +21,19 @@
                         </div>
                     </div>
                     <div class="overflow-hidden border-top">
+                        @if(auth()->user()->id == $user->id)
                         <a class="font-weight-bold p-3 d-block" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();" href="{{ route('logout') }}"> Log Out </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
+                        @else
+                        <div class="col-lg-12" style="display: flex;margin: 0px 0 7px 0;">
+                        <button style="    margin-top: 8px;margin-right: 7px;" type="button" data-id="{{ $user->id }}" class="btn btn-primary btn-sm btn-block connect  ">  Connect </button>
+                        <a style="color:#fff"  href="{{ route('chat.index') }}?t={{ base64_encode($user->id) }}" class="btn btn-primary btn-sm btn-block   ">  Message </a>
+                        
+                        </div>
+                        @endif
                     </div>
                 </div>
                 <div class="box shadow-sm border rounded bg-white mb-3">
@@ -249,3 +257,29 @@
 </div>
 
 @include('include.footer')
+
+<script>
+    $(document).on('click', '.connect', function() {
+        var connected_id = $(this).attr('data-id');
+        var msg = $(this).attr('data-msg');
+        // alert(msg);
+
+        var url = '{{ route("connection.connected") }}';
+
+        var peram = {
+            connected_id: connected_id
+        };
+
+        if (msg == undefined) {
+            msg = 'Request sent Successfully.';
+            $(this).html('<i class="fa fa-clock"></i> &nbsp; Pending');
+            $(this).addClass('disable-connect-btn');
+        } else {
+            msg = msg;
+            $(this).parents('.col-md-4').remove();
+        }
+
+        getDataByAjax(url, peram, 'POST', msg);
+
+    });
+</script>

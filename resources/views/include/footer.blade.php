@@ -60,10 +60,12 @@
             url: url,
             type: method,
             data: peram,
+            contentType: false,
+            processData: false,
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-
+           
             success: function(resp) {
 
                 if (resp.success == 'done') {
@@ -71,16 +73,17 @@
                         showMsg(msg);
                     }
 
-                } else if (resp.success == 'diff') {
+
+                } else {
                     if (resp.msg != '') {
                         showError(resp.msg);
                     }
-                } else {
-                    showError('Data processing error, Please try sometime.');
                 }
-
+              
             }
         })
+        
+       
     }
 
 

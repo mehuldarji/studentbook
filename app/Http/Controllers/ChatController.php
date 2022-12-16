@@ -51,7 +51,7 @@ class ChatController extends Controller
         $login_user_id = auth()->user()->id;
         $recived_user_id = $input['user_id'];
 
-        $msg = DB::Select("SELECT * FROM ( select * from ( SELECT a.id, a.from_id, a.to_id, a.body,a.seen,a.created_at,u.name,u.photo FROM socket_chat a INNER JOIN users u ON u.id = a.from_id WHERE  (a.from_id = '" . $login_user_id . "' )  AND a.body != ''  ORDER BY a.id  ASC ) as a UNION select * from ( SELECT a1.id, a1.from_id, a1.to_id, a1.body,a1.seen,a1.created_at,u1.name,u1.photo FROM socket_chat a1 INNER JOIN users u1 ON u1.id = a1.from_id  WHERE  ( a1.from_id = '" . $recived_user_id . "')  AND a1.body != '' ORDER BY a1.id ASC ) as b ) as c   GROUP BY id ORDER BY id ASC");
+        $msg = DB::Select("SELECT * FROM ( select * from ( SELECT a.id, a.from_id, a.to_id, a.body,a.seen,a.created_at,u.name,u.photo FROM socket_chat a INNER JOIN users u ON u.id = a.from_id WHERE  (a.from_id = '" . $login_user_id . "' AND a.to_id = '".$recived_user_id."' )  AND a.body != ''  ORDER BY a.id  ASC ) as a UNION select * from ( SELECT a1.id, a1.from_id, a1.to_id, a1.body,a1.seen,a1.created_at,u1.name,u1.photo FROM socket_chat a1 INNER JOIN users u1 ON u1.id = a1.from_id  WHERE  ( a1.from_id = '" . $recived_user_id . "' AND a1.to_id = '" . $login_user_id . "')  AND a1.body != '' ORDER BY a1.id ASC ) as b ) as c   GROUP BY id ORDER BY id ASC");
 
         $html =  view('chat/chat_msg', compact('getData', 'msg'))->render();
         return response()->json(['success' => $data['success'], 'html' => $html]);
@@ -73,5 +73,16 @@ class ChatController extends Controller
             return  response()->json(['success' => 'error']);
         }
 
+
+       
+
+    }
+
+    public function getNewUser(Request $request){
+        $input = $request->all();
+        $user_id = auth()->user()->id;
+        // $user = User::where('id', $input['id'])->first();
+        $user = DB::select('select a.*,b.body,b.created_at from users a LEFT join socket_chat b ON a.id = b.to_id OR a.id = b.from_id where a.id = '.$input['id'].' limit 1;');
+        return response()->json(['success' => 'done', 'html' => $user[0]]);
     }
 }

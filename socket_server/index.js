@@ -28,12 +28,14 @@ sock.on("connection", function (socket) {
     // use emit to send the “chat” event to everybody that is connected, including the sender
     sock.sockets.emit("chat", data);
   });
-
-  socket.on('typing', (data)=>{
-    if(data.typing==true)
-    sock.emit('display', data)
-    else
-    sock.emit('display', data)
+  socket.on("typing", function (data) {
+    if (data.typing == true) {
+      sock.sockets.emit('display', data);
+    } else {
+      sock.sockets.emit('display', data);
+    }
   })
+
+
 });
 
