@@ -18,7 +18,6 @@
 		<link rel="icon" href="{{ asset('/assets_admin/upload/')}}/{{$value}}" type="image/x-icon"/>
 		<link rel="shortcut icon" type="image/x-icon" href="{{ asset('/assets_admin/upload/')}}/{{$value}}" />
 
-		<!-- Title -->
 
 		<!--Bootstrap.min css-->
                 <link rel="stylesheet" href="{{ asset('assets_admin/plugins/bootstrap/css/bootstrap.min.css') }}" />
@@ -62,7 +61,6 @@
                 <link href="{{ asset('assets_admin/plugins/wysiwyag/richtext.min.css') }}" rel="stylesheet" />
                 <link href="{{ asset('assets_admin/css/icons.css') }}" rel="stylesheet" />
                 <link href="{{ asset('assets_admin/plugins/sidebar/sidebar.css') }}" rel="stylesheet" />
-
                 
                 <!-- file Uploads -->
                 <link href="{{ asset('assets_admin/plugins/fileuploads/css/dropify.css') }}" rel="stylesheet"  type="text/css"/>

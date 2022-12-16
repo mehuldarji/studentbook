@@ -19,14 +19,14 @@
         <div class="row">
             <div class="col-md-12 col-lg-12">
                 <div class="card">
-                    <div class="card-header">
+<!--                    <div class="card-header">
                         <div class="card-title">User List</div>
-                        <!--<div class="card-options">
+                        <div class="card-options">
                                 <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
                                 <a href="#" class="card-options-fullscreen" data-toggle="card-fullscreen"><i class="fe fe-maximize"></i></a>
                                 <a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
-                            </div>-->
-                    </div>
+                            </div>
+                    </div>-->
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="example-1" class="table table-striped table-bordered text-nowrap">
