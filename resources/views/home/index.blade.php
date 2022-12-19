@@ -138,6 +138,70 @@
         display: none;
     }
 </style>
+
+<style>
+    .comment img {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .comment-replies img {
+        width: 1.75rem;
+        height: 1.75rem;
+    }
+
+    .form-control {
+        background-color: rgba(#ffffff, .05);
+    }
+
+    .ms-3 {
+        margin-left: 1rem !important;
+    }
+
+    .flex-grow-1 {
+        flex-grow: 1 !important;
+    }
+
+    .mb-2 {
+        margin-bottom: 0.5rem !important;
+    }
+
+    .align-items-center {
+        align-items: center !important;
+    }
+
+    .hstack {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        align-self: stretch;
+    }
+
+    .me-2 {
+        margin-right: 0.5rem !important;
+    }
+
+    .me-3 {
+        margin-right: 1rem !important;
+    }
+
+    .me-4 {
+        margin-right: 1.5rem !important;
+    }
+
+    .text-muted {
+        --bs-text-opacity: 1;
+        color: #adb5bd !important;
+    }
+
+    .link-primary {
+        color: #0172BC
+    }
+
+    .link-secondary {
+        color: #0172BC;
+    }
+</style>
 <div class="py-4">
     <div class="container">
         <div class="row">
@@ -236,82 +300,10 @@
                     </div>
 
                 </div>
-
-                @if(!empty($post))
-                @foreach($post as $row)
-                <div class="box shadow-sm border rounded bg-white mb-3 osahan-post">
-                    <div class="p-3 d-flex align-items-center border-bottom osahan-post-header">
-                        <div class="dropdown-list-image mr-3">
-                            <img class="rounded-circle" onerror="this.onerror=null;this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png';" src="{{ asset('upload/users/')}}/{{ $row->photo }}" alt="">
-                            <div class="status-indicator bg-success"></div>
-                        </div>
-                        <div class="font-weight-bold">
-                            <div class="text-truncate">{{ $row->name }}</div>
-                            <div class="small text-gray-500">{{ $row->headline }}</div>
-                        </div>
-                        <span class="ml-auto small">
-                            <?php
-                            $time = App\Http\Controllers\Controller::get_timeago(strtotime($row->created_at));
-                            ?>
-                            {{ $time }}
-                        </span>
-                    </div>
-                    <div class="p-3 border-bottom osahan-post-body">
-
-                        @if($row->type == 'article')
-                        <h6>{{ $row->title }}</h6>
-                        @endif
-                        @if($row->desc != '')
-                        <p class="mb-0 posts box" id="descshow{{ $row->id }}">{!! substr($row->desc,0, 110) !!} ...... @if($row->type != 'article') <a href="javascript:void(0)" data-id="{{ $row->id }}" data-type="descshow" class="show-btn" style="font-weight:bold">Read more</a>@else <a href="{{ route('article.show', Crypt::encryptString($row->id)) }}" class="show-btn" style="font-weight:bold">Read more</a> @endif
-                        </p>
-                        @if($row->type != 'article')
-                        <p class="mb-0 posts box " style="display: none" id="descless{{ $row->id }}">{!! $row->desc !!} ........ <a href="javascript:void(0)" data-id="{{ $row->id }}" data-type="descless" class="show-btn" style="font-weight:bold">Read less</a>
-                        </p>
-                        @endif
-                        @endif
-                        @if($row->img != '')
-                        <img style="width: 510px;margin-top:15px" src="{{ asset('upload/posts') }}/{{ $row->img  }}">
-                        @endif
-
-                        @if($row->type == 'poll')
-                        <div class="wrapper">
-                            <header>{{ $row->que }}</header>
-                            <div class="poll-area">
-                                <input type="checkbox" name="poll" id="opt-1">
-                                <input type="checkbox" name="poll" id="opt-2">
-                                <input type="checkbox" name="poll" id="opt-3">
-                                <input type="checkbox" name="poll" id="opt-4">
-                                <?php
-                                $option = explode(',',$row->ans);
-                                foreach ($option as $row) {
-                                ?>
-                                    <label for="opt-1" class="opt-1">
-                                        <div class="row">
-                                            <div class="column">
-                                                <span class="circle"></span>
-                                                <span class="text"><?= $row ?></span>
-                                            </div>
-                                            <span class="percent">30%</span>
-                                        </div>
-                                        <div class="progress" style='--w:30;'></div>
-                                    </label>
-                                <?php } ?>
-                            </div>
-                        </div>
-                        @endif
-
-                    </div>
-                    <div class="p-3 border-bottom osahan-post-footer">
-                        <a href="#" class="mr-3 text-secondary"><i class="feather-heart text-danger"></i> 16</a>
-                        <a href="#" class="mr-3 text-secondary"><i class="feather-message-square"></i> 8</a>
-                        <a href="#" class="mr-3 text-secondary"><i class="feather-share-2"></i> 2</a>
-                    </div>
-                    <div class="p-3">
-                        <textarea placeholder="Add a Comment..." class="form-control border-0 p-0 shadow-none" rows="1"></textarea>
-                    </div>
+                <div class="box   rounded  mb-3 osahan-post" id="load_data">
+                    <!-- -//--Post Data------->
                 </div>
-                @endforeach
-                @endif
+                <div id="load_data_message"></div>
             </main>
             <aside class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12">
                 <div class="box mb-3 shadow-sm border rounded bg-white profile-box text-center">
@@ -510,10 +502,15 @@
             msg = 'Poll';
         }
 
-        getDataByAjaxImage(url, postData, 'POST', msg + ' share Successfully.');
+        getDataByAjaxImage(url, postData, 'POST', msg + ' Share Successfully.');
         $('.que').val('');
         CKEDITOR.instances.editor.setData('');
         $('.ans').val('');
+
+        window.location.reload();
+
+
+
 
 
 
@@ -530,6 +527,36 @@
             $('#descless' + id).hide();
             $('#descshow' + id).show();
         }
+    });
+    $(document).on('click', '.opencomment', function() {
+        var id = $(this).attr('data-id');
+        if ($('#commentList' + id).is(':empty')) {} else {
+            $('#commentList' + id).html('');
+            return false;
+        }
+        $.ajax({
+            url: '{{ route("post.get-comment") }}',
+            type: 'POST',
+            data: {
+                id: id
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+
+            success: function(resp) {
+
+                if (resp.success == 'done') {
+                    $('#commentList' + id).html(resp.html);
+
+
+                } else {
+                    $('#commentList' + id).html('');
+                }
+
+            }
+        })
+
     });
 </script>
 <script>
@@ -582,41 +609,98 @@
 
 
 <script>
-    const options = document.querySelectorAll("label");
-    for (let i = 0; i < options.length; i++) {
-        options[i].addEventListener("click", () => {
-            for (let j = 0; j < options.length; j++) {
-                if (options[j].classList.contains("selected")) {
-                    options[j].classList.remove("selected");
-                }
-            }
+    $(document).ready(function() {
+        var limit = 2;
+        var start = 0;
+        var action = 'inactive';
 
-            options[i].classList.add("selected");
-            for (let k = 0; k < options.length; k++) {
-                options[k].classList.add("selectall");
-            }
+        function load_post_data(limit, start) {
 
-            let forVal = options[i].getAttribute("for");
-            let selectInput = document.querySelector("#" + forVal);
-            let getAtt = selectInput.getAttribute("type");
-            if (getAtt == "checkbox") {
-                selectInput.setAttribute("type", "radio");
-            } else if (selectInput.checked == true) {
-                options[i].classList.remove("selected");
-                selectInput.setAttribute("type", "checkbox");
-            }
+            var url = '{{ route("post.get") }}';
+            var peram = {
+                limit: limit,
+                start: start,
+            };
+            var method = 'POST';
 
-            let array = [];
-            for (let l = 0; l < options.length; l++) {
-                if (options[l].classList.contains("selected")) {
-                    array.push(l);
+            $.ajax({
+                url: url,
+                type: method,
+                data: peram,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+
+                success: function(resp) {
+                    $('#load_data').append(resp.html);
+                    if (resp.success != 'done') {
+                        $('#load_data_message').html('');
+                        action = 'active';
+                    } else {
+                        $('#load_data_message').html("<p style='text-align: center; font-weight: bold;font-size: 18px;'><i class='fa fa-spinner fa-spin ' ></i>&nbsp;&nbsp;Please Wait....</p>");
+                        action = 'inactive';
+                    }
+
                 }
-            }
-            if (array.length == 0) {
-                for (let m = 0; m < options.length; m++) {
-                    options[m].removeAttribute("class");
-                }
+            })
+
+
+
+        }
+
+        if (action == 'inactive') {
+            action = 'active';
+            load_post_data(limit, start);
+        }
+        console.log(action);
+        $(window).scroll(function() {
+            if ($(window).scrollTop() + $(window).height() > $("#load_data").height() && action == 'inactive') {
+                action = 'active';
+                start = start + limit;
+                setTimeout(function() {
+                    $('#load_data_message').html("<p style='text-align: center; font-weight: bold;font-size: 18px;'><i class='fa fa-spinner fa-spin ' ></i>&nbsp;&nbsp;Please Wait....</p>");
+                    $("#Serach").val('');
+                    load_post_data(limit, start);
+                }, 1000);
+
             }
         });
+
+    });
+</script>
+
+<script>
+    $(document).on('keydown', '.comments_filed', function(e) {
+        if (event.which == 13) {
+            var comment = $(this).val();
+            var post_id = $(this).attr('data-post-id');
+            send_comment(comment, post_id);
+
+        }
+    });
+
+    function send_comment(comment, post_id) {
+        // var comment = $('.comments_filed').val();
+        // var post_id = $('.comments_filed').attr('data-post-id');
+        var url = '{{route("post.save-comment")}}'
+        var peram = {
+            comment: comment,
+            post_id: post_id
+        };
+
+        var method = 'POST';
+        var msg = 'Comment send successfully';
+
+        getDataByAjax(url, peram, method, msg)
+        append_comment(peram);
+        $('.comments_filed').val('');
+    }
+
+
+    function append_comment(peram) {
+        var htmlComment = '<div class=""><div class="py-3"><div class="d-flex comment"><img class="rounded-circle comment-img" src="{{ asset("upload/users") }}/{{ auth()->user()->photo }}"><div class="flex-grow-1 ms-3"><div class="mb-1" style="color:#0172BD;font-weight:bold"> {{ auth()->user()->name }} <span class="text-muted text-nowrap" style="float: right;"> ' + moment(new Date(), 'ddd DD-MMM-YYYY, hh:mm A').format('hh:mm A') + '</span></div><div class="mb-2">' + peram.comment + '</div></div>';
+        $('#commentList' + peram.post_id + ' .comments ').prepend(htmlComment);
     }
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>

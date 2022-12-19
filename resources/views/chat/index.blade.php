@@ -282,12 +282,12 @@
 
     .msg_card_body {
         height: 322px;
-        overflow-y: scroll;
+        overflow-y: auto;
         margin-bottom: 15px;
     }
 
     .overflow {
-        height: 322px;
+        max-height: 322px;
     }
 
     .scroll-3::-webkit-scrollbar-track {

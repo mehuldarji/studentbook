@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\PostComment;
 use Illuminate\Support\Facades\Crypt;
 use DB;
 
@@ -29,7 +30,67 @@ class HomeController extends Controller
     {
         $connection = DB::Select('SELECT * FROM users WHERE id IN (SELECT ids from (SELECT connected_id as ids FROM `user_connections` a  WHERE user_id = "' . auth()->user()->id . '"  AND status = 1 UNION ALL SELECT user_id as ids FROM `user_connections` a  WHERE connected_id = "' . auth()->user()->id . '"  AND status = 1) as x) ');
         $post =  Post::join('users', 'users.id', 'posts.user_id')->select('posts.*', 'users.name', 'users.headline', 'users.photo')->orderby('id', 'desc')->get();
+        $post = array();
         return view('home/index', compact('connection', 'post'));
+    }
+
+    public function getPost(Request $request)
+    {
+        $input = $request->all();
+
+        $connection = DB::Select('SELECT id FROM users WHERE id IN (SELECT ids from (SELECT connected_id as ids FROM `user_connections` a  WHERE user_id = "' . auth()->user()->id . '"  AND status = 1 UNION ALL SELECT user_id as ids FROM `user_connections` a  WHERE connected_id = "' . auth()->user()->id . '"  AND status = 1) as x) ');
+        $conn = array();
+        if (COUNT($connection) > 0) {
+            foreach ($connection as $row) {
+                $conn[] = $row->id;
+            }
+        }
+        $conn[] = auth()->user()->id;
+     
+        $post =  Post::join('users', 'users.id', 'posts.user_id')
+            ->whereIn('posts.user_id', $conn)
+            ->select('posts.*', 'users.name', 'users.headline', 'users.photo','posts.id as primarys')
+            ->offset($input['start'])->limit($input['limit'])
+            ->groupBy('posts.id')
+            ->orderby('posts.id', 'desc')
+            ->get();
+
+
+           
+        if (COUNT($post) > 0) {
+            $success = 'done';
+        } else {
+            $success = 'invalid';
+        }
+
+        $html =  view('home/post', compact('post'))->render();
+        return response()->json(['success' => $success, 'html' => $html]);
+    }
+
+    public function getPostComment(Request $request)
+    {
+        $input = $request->all();
+        $comment = PostComment::join('users', 'users.id', 'post_comments.user_id')
+        ->select('post_comments.*', 'users.name', 'users.headline', 'users.photo')
+        ->where('post_comments.post_id', $input['id'])->orderBy('post_comments.id','desc')->get();
+        $id = $input['id'];
+        
+        $html =  view('home/comment', compact('comment','id'))->render();
+        return response()->json(['success' => 'done', 'html' => $html]);
+    }
+    public function savePostComment(Request $request)
+    {
+        $input = $request->all();
+        $insert = new PostComment();
+        $insert->comment = $input['comment'];
+        $insert->post_id = $input['post_id'];
+        $insert->user_id = auth()->user()->id;
+        $insert->save();
+        if($insert){
+            return response()->json(['success' => 'done']);
+        }else{
+            return  response()->json(['success' => 'error']);
+        }
     }
 
     public function suggestionUsers()
@@ -87,8 +148,9 @@ class HomeController extends Controller
         }
     }
 
-    public function showArticle($id){
-        $article = Post::where('id',Crypt::decryptString($id))->first();
+    public function showArticle($id)
+    {
+        $article = Post::where('id', Crypt::decryptString($id))->first();
         return view('home/articalDetail', compact('article'));
     }
 }

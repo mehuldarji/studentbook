@@ -18,7 +18,8 @@ use App\Http\Controllers\ChatController;
 |
 */
 Route::resource('/', LandingController::class);
-Route::resource('home', HomeController::class);
+
+Route::get('home', [HomeController::class, 'index']);
 Route::get('suggestion-users', [HomeController::class, 'suggestionUsers'])->name('users.suggestion');
 Route::post('save-post', [HomeController::class, 'savePost'])->name('post.save');
 
@@ -31,6 +32,9 @@ Route::prefix('user')->group(function () {
     Route::post('send-message', [ChatController::class, 'sendMessage'])->name('chat.sendMessage');
     Route::post('send-new-user', [ChatController::class, 'getNewUser'])->name('chat.new-user');
     Route::get('chat-delete/{id}', [ChatController::class, 'deleteChat'])->name('chat.delete');
+    Route::post('post-get', [HomeController::class, 'getPost'])->name('post.get');
+    Route::post('get-comment', [HomeController::class, 'getPostComment'])->name('post.get-comment');
+    Route::post('save-comment', [HomeController::class, 'savePostComment'])->name('post.save-comment');
 });
 
 
