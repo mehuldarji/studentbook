@@ -430,7 +430,7 @@ p.awesome_line {
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 10px;
-    background-color: #F2F6F9;
+    /* background-color: #F2F6F9; */
     padding: 10px;
     position: relative;
     border-radius: 10px 10px 10px 0px;

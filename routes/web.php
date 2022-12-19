@@ -30,6 +30,7 @@ Route::prefix('user')->group(function () {
     Route::post('get-user-chat', [ChatController::class, 'getUserChat'])->name('chat.get');
     Route::post('send-message', [ChatController::class, 'sendMessage'])->name('chat.sendMessage');
     Route::post('send-new-user', [ChatController::class, 'getNewUser'])->name('chat.new-user');
+    Route::get('chat-delete/{id}', [ChatController::class, 'deleteChat'])->name('chat.delete');
 });
 
 

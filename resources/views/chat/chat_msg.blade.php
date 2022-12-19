@@ -16,7 +16,7 @@
                 <i class="feather-more-vertical"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-right">
-                <button class="dropdown-item" type="button"><i class="feather-trash"></i> Delete All Message</button>
+                <a class="dropdown-item" onclick="return confirm('Are you sure you want to delete this chat?');" href="{{ route('chat.delete',$getData->id ) }}" ><i class="feather-trash"></i> Delete All Message</a>
             </div>
         </div>
     </span>
@@ -59,7 +59,10 @@
                 <img src="{{ asset('upload/users/')}}/{{ $row->photo }}" class="rounded-circle user_img_msg" alt="img">
             </div>
             <div class="msg_cotainer">
-                {{ $row->body }}
+            @if(@$row->file != '')
+                <img src="{{ asset('upload/chat') }}/{{ $row->file }}" class="thumbss">
+                @endif
+                {{ @$row->body }}
                 <span class="msg_time"> {{ date('h:i A',strtotime($row->created_at)); }}</span>
             </div>
         </div>
@@ -67,7 +70,11 @@
         @if($row->from_id == auth()->user()->id)
         <div class="d-flex justify-content-end ">
             <div class="msg_cotainer_send">
-                {{ $row->body }}
+            @if(@$row->file != '')
+                <img src="{{ asset('upload/chat') }}/{{ $row->file }}" class="thumbs">
+                @endif
+                {{ @$row->body }}
+               
                 <span class="msg_time_send"> {{ date('h:i A',strtotime($row->created_at)); }}</span>
             </div>
             <div class="img_cont_msg">
@@ -81,14 +88,12 @@
 
     </div>
 </div>
-<div class="typing" style="display: none;">
-
+<div class="typing" style="display: none;color:#8c8a8a">
+    typing
     <span class="dot-1">●</span>
     <span class="dot-2">●</span>
     <span class="dot-3">●</span>
-    <span class="dot-4">●</span>
-    <span class="dot-5">●</span>
-    <span class="dot-6">●</span>
+   
 </div>
 
 
@@ -107,7 +112,7 @@
 
         <label style="margin-top: 7px;" data-toggle="tooltip" data-placement="top" data-original-title="Click Picture" class="btn btn-light btn-sm rounded" for="fileAttachmentBtn">
             <i class="feather-paperclip"></i>
-            <input id="fileAttachmentBtn"  name="files[]"  type="file" class="d-none">
+            <input id="fileAttachmentBtn"  name="files"  type="file" class="d-none">
         </label>
 
         

@@ -3,6 +3,30 @@
 <script src="{{ asset('/js/socket.io.js') }}"></script>
 
 <style>
+    .thumbs {
+        width: 115px;
+        height: 115px;
+        border-radius: 0.475rem;
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: block;
+        margin-bottom: 13px;
+        text-align: center;
+        margin-left: auto;
+    }
+
+    .thumbss {
+        width: 115px;
+        height: 115px;
+        border-radius: 0.475rem;
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: block;
+        margin-bottom: 13px;
+        text-align: center;
+        margin-right: auto;
+    }
+
     .fileinput-button {
         position: relative;
         overflow: hidden;
@@ -193,6 +217,7 @@
         position: relative;
         border-radius: 10px 10px 10px 0px;
         min-width: 65px;
+        max-width: 80%;
     }
 
     .chatbox .msg_time {
@@ -216,6 +241,7 @@
         position: relative;
         border-radius: 10px 10px 0px 10px;
         min-width: 65px;
+        max-width: 80%;
     }
 
     .chatbox .msg_time_send {
@@ -371,14 +397,20 @@
             var send = 'no';
         }
         if ('{{auth()->user()->id}}' != data.from_id) {
-            appendMsg(data.message, send, data.photo);
+            appendMsg(data.message, send, data.photo, data.file);
+            $('#bottom').focus();
+        $('.msg_card_body').animate({
+            scrollTop: $('.msg_card_body').prop("scrollHeight")
+        }, 0);
         }
     });
 
     socket.on('display', (data) => {
         if (data.typing == true) {
-            $('.typing').show();
-            $('.typing').focus();
+            if ('{{auth()->user()->id}}' != data.from_id) {
+                $('.typing').show();
+                $('.typing').focus();
+            }
         } else {
             $('.typing').hide("");
         }
@@ -394,14 +426,13 @@
             typing = true;
             socket.emit("typing", {
                 user: 'salman',
-                typing: true
+                typing: true,
+                from_id :'{{ auth()->user()->id }}'
             });
 
 
         } else {
-            setTimeout(function() {
-                $('.typing').hide("");
-            }, 5000);
+            $('.typing').hide("");
             typingTimeout()
 
 
@@ -428,10 +459,7 @@
         var name_input = '{{ auth()->user()->name }}';
 
 
-        if (message_input.val() == "") { //emtpy message?
-            alert('enter msg.');
-            return false;
-        }
+
 
         //prepare json data
 
@@ -442,26 +470,25 @@
             type: 'usermsg'
         };
         var body = message_input.val();
-        var files = $('#files')[0].files[0];
+        var files = $('#fileAttachmentBtn')[0].files[0];
         var to_id = $('#to_id').val();
         var photo = $('#photo').val();
         var from_id = '{{ auth()->user()->id }}';
         var url = '{{ route("chat.sendMessage") }}';
         var peram = {
             body: body,
-            to_id: to_id
+            to_id: to_id,
+            file: files
         };
-        console.log(files);
+
+        if (body == "" && files.name == '') { //emtpy message?
+            alert('enter msg.');
+            return false;
+        }
+        // console.log(files);
         var reader = new FileReader();
 
-        // reader.onload = function(ev) {
-        //     $('#img_prv').attr('src', ev.target.result);
-        // }
-        // reader.readAsDataURL(files);
 
-        /// preview end
-
-        //upload
 
         var postData = new FormData();
         postData.append('photo', files);
@@ -479,9 +506,9 @@
         } else {
             var send = 'no';
         }
-
+        var filesValue = $('.thumb').attr('src');
         if ('{{auth()->user()->id}}' == from_id) {
-            appendMsg(body, send, '{{auth()->user()->photo}}');
+            appendMsg(body, send, '{{auth()->user()->photo}}', filesValue);
         }
 
         $('#bottom').focus();
@@ -496,12 +523,13 @@
             to_id: to_id,
             from_id: from_id,
             photo: photo,
+            file: filesValue
         };
         console.log(msg);
         message_input.val('');
 
         socket.emit("chat", JSON.stringify(msg));
-
+        $('#imgList').remove();
         // mySocket.send(JSON.stringify(msg));
         //reset message input
     }
@@ -578,6 +606,10 @@
                 console.log(resp);
                 if (resp.success == 'done') {
                     $('.chatbox').html(resp.html);
+                    $('#bottom').focus();
+        $('.msg_card_body').animate({
+            scrollTop: $('.msg_card_body').prop("scrollHeight")
+        }, 0);
                 } else if (resp.success == 'diff') {
                     showError(resp.msg);
                 } else {
@@ -595,14 +627,29 @@
 
 
 
-    function appendMsg(body, send, photo) {
-        console.log(send);
+    function appendMsg(body, send, photo, file) {
+        $('.typing').hide("");
+        console.log(file);
         if (send == 'yes') {
-            var appendHtml = '<div class="d-flex justify-content-end "><div class="msg_cotainer_send">' + body + '<span class="msg_time_send"> ' + moment(new Date(), 'ddd DD-MMM-YYYY, hh:mm A').format('hh:mm A') + '</span></div> <div class="img_cont_msg">  <img src="{{ asset("upload/users") }}/' + photo + '" class="rounded-circle user_img_msg" alt="img"> </div></div>';
+            if(file != '' && typeof file != "undefined"){
+                var IMG = '<img src="' + file + '" class="thumbs">';
+            }else{
+                var IMG = ''
+            }
+            var appendHtml = '<div class="d-flex justify-content-end "><div class="msg_cotainer_send"> '+ IMG +'' + body + ' <span class="msg_time_send"> ' + moment(new Date(), 'ddd DD-MMM-YYYY, hh:mm A').format('hh:mm A') + '</span></div> <div class="img_cont_msg">  <img src="{{ asset("upload/users") }}/' + photo + '" class="rounded-circle user_img_msg" alt="img"> </div></div>';
         } else {
-            var appendHtml = '<div class="d-flex justify-content-start"> <div class="img_cont_msg"> <img src="{{ asset("upload/users") }}/' + photo + '" class="rounded-circle user_img_msg" alt="img"></div><div class="msg_cotainer"> ' + body + '<span class="msg_time"> ' + moment(new Date(), 'ddd DD-MMM-YYYY, hh:mm A').format('hh:mm A') + '</span></div>';
+            if(file != '' && typeof file != "undefined"){
+                var IMG = '<img src="' + file + '" class="thumbss">';
+            }else{
+                var IMG = ''
+            }
+            var appendHtml = '<div class="d-flex justify-content-start"> <div class="img_cont_msg"> <img src="{{ asset("upload/users") }}/' + photo + '" class="rounded-circle user_img_msg" alt="img"></div><div class="msg_cotainer">'+ IMG +' ' + body + '<span class="msg_time"> ' + moment(new Date(), 'ddd DD-MMM-YYYY, hh:mm A').format('hh:mm A') + '</span></div>';
         }
         $('.overflow').append(appendHtml);
+        $('#bottom').focus();
+        $('.msg_card_body').animate({
+            scrollTop: $('.msg_card_body').prop("scrollHeight")
+        }, 0);
     }
 
 
