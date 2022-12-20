@@ -31,7 +31,7 @@
 <br>
 <div class="scrollbar scroll-3">
     <div class="comments overflow">
-        <!-- Comment #1 //-->
+       
         @if(!empty($comment))
 
         @foreach($comment as $row)

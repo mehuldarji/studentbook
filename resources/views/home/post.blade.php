@@ -169,7 +169,7 @@ if (!empty($checkLike)) {
                                                                                                                                                                                                                                                                                                                                                             } ?></span></a>
         <a href="javascript:void()" data-toggle="tooltip" data-placement="top" data-original-title="Comments" class="mr-3 text-secondary opencomment" data-id="<?= @$row->id  ?>"><i class="feather-message-square"></i> <?php if (COUNT($comment) > 0) {
                                                                                                                                                                                                                                 echo COUNT($comment);
-                                                                                                                                                                                                                            } ?></a>
+                                                                                                                                                                                                                            } ?> </a>
 
 
 
@@ -182,6 +182,11 @@ if (!empty($checkLike)) {
         </div>
 
         <script async src="https://static.addtoany.com/menu/page.js"></script>
+       
+        <script>
+var a2a_config = a2a_config || {};
+a2a_config.counts = { recover_protocol: 'http',recover_domain: '{{ substr (Request::root(), 7); }}' };
+</script>
         <div class="" id="commentList<?= @$row->id  ?>"></div>
 
     </div>

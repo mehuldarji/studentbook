@@ -48,8 +48,7 @@ class HomeController extends Controller
         }
         $conn[] = auth()->user()->id;
         $conn[] = 0;
-// dd($conn);
-// DB::enableQueryLog(); // enable query log
+
         $post =  Post::leftjoin('users', 'users.id', 'posts.user_id')
             ->whereIn('posts.user_id', $conn)
             ->select('posts.*', 'users.name', 'users.headline', 'users.photo', 'posts.id as primarys')
@@ -57,7 +56,7 @@ class HomeController extends Controller
             ->groupBy('posts.id')
             ->orderby('posts.id', 'desc')
             ->get();
-// dd(DB::getQueryLog());
+
 
 
         if (COUNT($post) > 0) {
@@ -73,12 +72,12 @@ class HomeController extends Controller
     public function getPostComment(Request $request)
     {
         $input = $request->all();
+
         $comment = PostComment::join('users', 'users.id', 'post_comments.user_id')
             ->select('post_comments.*', 'users.name', 'users.headline', 'users.photo')
-            ->where('post_comments.comment', '!= ', '')
             ->where('post_comments.post_id', $input['id'])->orderBy('post_comments.id', 'desc')->get();
         $id = $input['id'];
-        
+
 
         $html =  view('home/comment', compact('comment', 'id'))->render();
         return response()->json(['success' => 'done', 'html' => $html]);
