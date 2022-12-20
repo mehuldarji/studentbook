@@ -19,6 +19,15 @@ return new class extends Migration
             $table->string('about');
             $table->string('about_description');
         });
+        
+                DB::table('websitetables')->insert(
+        array(
+             'logo' => 'logo.png',
+            'about' => 'brand logo',
+            'about_description'=> 'Copyright © 2022 Student Book. Designed by Spruko All rights reserved.'
+           
+        )
+    );
     }
 
     /**
