@@ -18,7 +18,6 @@ $value = \App\Models\Websitetable::where(['id' => 1])->first()->logo;
     <ul class="side-menu">
         <li class="slide">
             <a class="side-menu__item" href="{{ route('admin.dashboard')  }}"><i class="side-menu__icon si si-screen-desktop"></i><span class="side-menu__label">Dashboard</span></a>
-
         </li>
         <li class="slide">
             <a class="side-menu__item" href="{{ route('admin.userlist')  }}"><i class="side-menu__icon si si-people"></i><span class="side-menu__label">User</span></a>
@@ -27,18 +26,7 @@ $value = \App\Models\Websitetable::where(['id' => 1])->first()->logo;
             <a class="side-menu__item" href="{{ route('admin.landing')  }}"><i class="side-menu__icon si si-layers"></i><span class="side-menu__label">Landing Page</span></a>
         </li>
         <li class="slide">
-            <a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-briefcase"></i><span class="side-menu__label">Post</span><i class="angle fas fa-angle-right"></i></a>
-            <ul class="slide-menu">
-                    <li>
-                            <a href="{{ route('admin.title')  }}" class="slide-item">Title</a>
-                    </li>
-                    <li>
-                            <a href="{{ route('admin.description')  }}" class="slide-item">Description</a>
-                    </li>
-                    <li>
-                            <a href="{{ route('admin.youtube-url')  }}" class="slide-item">YouTube URL</a>
-                    </li>
-            </ul>
+            <a class="side-menu__item"  href="{{ route('admin.post')  }}"><i class="side-menu__icon si si-briefcase"></i><span class="side-menu__label">Post</span></a>
         </li>
         
     </ul>

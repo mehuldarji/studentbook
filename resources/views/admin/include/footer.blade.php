@@ -90,3 +90,14 @@
 <!-- Custom-->
 <script src="{{ asset('assets_admin/js/index4.js') }}"></script>
 
+        
+<script>
+$(document).on('click', '#delete', function(){
+	var result = confirm('Are you sure you want to Delete?');
+    if(!result){
+    	return false;
+    }
+})
+
+
+</script>

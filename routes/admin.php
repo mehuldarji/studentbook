@@ -20,9 +20,13 @@ Route::group(['middleware' => ['Adminlogin']], function () {
         Route::get('landing', [UserController::class, 'landingpage'])->name('landing');
         Route::post('update-page', [UserController::class, 'update'])->name('update-page');
         
-        Route::get('title', [PostController::class, 'titlepage'])->name('title');
-        Route::get('description', [PostController::class, 'description'])->name('description');
-        Route::get('youtube-url', [PostController::class, 'youtube_url'])->name('youtube-url');
+        Route::get('post', [PostController::class, 'post'])->name('post');
+        Route::get('post-form', [PostController::class, 'post_form'])->name('post-form');
+        Route::post('post-store', [PostController::class, 'post_store'])->name('post-store');
+        Route::get('post-edit/{id}', [PostController::class, 'post_edit'])->name('post-edit');
+        Route::get('post-delete/{id}', [PostController::class, 'post_delete'])->name('post-delete');
+        Route::post('post-update/{id}', [PostController::class, 'post_update'])->name('post-update');
+       
     });
 });
 

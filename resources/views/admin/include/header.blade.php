@@ -69,11 +69,19 @@
                 <link href="{{ asset('assets_admin/plugins/fancyuploder/fancy_fileupload.css') }}" rel="stylesheet"/>
 
                 <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+                
+                <!--validation-->
+                <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 
 
 </head>
         
 <style>
+    
+    .error{
+        color: #FF0000
+    }
             
     .dataTables_wrapper{
         width: 100%;

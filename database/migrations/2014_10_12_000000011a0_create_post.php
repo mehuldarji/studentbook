@@ -18,6 +18,7 @@ return new class extends Migration
             $table->bigInteger('user_id')->nullable();
             $table->string('type')->nullable();
             $table->string('title')->nullable();
+			$table->string('youtube_link')->nullable();
             $table->longText('desc')->nullable();
             $table->longText('img')->nullable();
             $table->longText('que')->nullable();
