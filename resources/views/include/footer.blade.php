@@ -85,6 +85,35 @@
         
        
     }
+    function getDataByAjaxWithoutLoaderAppend(url, peram, method, msg) {
+
+        $.ajax({
+            url: url,
+            type: method,
+            data: peram,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+           
+            success: function(resp) {
+
+                if (resp.success == 'done') {
+                    if (msg != '') {
+                        showMsg(msg);
+                    }
+
+
+                } else {
+                    if (resp.msg != '') {
+                        showError(resp.msg);
+                    }
+                }
+              
+            }
+        })
+        
+       
+    }
 
 
 

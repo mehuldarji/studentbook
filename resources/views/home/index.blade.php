@@ -141,8 +141,8 @@
 
 <style>
     .comment img {
-        width: 3rem;
-        height: 3rem;
+        width: 2rem;
+        height: 2rem;
     }
 
     .comment-replies img {
@@ -201,13 +201,76 @@
     .link-secondary {
         color: #0172BC;
     }
+
+    .osahan-post-body img {
+        width: 100%;
+    }
+    .centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.playIcon{
+    font-size: 47px;
+    color: red;
+    background-color: #fff;
+    border-radius: 50%;
+}
+.play { 
+    background: red;
+    border-radius: 50% / 10%;
+    color: #FFFFFF;
+    font-size: 2em;
+    height: 2em;
+    margin: 20px auto;
+    padding: 0;
+    position: relative;
+    text-align: center;
+    text-indent: 0.1em;
+    transition: all 150ms ease-out;
+    width: 3em;
+}
+
+.play:hover {
+  background: red;
+}
+
+.play::before { 
+  background: inherit;
+  border-radius: 5% / 50%;
+  bottom: 9%;
+  content: "";
+  left: -5%;
+  position: absolute;
+  right: -5%;
+  top: 9%;
+}
+
+.play::after {
+    border-style: solid;
+    border-width: 1em 0 1em 1.732em;
+    border-color: transparent transparent transparent #fff;
+    content: ' ';
+    font-size: 0.55em;
+    height: 0;
+    margin: -1em 0 0 -0.75em;
+    top: 50%;
+    position: absolute;
+    width: 0;
+}
+
+
 </style>
+<?php 
+
+?>
 <div class="py-4">
     <div class="container">
         <div class="row">
 
-            <main class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
-                <div class="box shadow-sm border rounded bg-white mb-3 osahan-share-post">
+            <main class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12" data-aos="fade-down">
+                <div class="box shadow-sm border rounded bg-white mb-3 osahan-share-post" data-aos="fade-down">
                     <ul class="nav nav-justified border-bottom osahan-line-tab" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><i class="feather-edit"></i> Share a post</a>
@@ -305,8 +368,8 @@
                 </div>
                 <div id="load_data_message"></div>
             </main>
-            <aside class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12">
-                <div class="box mb-3 shadow-sm border rounded bg-white profile-box text-center">
+            <aside class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12" data-aos="fade-right">
+                <div class="box mb-3 shadow-sm border rounded bg-white profile-box text-center" data-aos="fade-right">
                     <div class="py-4 px-3 border-bottom">
                         <img onerror="this.onerror=null;this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png';" src="{{ asset('upload/users/')}}/{{ auth()->user()->photo }}" class="img-fluid mt-2 rounded-circle" alt="Responsive image">
                         <h5 class="font-weight-bold text-dark mb-1 mt-4">{{ auth()->user()->name }}</h5>
@@ -326,7 +389,7 @@
                         <a class="font-weight-bold p-3 d-block" href="{{ route('profile.index',Crypt::encryptString(auth()->user()->id)) }}"> View my profile </a>
                     </div>
                 </div>
-                <div class="box mb-3 shadow-sm rounded bg-white view-box overflow-hidden">
+                <div class="box mb-3 shadow-sm rounded bg-white view-box overflow-hidden" data-aos="fade-right">
                     <div class="box-title border-bottom p-3">
                         <h6 class="m-0">Profile Views</h6>
                     </div>
@@ -346,8 +409,8 @@
                 </div>
 
             </aside>
-            <aside class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="box shadow-sm border rounded bg-white mb-3">
+            <aside class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-6 col-12" data-aos="fade-left">
+                <div class="box shadow-sm border rounded bg-white mb-3" data-aos="fade-left">
                     <div class="box-title border-bottom p-3">
                         <h6 class="m-0">People you might know</h6>
                     </div>
@@ -420,7 +483,7 @@
                     </div>
                 </div>
 
-                <div class="box shadow-sm mb-3 rounded bg-white ads-box text-center">
+                <div class="box shadow-sm mb-3 rounded bg-white ads-box text-center" data-aos="fade-left">
                     <img src="img/job1.png" class="img-fluid" alt="Responsive image">
                     <div class="p-3 border-bottom">
                         <h6 class="font-weight-bold text-dark">Osahan Solutions</h6>
@@ -556,6 +619,43 @@
 
             }
         })
+
+    });
+    $(document).on('click', '.clickLike', function() {
+        
+        var id = $(this).attr('data-id');
+        var count = $(this).attr('data-count');
+        var is_like = $(this).attr('data-is-like');
+        console.log(id);
+        var url = '{{ route("post.like") }}';
+        var peram = {
+            post_id: id
+        };
+        console.log(count);
+        var counts = parseInt(count) + parseInt(1);
+        var countsM = parseInt(count) - parseInt(1);
+        // data-is-like
+        console.log(counts);
+        getDataByAjaxWithoutLoaderAppend(url, peram, 'POST', '');
+        if(is_like == 0){
+            $('.icon'+id).removeClass('feather-heart');
+            $('.icon'+id).addClass('fa fa-heart');
+            $('.value'+id).html('&nbsp;'+counts);
+            $(this).attr("data-is-like","1");
+            $(this).attr("data-count",counts);
+          
+        }else{
+            $('.icon'+id).removeClass('fa fa-heart');
+            $('.icon'+id).addClass('feather-heart');
+            if(countsM != 0){
+                $('.value'+id).html('&nbsp;'+countsM);
+            }else{
+                $('.value'+id).html('&nbsp;');
+            }
+            
+            $(this).attr("data-is-like","0");
+            $(this).attr("data-count",countsM);
+        }
 
     });
 </script>

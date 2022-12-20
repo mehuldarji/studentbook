@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\PostComment;
+use App\Models\PostLike;
 use Illuminate\Support\Facades\Crypt;
 use DB;
 
@@ -46,17 +47,19 @@ class HomeController extends Controller
             }
         }
         $conn[] = auth()->user()->id;
-     
-        $post =  Post::join('users', 'users.id', 'posts.user_id')
+        $conn[] = 0;
+// dd($conn);
+// DB::enableQueryLog(); // enable query log
+        $post =  Post::leftjoin('users', 'users.id', 'posts.user_id')
             ->whereIn('posts.user_id', $conn)
-            ->select('posts.*', 'users.name', 'users.headline', 'users.photo','posts.id as primarys')
+            ->select('posts.*', 'users.name', 'users.headline', 'users.photo', 'posts.id as primarys')
             ->offset($input['start'])->limit($input['limit'])
             ->groupBy('posts.id')
             ->orderby('posts.id', 'desc')
             ->get();
+// dd(DB::getQueryLog());
 
 
-           
         if (COUNT($post) > 0) {
             $success = 'done';
         } else {
@@ -71,11 +74,13 @@ class HomeController extends Controller
     {
         $input = $request->all();
         $comment = PostComment::join('users', 'users.id', 'post_comments.user_id')
-        ->select('post_comments.*', 'users.name', 'users.headline', 'users.photo')
-        ->where('post_comments.post_id', $input['id'])->orderBy('post_comments.id','desc')->get();
+            ->select('post_comments.*', 'users.name', 'users.headline', 'users.photo')
+            ->where('post_comments.comment', '!= ', '')
+            ->where('post_comments.post_id', $input['id'])->orderBy('post_comments.id', 'desc')->get();
         $id = $input['id'];
         
-        $html =  view('home/comment', compact('comment','id'))->render();
+
+        $html =  view('home/comment', compact('comment', 'id'))->render();
         return response()->json(['success' => 'done', 'html' => $html]);
     }
     public function savePostComment(Request $request)
@@ -86,9 +91,32 @@ class HomeController extends Controller
         $insert->post_id = $input['post_id'];
         $insert->user_id = auth()->user()->id;
         $insert->save();
-        if($insert){
+        if ($insert) {
             return response()->json(['success' => 'done']);
-        }else{
+        } else {
+            return  response()->json(['success' => 'error']);
+        }
+    }
+    public function postLike(Request $request)
+    {
+        $input = $request->all();
+        $check = PostLike::where('post_id', $input['post_id'])->where('user_id', auth()->user()->id)->first();
+        if (!empty($check)) {
+            $insert =  PostLike::where('post_id', $input['post_id'])->where('user_id', auth()->user()->id)->delete();
+            if ($insert) {
+                return response()->json(['success' => 'done']);
+            } else {
+                return  response()->json(['success' => 'error']);
+            }
+        }
+        $insert = new PostLike();
+        $insert->like = 1;
+        $insert->post_id = $input['post_id'];
+        $insert->user_id = auth()->user()->id;
+        $insert->save();
+        if ($insert) {
+            return response()->json(['success' => 'done']);
+        } else {
             return  response()->json(['success' => 'error']);
         }
     }

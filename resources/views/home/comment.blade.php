@@ -24,18 +24,18 @@
     }
 </style>
 
-<div class="p-3 border " style="    border-color: gainsboro !important;">
+<div class="p-3 border " style="    border-color: gainsboro !important;margin-top: 13px;">
     <textarea placeholder="Add a Comment..." data-post-id="{{ $id }}" class="comments_filed form-control border-0 p-0 shadow-none" rows="1"></textarea>
     <!-- <button type="button" data-type="post" class="btn btn-primary btn-sm save_post">Share Post</button> -->
 </div>
-
+<br>
 <div class="scrollbar scroll-3">
-    <div class="p-3  comments overflow">
+    <div class="comments overflow">
         <!-- Comment #1 //-->
         @if(!empty($comment))
 
         @foreach($comment as $row)
-
+        @if($row->comment !='')
         <?php
         $seconds_ago = (time() - strtotime($row->created_at));
         $timeago = "";
@@ -53,8 +53,9 @@
             $timeago =  "1m";
         }
         ?>
+       
         <div class="">
-            <div class="py-3">
+            <div class="py-2">
                 <div class="d-flex comment">
                     <img class="rounded-circle comment-img" src="{{ asset('upload/users') }}/{{ $row->photo }}">
                     <div class="flex-grow-1 ms-3">
@@ -74,6 +75,7 @@
 
 
         </div>
+        @endif
         @endforeach
         @endif
 
