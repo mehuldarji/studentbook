@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Post;
 use App\Models\PostComment;
 use App\Models\PostLike;
+use App\Models\PollAnalysis;
 use Illuminate\Support\Facades\Crypt;
 use DB;
 
@@ -179,5 +180,142 @@ class HomeController extends Controller
     {
         $article = Post::where('id', Crypt::decryptString($id))->first();
         return view('home/articalDetail', compact('article'));
+    }
+
+    public function pollAnalysis(Request $request)
+    {
+        $input = $request->all();
+
+        $check = PollAnalysis::where('post_id', $input['post_id'])->where('user_id', auth()->user()->id)->first();
+        if (!empty($check)) {
+            $insert =  PollAnalysis::where('post_id', $input['post_id'])->where('user_id', auth()->user()->id)->delete();
+            if ($insert) {
+                $analysis =  $this->getAnalysisValue($input['post_id']);
+
+                return response()->json(['success' => 'done', 'analysis' => $analysis[0]]);
+            } else {
+                return  response()->json(['success' => 'error', 'analysis' => array()]);
+            }
+        }
+
+        $insert = new PollAnalysis();
+        $insert->post_id = $input['post_id'];
+        $insert->option = $input['option'];
+        $insert->option_index = $input['option_index'];
+        $insert->user_id = auth()->user()->id;
+        $insert->created_at = date('Y-m-d H:i:s');
+        $insert->save();
+        if ($insert) {
+            $analysis =  $this->getAnalysisValue($input['post_id']);
+
+
+            return response()->json(['success' => 'done', 'analysis' => $analysis[0]]);
+        } else {
+            return  response()->json(['success' => 'error', 'analysis' => array()]);
+        }
+    }
+
+
+    public static function getAnalysisValue($input){
+       
+        $analysis = DB::Select('SELECT
+            IFNULL(
+                (
+                SELECT
+                    ((100 * analysis) / all_analisis) AS option_analysis
+                FROM
+                    (
+                    SELECT
+                        COUNT(*) AS analysis,
+                        (
+                        SELECT
+                            COUNT(*)
+                        FROM
+                            poll_analysis
+                        WHERE
+                            post_id = "' . $input . '"
+                    ) AS all_analisis
+                FROM
+                    poll_analysis
+                WHERE
+                    post_id = "' . $input . '" AND option_index = "1"
+                ) AS X
+            ),
+            "0.000"
+            ) AS A,
+            IFNULL(
+                (
+                SELECT
+                    ((100 * analysis) / all_analisis) AS option_analysis
+                FROM
+                    (
+                    SELECT
+                        COUNT(*) AS analysis,
+                        (
+                        SELECT
+                            COUNT(*)
+                        FROM
+                            poll_analysis
+                        WHERE
+                            post_id = "' .$input . '"
+                    ) AS all_analisis
+                FROM
+                    poll_analysis
+                WHERE
+                    post_id = "' . $input . '" AND option_index = "2"
+                ) AS X
+            ),
+           "0.000"
+            ) AS B,
+            IFNULL(
+                (
+                SELECT
+                    ((100 * analysis) / all_analisis) AS option_analysis
+                FROM
+                    (
+                    SELECT
+                        COUNT(*) AS analysis,
+                        (
+                        SELECT
+                            COUNT(*)
+                        FROM
+                            poll_analysis
+                        WHERE
+                            post_id = "' . $input . '"
+                    ) AS all_analisis
+                FROM
+                    poll_analysis
+                WHERE
+                    post_id = "' . $input . '" AND option_index = "3"
+                ) AS X
+            ),
+           "0.000"
+            ) AS C,
+            IFNULL(
+                (
+                SELECT
+                    ((100 * analysis) / all_analisis) AS option_analysis
+                FROM
+                    (
+                    SELECT
+                        COUNT(*) AS analysis,
+                        (
+                        SELECT
+                            COUNT(*)
+                        FROM
+                            poll_analysis
+                        WHERE
+                            post_id = "' . $input . '"
+                    ) AS all_analisis
+                FROM
+                    poll_analysis
+                WHERE
+                    post_id = "' . $input . '" AND option_index = "4"
+                ) AS X
+            ),
+           "0.000"
+            ) AS D');
+
+          return $analysis;
     }
 }

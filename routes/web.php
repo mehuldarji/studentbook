@@ -36,6 +36,7 @@ Route::prefix('user')->group(function () {
     Route::post('get-comment', [HomeController::class, 'getPostComment'])->name('post.get-comment');
     Route::post('save-comment', [HomeController::class, 'savePostComment'])->name('post.save-comment');
     Route::post('post-like', [HomeController::class, 'postLike'])->name('post.like');
+    Route::post('post-poll-analysis', [HomeController::class, 'pollAnalysis'])->name('post.poll.analysis');
 });
 
 
