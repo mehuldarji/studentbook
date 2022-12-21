@@ -29,10 +29,8 @@
                     </div>-->
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example-1" class="table table-striped table-bordered text-nowrap">
-                                {{$dataTable->table()}}
+                                {{$dataTable->table(['class' => 'table table-bordered text-nowrap'])}}
                                 {{ $dataTable->scripts() }}
-                            </table>
                         </div>
                     </div>
                 </div>

@@ -16,13 +16,15 @@ return new class extends Migration
         Schema::create('websitetables', function (Blueprint $table) {
             $table->Increments('id');
             $table->string('logo');
-            $table->string('about');
-            $table->string('about_description');
+			$table->string('type');
+            $table->text('about');
+            $table->text('about_description');
         });
         
                 DB::table('websitetables')->insert(
         array(
              'logo' => 'logo.png',
+			 'type' => 'brand_logo',
             'about' => 'brand logo',
             'about_description'=> 'Copyright © 2022 Student Book. Designed by Spruko All rights reserved.'
            

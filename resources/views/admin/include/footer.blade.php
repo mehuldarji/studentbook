@@ -1,5 +1,5 @@
 
-<?php $value = \App\Models\Websitetable::where(['id' => 1])->first()->about_description; ?>
+<?php $value = \App\Models\Websitetable::where(['type' => 'brand_logo'])->first()->about_description; ?>
 
 <footer class="footer">
     <div class="container">

@@ -1,6 +1,6 @@
 
 <?php
-$value = \App\Models\Websitetable::where(['id' => 1])->first()->logo;
+$value = \App\Models\Websitetable::where(['type' => 'brand_logo'])->first()->logo;
 ?>
 
 <aside class="app-sidebar">

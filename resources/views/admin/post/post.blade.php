@@ -21,45 +21,16 @@
                             <a class="btn btn-primary" href="{{ route('admin.post-form')  }}">Add Post</a>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="table-responsive border-top">
-                            <table class="table table-bordered  text-wrap">
-                                <thead>
-                                    <tr>
-                                        <th>User Id</th>
-                                        <th>Title</th>
-                                        <th>Youtube Link</th>
-                                        <th>Description</th>
-                                        <th>Action</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    @foreach($posts as $posts)
-
-                                    <tr>
-
-                                        <td>{{$posts->user_id}}</td>
-                                        <td>{{$posts->title}}</td>
-                                        <td>{{$posts->youtube_link}}</td>
-                                        <td>{{$posts->desc}}</td>
-                                        <td>
-                                            <a href="{{ route('admin.post-edit',[$posts->id]) }}"><i class="fe fe-edit"></i></a>
-                                            <a href="{{ route('admin.post-delete',[$posts->id]) }}" id="delete"><i class="fe fe-trash-2" style="color:red"></i></a>
-                                        </td>
-
-                                        @endforeach
-
-                                    </tr>
-                                </tbody>
-                            </table>
+                     <div class="card-body">
+                        <div class="table-responsive">
+                                {{$dataTable->table(['class' =>'table table-bordered text-wrap '])}}
+                                {{ $dataTable->scripts() }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+
 
         @include('admin/include/footer')
     </div>

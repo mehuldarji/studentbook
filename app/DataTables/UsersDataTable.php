@@ -28,10 +28,10 @@ class UsersDataTable extends DataTable {
                         <a href="' . $row->instagram_link . '"><button type="button" class="rounded-circle btn btn-icon btn-instagram"><i class="fab fa-instagram"></i></button></a>';
                         })
                         ->addColumn('name', function ($img) {
-                            return '<img src="../upload/users/' . $img->photo . '" width="40" class="avatar-md brround" >&nbsp &nbsp' . $img->name;
+                            return '<img src="../upload/users/' . $img->photo . '" class="avatar brround" >&nbsp &nbsp' . $img->name.'&nbsp &nbsp &nbsp &nbsp';
                         })->rawColumns(['name', 'action'])
                         ->editColumn('b_date', function ($row) {
-                            return $row->b_date . '-' . $row->b_month . '-' . $row->b_year;
+                            return $row->b_date.'-'.$row->b_month.'-'.$row->b_year;
                         });
                         
 //             ->editColumn('location', function ($row) {
@@ -74,7 +74,7 @@ class UsersDataTable extends DataTable {
             Column::make('email'),
             Column::make('b_date')->title('Date Of Birth'),
             Column::make('phone'),
-            Column::make('location'),
+            Column::make('country'),
             Column::make('action')->title('Link'),
         ];
     }
