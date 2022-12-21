@@ -1,6 +1,7 @@
 <!-- -//--Post Data------->
 
 <?php
+
 use App\Http\Controllers\HomeController;
 ?>
 @if(!empty($post))
@@ -16,15 +17,13 @@ $like = App\Models\PostLike::where('post_id', $row->id)->get();
 $checkLike = App\Models\PostLike::where('post_id', $row->id)->where('user_id', auth()->user()->id)->first();
 $checkPoll = array();
 if ($row->type == 'poll') {
-   
+
     $checkPoll = App\Models\PollAnalysis::where('post_id', $row->id)->where('user_id', auth()->user()->id)->first();
-    
+
     $getPollAnalysis  = HomeController::getAnalysisValue($row->id);
 
-   
-    $getPollAnalysisRecode  =  $getPollAnalysis[0];
 
-    
+    $getPollAnalysisRecode  =  $getPollAnalysis[0];
 }
 $likeIS = '0';
 
@@ -91,7 +90,7 @@ if (!empty($checkLike)) {
         @if($row->type == 'poll')
         <div class="wrapper">
             <header>{{ $row->que }}</header>
-            <div class="poll-area" <?php if(!empty($checkPoll)){ ?> style="pointer-events: none" <?php } ?>>
+            <div class="poll-area" <?php if (!empty($checkPoll)) { ?> style="pointer-events: none" <?php } ?>>
 
 
                 <?php
@@ -100,33 +99,40 @@ if (!empty($checkLike)) {
                 foreach ($option as $rows) {
                     if ($rows != '') {
                 ?>
-                 <?php 
-                                $per = '0';
-                                if( $i == 1){
-                                    $per = round($getPollAnalysisRecode->A);
-                                }else if($i == 2){
-                                    $per = round($getPollAnalysisRecode->B);
-                                }else if($i == 3){
-                                    $per = round($getPollAnalysisRecode->C);
-                                }else if($i == 4){
-                                    $per = round($getPollAnalysisRecode->D);
-                                }else{
-                                    $per = '0';
-                                }
-                                ?>
+                        <?php
+                        $per = '0';
+                        if ($i == 1) {
+                            $per = round($getPollAnalysisRecode->A);
+                        } else if ($i == 2) {
+                            $per = round($getPollAnalysisRecode->B);
+                        } else if ($i == 3) {
+                            $per = round($getPollAnalysisRecode->C);
+                        } else if ($i == 4) {
+                            $per = round($getPollAnalysisRecode->D);
+                        } else {
+                            $per = '0';
+                        }
+                        ?>
                         <input type="checkbox" name="poll" id="opt-<?= rand() . $i ?>">
-                        <label   for="opt-<?= rand() . $i ?>" class="opt-<?= rand() . $i ?> selectedOption <?php if(!empty($checkPoll)){ ?> selectall selected <?php } ?>" data-option="<?= $rows ?>" data-index="{{ $i }}" data-post-id="{{ $row->id }}">
+                        <label for="opt-<?= rand() . $i ?>" class="opt-<?= rand() . $i ?> selectedOption <?php if (!empty($checkPoll)) { ?> selectall selected <?php } ?>" data-option="<?= $rows ?>" data-index="{{ $i }}" data-post-id="{{ $row->id }}">
+                            <?php if (!empty($checkPoll)) { ?>
+                                <span class="percentage_bar" style="width: <?= $per ?>%;"></span>
+                            <?php } else {
+                            ?>
+                                <span id="percentage_bar_{{ $row->id }}_<?= $i ?>" class="percentage_bar" ></span>
+                            <?php
+                            } ?>
                             <div class="row">
                                 <div class="column">
-                                    <?php if(empty($checkPoll)){ ?>
-                                    <span class="circle"></span>
+                                    <?php if (empty($checkPoll)) { ?>
+                                        <span class="circle"></span>
                                     <?php } ?>
-                                    <span class="text"  <?php if(!empty($checkPoll)){ ?> style="padding-left:9px" <?php } ?>><?= $rows ?></span>
+                                    <span class="text" <?php if (!empty($checkPoll)) { ?> style="padding-left:9px" <?php } ?>><?= $rows ?></span>
                                 </div>
-                               
-                                <span class="percent percent_{{ $row->id }}_<?= $i ?>"><?=  @$per ?>%</span>
+
+                                <span class="percent percent_{{ $row->id }}_<?= $i ?>"><?= @$per ?>%</span>
                             </div>
-                            <div class="progress " id="progress_{{ $row->id }}_<?= $i ?>" style='--w:<?=  @$per ?>'></div>
+                            <!-- <div class="progress " id="progress_{{ $row->id }}_<?= $i ?>" style='--w:<?= @$per ?>'></div> -->
                         </label>
                 <?php $i++;
                     }

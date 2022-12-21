@@ -38,10 +38,15 @@
                     $('.percent_' + post_id + '_4').text(Math.round(resp.analysis.D) + '%');
 
 
-                    $('#progress_' + post_id + '_1').css('--w', Math.round(resp.analysis.A));
-                    $('#progress_' + post_id + '_2').css('--w', Math.round(resp.analysis.B));
-                    $('#progress_' + post_id + '_3').css('--w', Math.round(resp.analysis.C));
-                    $('#progress_' + post_id + '_4').css('--w', Math.round(resp.analysis.D));
+                    // $('#progress_' + post_id + '_1').css('--w', Math.round(resp.analysis.A));
+                    // $('#progress_' + post_id + '_2').css('--w', Math.round(resp.analysis.B));
+                    // $('#progress_' + post_id + '_3').css('--w', Math.round(resp.analysis.C));
+                    // $('#progress_' + post_id + '_4').css('--w', Math.round(resp.analysis.D));
+
+                    $('#percentage_bar_' + post_id + '_1').css('width', Math.round(resp.analysis.A)+'%');
+                    $('#percentage_bar_' + post_id + '_2').css('width', Math.round(resp.analysis.B)+'%');
+                    $('#percentage_bar_' + post_id + '_3').css('width', Math.round(resp.analysis.C)+'%');
+                    $('#percentage_bar_' + post_id + '_4').css('width', Math.round(resp.analysis.D)+'%');
 
                 } else {
                     console.log('error');
