@@ -13,7 +13,6 @@
             </div>
         </div>
 
-
         <div class="row">
             <div class="col-lg-12">
                 <form data-toggle="validator" method="POST" class="card" action="{{ route('admin.update-page') }}" enctype="multipart/form-data" >

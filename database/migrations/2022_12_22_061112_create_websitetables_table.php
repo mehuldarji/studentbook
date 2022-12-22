@@ -17,8 +17,8 @@ return new class extends Migration
             $table->Increments('id');
             $table->string('logo');
 			$table->string('type');
-            $table->text('about');
-            $table->text('about_description');
+            $table->text('about')->nullable();
+            $table->text('about_description')->nullable();
         });
         
                 DB::table('websitetables')->insert(
