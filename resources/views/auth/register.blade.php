@@ -11,7 +11,7 @@
                         <!-- <h5 class="font-weight-bold mt-3">Welcome Back</h5> -->
                         <h4 class="font-weight-bold mt-3">Make the most of your <br> student life</h4>
                     </div>
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" onsubmit="clickSubmit()">
                         @csrf
                         <div class="form-group">
                             <label class="mb-1">{{ __('Name') }}</label>
@@ -53,7 +53,7 @@
                         <div class="form-group">
                             <label class="mb-1">You agree to the Osahanin <a href="#">User Agreement</a>, <a href="#">Privacy Policy</a>, and <a href="#">Cookie Policy</a>.</label>
                         </div>
-                        <button class="btn btn-primary btn-block text-uppercase" type="submit"> Agree & Join </button>
+                        <button class="btn btn-primary btn-block text-uppercase "  type="submit"> Agree & Join </button>
 
                         <div class="py-3 d-flex align-item-center">
                             <a href="/forgot-password">Forgot password?</a>

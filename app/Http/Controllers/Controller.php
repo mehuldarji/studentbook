@@ -6,6 +6,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use App\Models\Notification;
+use Mail;
+use App\Mail\SendMail;
 use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
@@ -22,13 +24,14 @@ class Controller extends BaseController
         $insert->save();
     }
 
-    public static  function get_timeago($ptime) {
+    public static  function get_timeago($ptime)
+    {
         $estimate_time = time() - $ptime;
-    
+
         if ($estimate_time < 1) {
             return 'just now';
         }
-    
+
         $condition = array(
             12 * 30 * 24 * 60 * 60 => 'year',
             30 * 24 * 60 * 60 => 'month',
@@ -37,14 +40,31 @@ class Controller extends BaseController
             60 => 'minute',
             1 => 'second'
         );
-    
+
         foreach ($condition as $secs => $str) {
             $d = $estimate_time / $secs;
-    
+
             if ($d >= 1) {
                 $r = round($d);
-                return $r . ' ' . $str . ( $r > 1 ? 's' : '' ) . ' ago';
+                return $r . ' ' . $str . ($r > 1 ? 's' : '') . ' ago';
             }
         }
+    }
+
+    public static function sendEmail($data)
+    {
+
+        $testMailData = [
+            'subject' => $data['subject'],
+            'body' => $data['message'],
+            'email' => $data['email'],
+            'name' => $data['name'],
+            'password' => $data['password'],
+            'to_email' => $data['to_email'],
+        ];
+
+        Mail::to($data['to_email'])->send(new SendMail($testMailData));
+
+       
     }
 }

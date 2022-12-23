@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" href="{{ asset('img/logo.png') }}">
-    <title>{{ config('constants.PROJECT_NAME'); }}</title>
+    <title>{{ config('constant.PROJECT_NAME'); }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="stylesheet" type="text/css" href="{{ asset('vendor/slick/slick.min.css')}}" />
@@ -19,6 +19,7 @@
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
     <link href="{{ asset('css/style.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/inline.css')}}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:600%2C400%2C500%7CRoboto:400" rel="stylesheet" property="stylesheet" media="all">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -48,6 +49,8 @@
 
 
     <main>
+    <div class="loader" ></div>
+<div class="blur-bg"></div>
     @include('include.msg')
         @yield('content')
     </main>
@@ -60,7 +63,18 @@
     <script src="{{ asset('js/rocket-loader.min.js')}}" data-cf-settings="28ed724a0bfe3d065bf5b69f-|49" defer=""></script>
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993" integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA==" data-cf-beacon='{"rayId":"76af6c0bfbbd6907","version":"2022.11.0","r":1,"token":"dd471ab1978346bbb991feaa79e6ce5c","si":100}' crossorigin="anonymous"></script>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+     $("document").ready(function() {
+        $(".loader").fadeOut("slow");
 
+    });
+
+    function clickSubmit(){
+        $('.loader').show();
+    }
+    
+</script>
 </html>
 </body>
 

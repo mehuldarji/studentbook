@@ -52,6 +52,7 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
+       
         $request->validate([
             'name' => 'required|string|max:255',
             'email'      => 'required|string|email|max:255|unique:users',
@@ -67,7 +68,17 @@ class RegisterController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-
+       
+        $email_data = array(
+            'to_email' => $user->email,
+            'subject' => 'Welcome to StudentBook!',
+            'message' => view('email/welcome', ['data' => $user]),
+            'email' => 'email.welcome',
+            'name' =>  $request->name,
+            'password' =>  $request->password,
+          
+        );
+        $mail = $this->sendEmail($email_data);
         return redirect(RouteServiceProvider::HOME);
     }
 

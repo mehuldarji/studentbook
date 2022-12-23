@@ -127,7 +127,7 @@ if (!empty($checkLike)) {
                                     <?php if (empty($checkPoll)) { ?>
                                         <span class="circle"></span>
                                     <?php } ?>
-                                    <span class="text" <?php if (!empty($checkPoll)) { ?> style="padding-left:9px" <?php } ?>><?= $rows ?></span>
+                                    <span class="text" <?php if (!empty($checkPoll)) { ?> style="padding-left:9px" <?php } ?>><?= $rows ?> </span>
                                 </div>
 
                                 <span class="percent percent_{{ $row->id }}_<?= $i ?>"><?= @$per ?>%</span>
