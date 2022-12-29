@@ -3,6 +3,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+
 ?>
 @if(!empty($post))
 @foreach($post as $row)
@@ -39,14 +40,18 @@ if (!empty($checkLike)) {
 @if($row->type != 'youtube')
 <div class="box shadow-sm border rounded bg-white mb-3 osahan-post post_{{ $row->id }}" data-aos="zoom-in">
     <div class="p-3 d-flex align-items-center border-bottom osahan-post-header">
-        <div class="dropdown-list-image mr-3">
-            <img class="rounded-circle" onerror="this.onerror=null;this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png';" src="{{ asset('upload/users/')}}/{{ $row->photo }}" alt="">
-            <div class="status-indicator bg-success"></div>
-        </div>
-        <div class="font-weight-bold">
-            <div class="text-truncate">{{ $row->name }}</div>
-            <div class="small text-gray-500">{{ $row->headline }}</div>
-        </div>
+        <a href="{{ route('profile.index',Crypt::encryptString($row->id)) }}">
+            <div class="dropdown-list-image mr-3">
+                <img class="rounded-circle" onerror="this.onerror=null;this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png';" src="{{ asset('upload/users/')}}/{{ $row->photo }}" alt="">
+                <div class="status-indicator bg-success"></div>
+            </div>
+        </a>
+        <a href="{{ route('profile.index',Crypt::encryptString($row->id)) }}">
+            <div class="font-weight-bold">
+                <div class="text-truncate">{{ $row->name }}</div>
+                <div class="small text-gray-500">{{ $row->headline }}</div>
+            </div>
+        </a>
         <span class="ml-auto small">
             <?php
             $time = App\Http\Controllers\Controller::get_timeago(strtotime($row->created_at));
@@ -119,7 +124,7 @@ if (!empty($checkLike)) {
                                 <span class="percentage_bar" style="width: <?= $per ?>%;"></span>
                             <?php } else {
                             ?>
-                                <span id="percentage_bar_{{ $row->id }}_<?= $i ?>" class="percentage_bar" ></span>
+                                <span id="percentage_bar_{{ $row->id }}_<?= $i ?>" class="percentage_bar"></span>
                             <?php
                             } ?>
                             <div class="row">
@@ -154,7 +159,7 @@ if (!empty($checkLike)) {
 
 
         <script async src="https://static.addtoany.com/menu/page.js"></script>
-        <div class="a2a_kit a2a_kit_size_32 a2a_default_style" data-a2a-url="{{ route('article.show', Crypt::encryptString($row->id)) }} " data-toggle="tooltip" data-placement="top" data-original-title="Please share a post" style="display: inline-block;vertical-align: middle;">
+        <div class="a2a_kit a2a_kit_size_32 a2a_default_style" data-a2a-url="<?= App\Http\Controllers\Controller::get_tiny_url(route('article.show', Crypt::encryptString($row->id))); ?>" data-toggle="tooltip" data-placement="top" data-original-title="Please share a post" style="display: inline-block;vertical-align: middle;">
 
             <a class="a2a_dd " href="https://www.addtoany.com/share" style="margin-top: -3px;">
                 <img src="{{ asset('img/share.png') }}" border="0" alt="Share" width="13" height="13">
@@ -219,7 +224,7 @@ if (!empty($checkLike)) {
 
 
         <script async src="https://static.addtoany.com/menu/page.js"></script>
-        <div class="a2a_kit a2a_kit_size_32 a2a_default_style" data-a2a-url="{{ route('article.show', Crypt::encryptString($row->id)) }} " data-toggle="tooltip" data-placement="top" data-original-title="Please share a post" style="display: inline-block;vertical-align: middle;">
+        <div class="a2a_kit a2a_kit_size_32 a2a_default_style" data-a2a-url="<?= App\Http\Controllers\Controller::get_tiny_url(route('article.show', Crypt::encryptString($row->id))); ?> " data-toggle="tooltip" data-placement="top" data-original-title="Please share a post" style="display: inline-block;vertical-align: middle;">
 
             <a class="a2a_dd " href="https://www.addtoany.com/share" style="margin-top: -3px;">
                 <img src="{{ asset('img/share.png') }}" border="0" alt="Share" width="13" height="13">

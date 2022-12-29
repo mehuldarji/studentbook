@@ -101,7 +101,28 @@ class ConnectionController extends Controller
                 $insert->user_id = auth()->user()->id;
                 $insert->connected_id = $input['connected_id'];
                 $insert->save();
+
+                $mailNotification = array(
+                    'user_id' => auth()->user()->id,
+                    'send_email' => env('MAIL_FROM_ADDRESS'),
+                    'to_email' =>  $this->getUserEmail($input['connected_id']),
+                    'templete' =>  '',
+                    'email_page' => 'email.connection_request',
+                    'data' => auth()->user(),
+                    'subject' => auth()->user()->name .' Send you invitation StudentBook!',
+                    'status' => 0,
+                );
+               
+                $this->insertMailNotification($mailNotification);
+
+                $insertNotification = array(
+                    'user_id' => $input['connected_id'],
+                    'description' => auth()->user()->name .' Send you invitation!',
+                );
+               
+                $this->insertNotification($insertNotification);
             } else {
+               
                 $insert = UserConnection::where('connected_id', auth()->user()->id)->where('user_id', $input['connected_id'])->where('status', '1')->delete();
             }
         } else {

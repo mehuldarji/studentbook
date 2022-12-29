@@ -6,6 +6,10 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ConnectionController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ComingsoonController;
+use App\Http\Controllers\HelpcenterController;
+use App\Http\Controllers\CmsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +24,10 @@ use App\Http\Controllers\ChatController;
 Route::resource('/', LandingController::class);
 
 Route::get('home', [HomeController::class, 'index']);
+
+Route::get('coming-soon', [ComingsoonController::class, 'index'])->name('coming-soon');
+Route::get('help-center', [HelpcenterController::class, 'index'])->name('help-center');
+Route::get('cms/{slug}', [CmsController::class, 'index'])->name('cms-page');
 Route::get('suggestion-users', [HomeController::class, 'suggestionUsers'])->name('users.suggestion');
 Route::post('save-post', [HomeController::class, 'savePost'])->name('post.save');
 
@@ -37,6 +45,8 @@ Route::prefix('user')->group(function () {
     Route::post('save-comment', [HomeController::class, 'savePostComment'])->name('post.save-comment');
     Route::post('post-like', [HomeController::class, 'postLike'])->name('post.like');
     Route::post('post-poll-analysis', [HomeController::class, 'pollAnalysis'])->name('post.poll.analysis');
+    Route::get('people-view-profile', [HomeController::class, 'peopleViewProfile'])->name('people-view');
+    Route::get('notification', [NotificationController::class, 'index'])->name('notification');
 });
 
 

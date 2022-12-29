@@ -29,7 +29,9 @@
             font-family: "Poppins", Arial, Helvetica, sans-serif;
         }
 
-
+        .bg-theme {
+    background-color: #F3F2EF!important;
+}
         .loginDe {
             box-shadow: 0 0px 25px rgb(0 0 0 / 7%);
             border-radius: 15px;

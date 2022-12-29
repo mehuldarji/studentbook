@@ -1,7 +1,12 @@
 @include('include.header')
 <script src="https://cdn.ckeditor.com/4.8.0/full-all/ckeditor.js"></script>
 <link href="{{ asset('css/post.css') }}" rel="stylesheet" type="text/css">
-
+<style>
+    .sectionSticky {
+        position: sticky;
+        top: 25px;
+    }
+</style>
 <div class="py-4">
     <div class="container">
         <div class="row">
@@ -105,130 +110,51 @@
                 </div>
                 <div id="load_data_message"></div>
             </main>
-            <aside class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12" data-aos="fade-right">
-                <div class="box mb-3 shadow-sm border rounded bg-white profile-box text-center" data-aos="fade-right">
+            <aside class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12 " data-aos="fade-right">
+                <div class="box mb-3 shadow-sm border rounded bg-white profile-box text-center sectionSticky">
                     <div class="py-4 px-3 border-bottom">
                         <img onerror="this.onerror=null;this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png';" src="{{ asset('upload/users/')}}/{{ auth()->user()->photo }}" class="img-fluid mt-2 rounded-circle" alt="Responsive image">
                         <h5 class="font-weight-bold text-dark mb-1 mt-4">{{ auth()->user()->name }}</h5>
                         <p class="mb-0 text-muted">{{ auth()->user()->headline }}</p>
                     </div>
                     <div class="d-flex">
-                        <div class="col-12 border-right p-3">
+                        <div class="col-6 border-right p-3">
                             <h6 class="font-weight-bold text-dark mb-1">{{ COUNT($connection) }}</h6>
                             <p class="mb-0 text-black-50 small">Connections</p>
                         </div>
-                        <!-- <div class="col-6 p-3">
-                                <h6 class="font-weight-bold text-dark mb-1">85</h6>
-                                <p class="mb-0 text-black-50 small">Views</p>
-                            </div> -->
+                        <div class="col-6 p-3">
+                            <h6 class="font-weight-bold mb-1 text-info "><i class="feather-bar-chart-2"></i><?= $view_profile[0]->last_seven_days_view_profile ?></h6>
+                            <p class="mb-0 text-black-50 small">Last 7 days Views</p>
+                        </div>
                     </div>
+
+
                     <div class="overflow-hidden border-top">
                         <a class="font-weight-bold p-3 d-block" href="{{ route('profile.index',Crypt::encryptString(auth()->user()->id)) }}"> View my profile </a>
                     </div>
                 </div>
-                <div class="box mb-3 shadow-sm rounded bg-white view-box overflow-hidden" data-aos="fade-right">
-                    <div class="box-title border-bottom p-3">
-                        <h6 class="m-0">Profile Views</h6>
-                    </div>
-                    <div class="d-flex text-center">
-                        <div class="col-6 border-right py-4 px-2">
-                            <h5 class="font-weight-bold text-info mb-1">08 <i class="feather-bar-chart-2"></i></h5>
-                            <p class="mb-0 text-black-50 small">last 5 days</p>
-                        </div>
-                        <div class="col-6 py-4 px-2">
-                            <h5 class="font-weight-bold text-success mb-1">+ 43% <i class="feather-bar-chart"></i></h5>
-                            <p class="mb-0 text-black-50 small">Since last week</p>
-                        </div>
-                    </div>
-                    <div class="overflow-hidden border-top text-center">
-                        <img src="img/chart.png" class="img-fluid" alt="Responsive image">
-                    </div>
-                </div>
 
-            </aside>
-            <aside class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-6 col-12" data-aos="fade-left">
-                <div class="box shadow-sm border rounded bg-white mb-3" data-aos="fade-left">
-                    <div class="box-title border-bottom p-3">
-                        <h6 class="m-0">People you might know</h6>
-                    </div>
-                    <div class="box-body p-3">
-                        <div class="d-flex align-items-center osahan-post-header mb-3 people-list">
-                            <div class="dropdown-list-image mr-3">
-                                <img class="rounded-circle" src="img/p8.png" alt="">
-                                <div class="status-indicator bg-success"></div>
-                            </div>
-                            <div class="font-weight-bold mr-2">
-                                <div class="text-truncate">Sophia Lee</div>
-                                <div class="small text-gray-500">Student at Harvard
-                                </div>
-                            </div>
-                            <span class="ml-auto"><button type="button" class="btn btn-light btn-sm"><i class="feather-user-plus"></i></button>
-                            </span>
-                        </div>
-                        <div class="d-flex align-items-center osahan-post-header mb-3 people-list">
-                            <div class="dropdown-list-image mr-3">
-                                <img class="rounded-circle" src="img/p9.png" alt="">
-                                <div class="status-indicator bg-success"></div>
-                            </div>
-                            <div class="font-weight-bold mr-2">
-                                <div class="text-truncate">John Doe</div>
-                                <div class="small text-gray-500">Traveler
-                                </div>
-                            </div>
-                            <span class="ml-auto"><button type="button" class="btn btn-light btn-sm"><i class="feather-user-plus"></i></button>
-                            </span>
-                        </div>
-                        <div class="d-flex align-items-center osahan-post-header mb-3 people-list">
-                            <div class="dropdown-list-image mr-3">
-                                <img class="rounded-circle" src="img/p10.png" alt="">
-                                <div class="status-indicator bg-success"></div>
-                            </div>
-                            <div class="font-weight-bold mr-2">
-                                <div class="text-truncate">Julia Cox</div>
-                                <div class="small text-gray-500">Art Designer
-                                </div>
-                            </div>
-                            <span class="ml-auto"><button type="button" class="btn btn-light btn-sm"><i class="feather-user-plus"></i></button>
-                            </span>
-                        </div>
-                        <div class="d-flex align-items-center osahan-post-header mb-3 people-list">
-                            <div class="dropdown-list-image mr-3">
-                                <img class="rounded-circle" src="img/p11.png" alt="">
-                                <div class="status-indicator bg-success"></div>
-                            </div>
-                            <div class="font-weight-bold mr-2">
-                                <div class="text-truncate">Robert Cook</div>
-                                <div class="small text-gray-500">Photographer at Photography
-                                </div>
-                            </div>
-                            <span class="ml-auto"><button type="button" class="btn btn-light btn-sm"><i class="feather-user-plus"></i></button>
-                            </span>
-                        </div>
-                        <div class="d-flex align-items-center osahan-post-header people-list">
-                            <div class="dropdown-list-image mr-3">
-                                <img class="rounded-circle" src="img/p12.png" alt="">
-                                <div class="status-indicator bg-success"></div>
-                            </div>
-                            <div class="font-weight-bold mr-2">
-                                <div class="text-truncate">Richard Bell</div>
-                                <div class="small text-gray-500">Graphic Designer at Envato
-                                </div>
-                            </div>
-                            <span class="ml-auto"><button type="button" class="btn btn-light btn-sm"><i class="feather-user-plus"></i></button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="box shadow-sm mb-3 rounded bg-white ads-box text-center" data-aos="fade-left">
+                <div class="box shadow-sm mb-3 rounded bg-white ads-box text-center " data-aos="fade-left">
                     <img src="img/job1.png" class="img-fluid" alt="Responsive image">
                     <div class="p-3 border-bottom">
                         <h6 class="font-weight-bold text-dark">Osahan Solutions</h6>
                         <p class="mb-0 text-muted">Looking for talent?</p>
                     </div>
-                    <div class="p-3">
-                        <button type="button" class="btn btn-outline-primary pl-4 pr-4"> POST A JOB </button>
+
+                </div>
+            </aside>
+            <aside class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-6 col-12" data-aos="fade-left">
+                <div class="box shadow-sm border rounded bg-white mb-3 peopleView sectionSticky">
+
+                </div>
+
+                <div class="box shadow-sm mb-3 rounded bg-white ads-box text-center " data-aos="fade-left">
+                    <img src="img/job1.png" class="img-fluid" alt="Responsive image">
+                    <div class="p-3 border-bottom">
+                        <h6 class="font-weight-bold text-dark">Osahan Solutions</h6>
+                        <p class="mb-0 text-muted">Looking for talent?</p>
                     </div>
+
                 </div>
 
             </aside>

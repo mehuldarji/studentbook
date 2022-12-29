@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\PostComment;
 use App\Models\PostLike;
 use App\Models\PollAnalysis;
+use App\Models\UserProfileView;
 use Illuminate\Support\Facades\Crypt;
 use DB;
 
@@ -33,7 +34,8 @@ class HomeController extends Controller
         $connection = DB::Select('SELECT * FROM users WHERE id IN (SELECT ids from (SELECT connected_id as ids FROM `user_connections` a  WHERE user_id = "' . auth()->user()->id . '"  AND status = 1 UNION ALL SELECT user_id as ids FROM `user_connections` a  WHERE connected_id = "' . auth()->user()->id . '"  AND status = 1) as x) ');
         $post =  Post::join('users', 'users.id', 'posts.user_id')->select('posts.*', 'users.name', 'users.headline', 'users.photo')->orderby('id', 'desc')->get();
         $post = array();
-        return view('home/index', compact('connection', 'post'));
+        $view_profile = DB::select('SELECT count(*) as last_seven_days_view_profile FROM `user_profile_views` WHERE DATE(created_at) > (NOW() - INTERVAL 7 DAY)');
+        return view('home/index', compact('connection', 'post','view_profile'));
     }
 
     public function getPost(Request $request)
@@ -176,9 +178,25 @@ class HomeController extends Controller
         }
     }
 
+    public function peopleViewProfile()
+    {
+      
+        $data = DB::select('SELECT b.*,c.status FROM `user_profile_views` a INNER JOIN users b on b.id = a.user_id left join user_connections c on c.connected_id = a.user_id OR c.user_id = a.user_id where a.view_user_id = "'.auth()->user()->id.'" and c.status is null order by a.id desc limit 10');
+        $html =  view('home/profile_view_user', compact('data'))->render();
+        if (count($data) > 0) {
+            return response()->json(['success' => 'done', 'html' => $html]);
+        } else {
+            return  response()->json(['success' => 'error', 'html' => '']);
+        }
+    }
+
     public function showArticle($id)
     {
-        $article = Post::where('id', Crypt::decryptString($id))->first();
+        $article =  Post::leftjoin('users', 'users.id', 'posts.user_id')
+            ->select('posts.*', 'users.name', 'users.headline', 'users.photo', 'posts.id as primarys')
+            ->where('posts.id', Crypt::decryptString($id))
+            ->first();
+
         return view('home/articalDetail', compact('article'));
     }
 
@@ -216,8 +234,9 @@ class HomeController extends Controller
     }
 
 
-    public static function getAnalysisValue($input){
-       
+    public static function getAnalysisValue($input)
+    {
+
         $analysis = DB::Select('SELECT
             IFNULL(
                 (
@@ -257,7 +276,7 @@ class HomeController extends Controller
                         FROM
                             poll_analysis
                         WHERE
-                            post_id = "' .$input . '"
+                            post_id = "' . $input . '"
                     ) AS all_analisis
                 FROM
                     poll_analysis
@@ -316,6 +335,6 @@ class HomeController extends Controller
            "0.000"
             ) AS D');
 
-          return $analysis;
+        return $analysis;
     }
 }

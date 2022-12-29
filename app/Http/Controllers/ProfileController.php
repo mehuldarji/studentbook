@@ -31,6 +31,13 @@ class ProfileController extends Controller
      */
     public function index($id)
     {
+        $array  = array(
+            'user_id' => auth()->user()->id,
+            'view_user_id' => Crypt::decryptString($id),
+        );
+        
+        $this->addProfileView($array);
+
         $user = User::where('id', Crypt::decryptString($id))->first();
         $user_education = UserEducation::where('user_id', auth()->user()->id)->get();
         return view('profile/my_profile', compact('user', 'user_education'));
@@ -71,10 +78,9 @@ class ProfileController extends Controller
         if ($input['type'] == 'password') {
             if (auth()->user()->password == Hash::make($input['old_password'])) {
                 return response()->json(['success' => 'diff', 'msg' => 'Old Password is wrong!']);
-            }else{
+            } else {
                 $User->password =  Hash::make($input['new_password']);
             }
-           
         }
 
 

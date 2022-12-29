@@ -1,4 +1,18 @@
 <script>
+    $.ajax({
+        url: '{{ route("people-view") }}',
+        type: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(resp) {
+            if (resp.success == 'done') {
+                $('.peopleView').html(resp.html);
+            }
+        }
+    });
+
+
     $(document).on('click', '.selectedOption', function() {
         var post_id = $(this).attr('data-post-id');
         var option_index = $(this).attr('data-index');
@@ -43,10 +57,10 @@
                     // $('#progress_' + post_id + '_3').css('--w', Math.round(resp.analysis.C));
                     // $('#progress_' + post_id + '_4').css('--w', Math.round(resp.analysis.D));
 
-                    $('#percentage_bar_' + post_id + '_1').css('width', Math.round(resp.analysis.A)+'%');
-                    $('#percentage_bar_' + post_id + '_2').css('width', Math.round(resp.analysis.B)+'%');
-                    $('#percentage_bar_' + post_id + '_3').css('width', Math.round(resp.analysis.C)+'%');
-                    $('#percentage_bar_' + post_id + '_4').css('width', Math.round(resp.analysis.D)+'%');
+                    $('#percentage_bar_' + post_id + '_1').css('width', Math.round(resp.analysis.A) + '%');
+                    $('#percentage_bar_' + post_id + '_2').css('width', Math.round(resp.analysis.B) + '%');
+                    $('#percentage_bar_' + post_id + '_3').css('width', Math.round(resp.analysis.C) + '%');
+                    $('#percentage_bar_' + post_id + '_4').css('width', Math.round(resp.analysis.D) + '%');
 
                 } else {
                     console.log('error');
@@ -349,6 +363,33 @@
         var htmlComment = '<div class=""><div class="py-3"><div class="d-flex comment"><img class="rounded-circle comment-img" src="{{ asset("upload/users") }}/{{ auth()->user()->photo }}"><div class="flex-grow-1 ms-3 postComment"><div class="mb-1" style="color:#0172BD;font-weight:bold"> {{ auth()->user()->name }} <span class="ml-auto small" style="float: right;color: #000;"> ' + moment(new Date(), 'ddd DD-MMM-YYYY, hh:mm A').format('hh:mm A') + '</span></div><div class="mb-2">' + peram.comment + '</div></div>';
         $('#commentList' + peram.post_id + ' .comments ').prepend(htmlComment);
     }
+</script>
+
+
+<script>
+    $(document).on('click', '.connect', function() {
+        var connected_id = $(this).attr('data-id');
+        var msg = $(this).attr('data-msg');
+        // alert(msg);
+
+        var url = '{{ route("connection.connected") }}';
+
+        var peram = {
+            connected_id: connected_id
+        };
+
+        if (msg == undefined) {
+            msg = 'Request sent Successfully.';
+            $(this).html('<i class="fa fa-clock"></i> &nbsp; Pending');
+            $(this).addClass('disable-connect-btn');
+        } else {
+            msg = msg;
+            $(this).parents('.col-md-4').remove();
+        }
+
+        getDataByAjax(url, peram, 'POST', msg);
+
+    });
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>

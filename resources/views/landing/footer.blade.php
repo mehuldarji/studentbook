@@ -1,3 +1,7 @@
+<?php
+$cms = \App\Models\Cms::all();
+
+?>
 <footer class="">
     <!-- fixed-bottom -->
     <div class="container footerDesign">
@@ -9,22 +13,25 @@
             <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 pl-5 footer-border">
                 <h4 class="widget-title">Usefull Link</h4>
                 <ul id="menu-footer-menu-links-1" class="menu">
-                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14"><a href="#">Sign Up</a></li>
-                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15"><a href="#">Help Center</a></li>
-                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15"><a href="#">About</a></li>
-                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15"><a href="#">Blog</a></li>
-                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15"><a href="#">Careers</a></li>
-                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15"><a href="#">Learning</a></li>
-                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15"><a href="#">Jobs</a></li>
-                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15"><a href="#">People</a></li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14"><a href="{{ route('register') }}">Sign Up</a></li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15"><a href="{{ route('help-center') }}">Help Center</a></li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15"><a href="{{ route('coming-soon') }}">About</a></li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15"><a href="{{ route('coming-soon') }}">Blog</a></li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15"><a href="{{ route('coming-soon') }}">Careers</a></li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15"><a href="{{ route('coming-soon') }}">Learning</a></li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15"><a href="{{ route('coming-soon') }}">Jobs</a></li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15"><a href="{{ route('coming-soon') }}">People</a></li>
 
                 </ul>
             </div>
             <div class="col-lg-3 col-md-3 col-xs-12 col-sm-12  pl-5">
                 <h4 class="widget-title">Browse</h4>
                 <ul id="menu-footer-menu-links-1" class="menu">
-                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14"><a href="#">Privacy Policy</a></li>
-                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15"><a href="#">Terms & Conditions</a></li>
+                    @if(COUNT($cms) > 0)
+                    @foreach($cms as $cmsP)
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14"><a href="{{ route('cms-page',$cmsP->slug) }}">{{ $cmsP->page_name }}</a></li>
+                   @endforeach
+                    @endif
                     <ul id="appicon">
                         <li><a href="#"><img src="{{ asset('img/android.png') }}" width="135" height="40" alt="android"></a></li>
                         <li><a href="#"><img src="{{ asset('img/ios.png') }}" width="135" height="40" alt="ios"></a></li>
@@ -80,11 +87,11 @@
 <script src="{{ asset('js/rocket-loader.min.js') }}" data-cf-settings="48632658e8f27a523ee43f01-|49" defer=""></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993" integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA==" data-cf-beacon='{"rayId":"76af6bd18c369ba0","version":"2022.11.0","r":1,"token":"dd471ab1978346bbb991feaa79e6ce5c","si":100}' crossorigin="anonymous"></script>
 <script>
- $("document").ready(function() {
+    $("document").ready(function() {
         $(".loader").fadeOut("slow");
 
     });
-    </script>
+</script>
 
 </body>
 

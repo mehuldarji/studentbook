@@ -3,7 +3,7 @@
 
 
 <?php
-$notification = \App\Models\Notification::where('is_read',0)->get();
+$notification = \App\Models\Notification::where('is_read', 0)->where('user_id', auth()->user()->id)->get();
 
 ?>
 
@@ -17,7 +17,7 @@ $notification = \App\Models\Notification::where('is_read',0)->get();
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('vendor/slick/slick.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('vendor/slick/slick-theme.min.css') }}" />
-
+    <link rel="canonical" href="<?= URL::current(); ?>" />
     <link href="{{ asset('vendor/icons/feather.css') }}" rel="stylesheet" type="text/css">
 
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -27,29 +27,33 @@ $notification = \App\Models\Notification::where('is_read',0)->get();
     <link href="https://fonts.googleapis.com/css?family=Poppins:600%2C400%2C500%7CRoboto:400" rel="stylesheet" property="stylesheet" media="all">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> -->
- 
-<style>
 
-.disable-connect-btn{
-    background-color: gainsboro!important;
-    background: gainsboro!important;
-    border-color: gainsboro !important;
-    color: #000 !important;
-    pointer-events: none;
-    outline: none !important;
-    box-shadow : none !important
-}
-.network-item:hover{
-    box-shadow: 0 0 0 1px rgb(0 0 0 / 15%), 0 4px 6px rgb(0 0 0 / 20%);
-    transition: box-shadow 83ms;
-}
-</style>
+    <style>
+        a {
+            color: #0172BD
+        }
+
+        .disable-connect-btn {
+            background-color: gainsboro !important;
+            background: gainsboro !important;
+            border-color: gainsboro !important;
+            color: #000 !important;
+            pointer-events: none;
+            outline: none !important;
+            box-shadow: none !important
+        }
+
+        .network-item:hover {
+            box-shadow: 0 0 0 1px rgb(0 0 0 / 15%), 0 4px 6px rgb(0 0 0 / 20%);
+            transition: box-shadow 83ms;
+        }
+    </style>
 </head>
 
 <body>
-<div class="loader" ></div>
-<div class="blur-bg"></div>
-@include('include.msg')
+    <div class="loader"></div>
+    <div class="blur-bg"></div>
+    @include('include.msg')
     <nav class="navbar navbar-expand navbar-dark  osahan-nav-top p-0">
         <div class="container">
             <a class="navbar-brand mr-2" href="/home"><img src="{{ asset('img/logo.png') }}" alt="">
@@ -85,7 +89,7 @@ $notification = \App\Models\Notification::where('is_read',0)->get();
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="jobs.html"><i class="feather-briefcase mr-2"></i><span class="d-none d-lg-inline">Jobs</span></a>
+                    <a class="nav-link" href="{{ route('coming-soon') }}"><i class="feather-briefcase mr-2"></i><span class="d-none d-lg-inline">Jobs</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('connection.index') }}"><i class="feather-users mr-2"></i><span class="d-none d-lg-inline">My Networks</span></a>
@@ -93,22 +97,22 @@ $notification = \App\Models\Notification::where('is_read',0)->get();
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('chat.index') }}"><i class="feather-message-square mr-2"></i><span class="d-none d-lg-inline">Message</span></a>
                 </li>
-                
-                
+
+
                 <li class="nav-item dropdown no-arrow mx-1 osahan-list-dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="{{ route('notification') }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="feather-bell"></i>
 
                         <span class="badge badge-info badge-counter">{{ COUNT($notification) }}</span>
                     </a>
-
+                    @if(COUNT($notification) > 0)
                     <div class="dropdown-list dropdown-menu dropdown-menu-right shadow-sm">
                         <h6 class="dropdown-header">
                             Notification Center
                         </h6>
-                        @if(!empty($notification))
+
                         @foreach($notification as $row)
-                        <a class="dropdown-item d-flex align-items-center" href="notifications.html">
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('notification') }}">
                             <div class="mr-3">
                                 <div class="icon-circle bg-primary">
                                     <i class="feather-bell text-white"></i>
@@ -121,10 +125,11 @@ $notification = \App\Models\Notification::where('is_read',0)->get();
                         </a>
 
                         @endforeach
-                        @endif
-                        
-                        <a class="dropdown-item text-center small text-gray-500" href="notifications.html">Show all notification</a>
+
+
+                        <a class="dropdown-item text-center small text-gray-500" href="{{ route('notification') }}">Show all notification</a>
                     </div>
+                    @endif
                 </li>
 
                 <li class="nav-item dropdown no-arrow ml-1 osahan-profile-dropdown">
@@ -143,9 +148,10 @@ $notification = \App\Models\Notification::where('is_read',0)->get();
                                 <div class="small text-gray-500">{{auth()->user()->headline}}</div>
                             </div>
                         </div>
-                        <div class="dropdown-divider"></div>, 
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('profile.index',Crypt::encryptString(auth()->user()->id)) }}"><i class="feather-edit mr-1"></i> My Account</a>
                         <a class="dropdown-item" href="{{ route('profile.update') }}"><i class="feather-user mr-1"></i> Edit Profile</a>
+                        <a class="dropdown-item" href="{{ route('notification') }}"><i class="feather-bell mr-1"></i> Notifications</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();" href="{{ route('logout') }}"><i class="feather-log-out mr-1"></i> Logout</a>

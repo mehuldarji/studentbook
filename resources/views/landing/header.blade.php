@@ -69,13 +69,13 @@ footer{
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="jobs.html"><i class="feather-briefcase mr-2"></i><span class="d-none d-lg-inline">Jobs</span></a>
+                    <a class="nav-link" href="{{ route('coming-soon') }}"><i class="feather-briefcase mr-2"></i><span class="d-none d-lg-inline">Jobs</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="connection.html"><i class="feather-users mr-2"></i><span class="d-none d-lg-inline">People</span></a>
+                    <a class="nav-link" href="{{ route('coming-soon') }}"><i class="feather-users mr-2"></i><span class="d-none d-lg-inline">People</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="connection.html"><i class="feather-book-open mr-1"></i><span class="d-none d-lg-inline">Learning</span></a>
+                    <a class="nav-link" href="{{ route('coming-soon') }}"><i class="feather-book-open mr-1"></i><span class="d-none d-lg-inline">Learning</span></a>
                 </li>
                 <li class="nav-item">
                 

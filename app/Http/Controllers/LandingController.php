@@ -15,11 +15,13 @@ class LandingController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    
+
     public function index()
     {
-        return view('landing/landing');
+        if (!auth()->user()) {
+            return view('landing/landing');
+        } else {
+            return redirect('home');
+        }
     }
-
-
 }

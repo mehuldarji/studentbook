@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class MailCron extends Model
 {
     use HasFactory;
+
+    protected $table = 'mail_cron';
 }
