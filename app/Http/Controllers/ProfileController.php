@@ -35,7 +35,7 @@ class ProfileController extends Controller
             'user_id' => auth()->user()->id,
             'view_user_id' => Crypt::decryptString($id),
         );
-        
+
         $this->addProfileView($array);
 
         $user = User::where('id', Crypt::decryptString($id))->first();
@@ -67,8 +67,7 @@ class ProfileController extends Controller
         if ($input['type'] == 'img') {
             $image = $request->file('photo');
             if ($image != '') {
-                $new_name = rand() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('upload/users'), $new_name);
+                $new_name = $this->uploadImage($image, 'upload/users');
             } else {
                 $new_name = "";
             }

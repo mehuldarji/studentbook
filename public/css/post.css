@@ -25,7 +25,8 @@ box-shadow: 0px 5px 10px rgba(0,0,0,0.1); */
 .wrapper .poll-area {
     margin: 20px 0 15px 0;
 }
-.percentage_bar{
+
+.percentage_bar {
     width: 0%;
     position: absolute;
     top: 0;
@@ -36,6 +37,7 @@ box-shadow: 0px 5px 10px rgba(0,0,0,0.1); */
     z-index: -2;
     transition: width 200ms ease-in-out;
 }
+
 .poll-area label {
     display: block;
     position: relative;
@@ -295,10 +297,43 @@ input[type="checkbox"] {
     background-color: #F5F5F5;
 }
 
-.postComment{
+.postComment {
     background-color: #F2F2F2;
     margin-left: 8px !important;
     padding: 8px 8px 8px 8px;
     border-radius: 0 8px 8px 8px;
     border: 1px solid #F2F2F2;
+}
+
+.sectionSticky {
+    /* position: sticky;
+    top: 25px; */
+}
+
+.postImagesdefult {
+    margin-bottom: 15px;
+    width: auto;
+    height: 675px;
+    border-radius: 0.25rem !important;
+}
+
+.animations {
+    background: linear-gradient(90deg,
+            rgb(0 0 0 / 20%),
+            rgb(70 70 70 / 13%),
+            rgb(0 0 0 / 11%));
+    background-size: 400% 100%;
+    -webkit-animation: skeletonAnimation 1.4s ease infinite;
+    -moz-animation: skeletonAnimation 1.4s ease infinite;
+    animation: skeletonAnimation 1.4s ease infinite;
+}
+
+@keyframes skeletonAnimation {
+    0% {
+        background-position: 100% 50%;
+    }
+
+    to {
+        background-position: 0 50%;
+    }
 }

@@ -1,7 +1,7 @@
 
 <script>
     $(document).ready(function() {
-        var limit = 9;
+        var limit = "{{ config('constant.CONNECTION_URL_LIMIT'); }}";
         var start = 0;
         var action = 'inactive';
         $(document).on('click', '#home-tab', function() {
@@ -68,12 +68,12 @@
 
     });
     $(document).ready(function() {
-        var limit1 = 9;
+        var limit1 = "{{ config('constant.CONNECTION_URL_LIMIT'); }}";
         var start1 = 0;
         var action1 = 'inactive';
         // 
         $(document).on('click', '#profile-tab', function() {
-            limit1 = 9;
+            limit1 = "{{ config('constant.CONNECTION_URL_LIMIT'); }}";
             start1 = 0;
             action1 = 'inactive';
             $('#connection_data').html('');

@@ -166,7 +166,16 @@ if (!empty($checkLike)) {
             </a>
         </div>
 
-        <script async src="https://static.addtoany.com/menu/page.js"></script>
+        <script>
+            var a2a_config = a2a_config || {};
+            a2a_config.counts = {
+                recover_protocol: 'http',
+                recover_domain: '{{ substr (Request::root(), 7); }}'
+            };
+            a2a_config.icon_color = "#0172BD";
+            a2a_config.init_all();
+            a2a.init('page');
+        </script>
         <div class="" id="commentList<?= @$row->id  ?>"></div>
 
     </div>
@@ -223,7 +232,7 @@ if (!empty($checkLike)) {
 
 
 
-        <script async src="https://static.addtoany.com/menu/page.js"></script>
+
         <div class="a2a_kit a2a_kit_size_32 a2a_default_style" data-a2a-url="<?= App\Http\Controllers\Controller::get_tiny_url(route('article.show', Crypt::encryptString($row->id))); ?> " data-toggle="tooltip" data-placement="top" data-original-title="Please share a post" style="display: inline-block;vertical-align: middle;">
 
             <a class="a2a_dd " href="https://www.addtoany.com/share" style="margin-top: -3px;">
@@ -241,6 +250,7 @@ if (!empty($checkLike)) {
             };
             a2a_config.icon_color = "#0172BD";
             a2a_config.init_all();
+            a2a.init('page');
         </script>
         <div class="" id="commentList<?= @$row->id  ?>"></div>
 

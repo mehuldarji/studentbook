@@ -272,7 +272,7 @@
 
 <script>
     $(document).ready(function() {
-        var limit = 2;
+        var limit = "{{ config('constant.POST_LIMIT'); }}";
         var start = 0;
         var action = 'inactive';
 
@@ -294,6 +294,7 @@
                 },
 
                 success: function(resp) {
+                    $('.defultImg').hide();
                     $('#load_data').append(resp.html);
                     if (resp.success != 'done') {
                         $('#load_data_message').html('');
@@ -390,6 +391,10 @@
         getDataByAjax(url, peram, 'POST', msg);
 
     });
+
+    $(".a2a_dd").each(function() {
+    a2a.init('page');
+});
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>

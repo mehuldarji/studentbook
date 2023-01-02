@@ -143,8 +143,8 @@ class HomeController extends Controller
         if ($input['type'] == 'post') {
             $image = $request->file('photo');
             if ($image != '') {
-                $new_name = rand() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('upload/posts'), $new_name);
+                $new_name = $this->uploadImage($image, 'upload/posts');
+                
             } else {
                 $new_name = "";
             }

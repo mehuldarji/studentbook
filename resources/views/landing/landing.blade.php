@@ -2,12 +2,14 @@
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-  AOS.init();
+    AOS.init({
+        duration: 1200,
+    })
 </script>
 <div class="profile-cover text-center" data-aos="zoom-in">
     <img class="img-fluid" src="{{ asset('img/company-profile.jpg')}}" alt="">
 </div>
-<section class="section" >
+<section class="section">
     <div class="feat bg-gray pt-5 pb-5">
         <div class="container">
             <div class="row" data-aos="fade-up">

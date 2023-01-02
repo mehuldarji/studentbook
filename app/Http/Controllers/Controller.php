@@ -135,4 +135,11 @@ class Controller extends BaseController
             $insert->save();
         }
     }
+
+    public static function uploadImage($image, $folder)
+    {
+        $new_name = rand() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path($folder), $new_name);
+        return $new_name;
+    }
 }

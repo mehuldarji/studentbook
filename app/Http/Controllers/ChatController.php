@@ -76,8 +76,7 @@ class ChatController extends Controller
         // dd($input);
         $image = $request->file('photo');
             if ($image != '') {
-                $new_name = rand() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('upload/chat'), $new_name);
+                $new_name = $this->uploadImage($image, 'upload/chat');
             } else {
                 $new_name = "";
             }

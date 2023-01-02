@@ -1,12 +1,7 @@
 @include('include.header')
 <script src="https://cdn.ckeditor.com/4.8.0/full-all/ckeditor.js"></script>
 <link href="{{ asset('css/post.css') }}" rel="stylesheet" type="text/css">
-<style>
-    .sectionSticky {
-        position: sticky;
-        top: 25px;
-    }
-</style>
+
 <div class="py-4">
     <div class="container">
         <div class="row">
@@ -106,7 +101,53 @@
 
                 </div>
                 <div class="box   rounded  mb-3 osahan-post" id="load_data">
-                    <!-- -//--Post Data------->
+                    <!-- -//--Post Data set using ajax------->
+                    <!-- <div class="defultImg">
+                    <img class="postImagesdefult" src="{{ asset('img/post.png') }}">
+                    
+                    </div> -->
+
+                    <div class="box shadow-sm border rounded bg-white mb-3 osahan-post post_39 aos-init animated defultImg" >
+                        <div class="p-3 d-flex align-items-center border-bottom osahan-post-header">
+                            <div class="dropdown-list-image mr-3">
+                                   <div class="rounded-circle animations" style="    background-color: #F4F4F4;height: 40px;width: 40px;"></div>
+                                    <div class="status-indicator bg-success animations" style="background-color: #F4F4F4 !important;"></div>
+                                </div>
+                            
+                            <div class="font-weight-bold">
+                                    <div class="text-truncate animations" style="background-color: #F4F4F4;width: 150px;height: 15px;"></div>
+                                    <div class="small text-gray-500 animations" style="background-color: #F4F4F4;width: 150px;height: 15px; margin-top: 5px;"></div>
+                                </div>
+                            
+                            <span class="ml-auto small animations" style="background-color: #F4F4F4;width: 150px;height: 15px;">
+                                
+                            </span>
+                        </div>
+                        <div class="p-3 border-bottom osahan-post-body">
+
+                            <p class="mb-0 posts box animations" id="" style="background-color: #F4F4F4;height: 44px;"></p>
+                            <div class="animations" style="height: 320px;margin-top: 13px;">
+                           
+                            
+                            </div>
+                            
+
+
+                        </div>
+
+                        <div class="p-3 border-bottom osahan-post-footer" style="display: inline-flex;">
+                        <p class="animations" style="    background-color: #F4F4F4;height: 20px;width: 40px;margin-right: 5px;float: left;"></p>
+                        <p class="animations" style="    background-color: #F4F4F4;height: 20px;width: 40px;margin-right: 5px;float: left;"></p>
+                        <p class="animations" style="    background-color: #F4F4F4;height: 20px;width: 40px;margin-right: 5px;float: left;"></p>
+                                   
+                              
+
+                           
+
+                        </div>
+
+                    </div>
+
                 </div>
                 <div id="load_data_message"></div>
             </main>
@@ -137,7 +178,7 @@
                 <div class="box shadow-sm mb-3 rounded bg-white ads-box text-center " data-aos="fade-left">
                     <img src="img/job1.png" class="img-fluid" alt="Responsive image">
                     <div class="p-3 border-bottom">
-                        <h6 class="font-weight-bold text-dark">Osahan Solutions</h6>
+                        <h6 class="font-weight-bold text-dark">Studentbook Solutions</h6>
                         <p class="mb-0 text-muted">Looking for talent?</p>
                     </div>
 
@@ -151,7 +192,7 @@
                 <div class="box shadow-sm mb-3 rounded bg-white ads-box text-center " data-aos="fade-left">
                     <img src="img/job1.png" class="img-fluid" alt="Responsive image">
                     <div class="p-3 border-bottom">
-                        <h6 class="font-weight-bold text-dark">Osahan Solutions</h6>
+                        <h6 class="font-weight-bold text-dark">Studentbook Solutions</h6>
                         <p class="mb-0 text-muted">Looking for talent?</p>
                     </div>
 

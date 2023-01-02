@@ -30,7 +30,7 @@ $cms = \App\Models\Cms::all();
                     @if(COUNT($cms) > 0)
                     @foreach($cms as $cmsP)
                     <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14"><a href="{{ route('cms-page',$cmsP->slug) }}">{{ $cmsP->page_name }}</a></li>
-                   @endforeach
+                    @endforeach
                     @endif
                     <ul id="appicon">
                         <li><a href="#"><img src="{{ asset('img/android.png') }}" width="135" height="40" alt="android"></a></li>
@@ -89,7 +89,6 @@ $cms = \App\Models\Cms::all();
 <script>
     $("document").ready(function() {
         $(".loader").fadeOut("slow");
-
     });
 </script>
 

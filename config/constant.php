@@ -9,4 +9,6 @@ return [
     'MAIL_BG_2' => '',
     'MAIL_BG_1' => '',
     'WEB_URL' => 'http://127.0.0.1:8000/',
+    'CONNECTION_URL_LIMIT' => '9',
+    'POST_LIMIT' => '4',
 ];
