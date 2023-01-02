@@ -16,6 +16,11 @@
         letter-spacing: 1px;
         text-align: justify;
     }
+
+    .card-btn-arrow {
+        display: inline-block;
+        color: #fff;
+    }
 </style>
 <div class="bg-primary pt-5 pb-5">
     <div class="container">
@@ -100,7 +105,7 @@
 <script>
     $("#SerachQuestion").on("keyup", function() {
         var value = $(this).val().toLowerCase();
-        console.log(value);
+
         $(".faq").filter(function() {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });

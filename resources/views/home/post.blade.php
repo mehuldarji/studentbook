@@ -240,6 +240,7 @@ if (!empty($checkLike)) {
                 recover_domain: '{{ substr (Request::root(), 7); }}'
             };
             a2a_config.icon_color = "#0172BD";
+            a2a_config.init_all();
         </script>
         <div class="" id="commentList<?= @$row->id  ?>"></div>
 

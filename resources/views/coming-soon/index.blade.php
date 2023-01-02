@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Studentbook | Coming Soon</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins:600%2C400%2C500%7CRoboto:400" rel="stylesheet" property="stylesheet" media="all">
-    
+
     <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:600,700|Damion' rel='stylesheet' type='text/css'>
     <meta name="viewport" content="width=device-width, initial-scale = 1.0, user-scalable = no">
     <style>
@@ -283,6 +283,57 @@
             box-shadow: inset 0 0 100px rgb(0 0 0 / 50%);
             position: relative;
         }
+
+        .btn-primary {
+            background: -moz-linear-gradient(194deg, #00c9e4 0%, #007bff 100%);
+            background: -webkit-gradient(linear, left top, right top, color-stop(0%, #007bff), color-stop(100%, #00c9e4));
+            background: -webkit-linear-gradient(194deg, #00c9e4 0%, #007bff 100%);
+            background: -o-linear-gradient(194deg, #00c9e4 0%, #007bff 100%);
+            background: -ms-linear-gradient(194deg, #00c9e4 0%, #007bff 100%);
+            background: linear-gradient(256deg, #0172bd8a 0%, #0172BD 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#007bff', endColorstr='#00c9e4', GradientType=1);
+            border-color: var(--theme-color);
+        }
+
+        .form-control,
+        .btn {
+            font-size: 13px;
+        }
+
+        .btn-primary {
+            background: -moz-linear-gradient(194deg, #00c9e4 0%, #007bff 100%);
+            background: -webkit-gradient(linear, left top, right top, color-stop(0%, #007bff), color-stop(100%, #00c9e4));
+            background: -webkit-linear-gradient(194deg, #00c9e4 0%, #007bff 100%);
+            background: -o-linear-gradient(194deg, #00c9e4 0%, #007bff 100%);
+            background: -ms-linear-gradient(194deg, #00c9e4 0%, #007bff 100%);
+            background: linear-gradient(256deg, #00c9e4 0%, #007bff 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#007bff', endColorstr='#00c9e4', GradientType=1);
+            border-color: #007bff;
+        }
+
+        .btn-primary:not(:disabled):not(.disabled).active,
+        .btn-primary:not(:disabled):not(.disabled):active,
+        .show>.btn-primary.dropdown-toggle {
+            color: #fff;
+            background-color: #0062cc;
+            border-color: #005cbf;
+        }
+
+        .form-control,
+        .btn {
+            font-size: 13px;
+        }
+
+        .btn-group-lg>.btn,
+        .btn-lg {
+            padding: 0.5rem 1rem;
+            font-size: 15px;
+            color: #fff;
+            border-radius: 0.3rem;
+            text-decoration: none;
+            margin-top: 15px !important;
+            font-family: 'Josefin Sans', sans-serif;
+        }
     </style>
 </head>
 
@@ -293,11 +344,13 @@
             <a href="/home"><img src="{{ asset('img/logoW.png') }}" style="width:10%"></a>
             <h1>Coming Soon</h1>
             <h2><strong class="sep-one"></strong>Our Awesome Product Launch<strong class="sep-two"></strong></h2>
-        
+
         </div>
         <div id="middle">
             <p>Our this page is under construction, we are working very hard to give you the best experience with this one. <span>Studentbook</span></p>
         </div>
+
+        <a href="/" class="btn btn-primary btn-lg">Go Back</a>
 
     </div>
 </body>

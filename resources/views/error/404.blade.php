@@ -286,55 +286,67 @@
 
         h2 {
             font-family: 'Josefin Sans', sans-serif;
-    font-size: 40px;
-    letter-spacing: 0px;
-    width: 70%;
-    margin: auto;
-    line-height: 41px;
+            font-size: 40px;
+            letter-spacing: 0px;
+            width: 70%;
+            margin: auto;
+            line-height: 41px;
         }
+
         .btn:not(:disabled):not(.disabled) {
-    cursor: pointer;
-}
-.btn-primary {
-    background: -moz-linear-gradient(194deg, #00c9e4 0%, #007bff 100%);
-    background: -webkit-gradient(linear, left top, right top, color-stop(0%, #007bff), color-stop(100%, #00c9e4));
-    background: -webkit-linear-gradient(194deg, #00c9e4 0%, #007bff 100%);
-    background: -o-linear-gradient(194deg, #00c9e4 0%, #007bff 100%);
-    background: -ms-linear-gradient(194deg, #00c9e4 0%, #007bff 100%);
-    background: linear-gradient(256deg, #0172bd8a 0%, #0172BD 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#007bff', endColorstr='#00c9e4', GradientType=1);
-    border-color: var(--theme-color);
-}
-.form-control, .btn {
-    font-size: 13px;
-}
-.btn-primary {
-    background: -moz-linear-gradient(194deg,#00c9e4 0%,#007bff 100%);
-    background: -webkit-gradient(linear,left top,right top,color-stop(0%,#007bff),color-stop(100%,#00c9e4));
-    background: -webkit-linear-gradient(194deg,#00c9e4 0%,#007bff 100%);
-    background: -o-linear-gradient(194deg,#00c9e4 0%,#007bff 100%);
-    background: -ms-linear-gradient(194deg,#00c9e4 0%,#007bff 100%);
-    background: linear-gradient(256deg,#00c9e4 0%,#007bff 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#007bff',endColorstr='#00c9e4',GradientType=1 );
-    border-color: #007bff;
-}
-.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
-    color: #fff;
-    background-color: #0062cc;
-    border-color: #005cbf;
-}
-.form-control, .btn {
-    font-size: 13px;
-}
-.btn-group-lg>.btn, .btn-lg {
-    padding: 0.5rem 1rem;
-    font-size: 15px;
-    color: #fff;
-    border-radius: 0.3rem;
-    text-decoration: none;
-    margin-top: 15px !important;
-    font-family: 'Josefin Sans', sans-serif;
-}
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: -moz-linear-gradient(194deg, #00c9e4 0%, #007bff 100%);
+            background: -webkit-gradient(linear, left top, right top, color-stop(0%, #007bff), color-stop(100%, #00c9e4));
+            background: -webkit-linear-gradient(194deg, #00c9e4 0%, #007bff 100%);
+            background: -o-linear-gradient(194deg, #00c9e4 0%, #007bff 100%);
+            background: -ms-linear-gradient(194deg, #00c9e4 0%, #007bff 100%);
+            background: linear-gradient(256deg, #0172bd8a 0%, #0172BD 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#007bff', endColorstr='#00c9e4', GradientType=1);
+            border-color: var(--theme-color);
+        }
+
+        .form-control,
+        .btn {
+            font-size: 13px;
+        }
+
+        .btn-primary {
+            background: -moz-linear-gradient(194deg, #00c9e4 0%, #007bff 100%);
+            background: -webkit-gradient(linear, left top, right top, color-stop(0%, #007bff), color-stop(100%, #00c9e4));
+            background: -webkit-linear-gradient(194deg, #00c9e4 0%, #007bff 100%);
+            background: -o-linear-gradient(194deg, #00c9e4 0%, #007bff 100%);
+            background: -ms-linear-gradient(194deg, #00c9e4 0%, #007bff 100%);
+            background: linear-gradient(256deg, #00c9e4 0%, #007bff 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#007bff', endColorstr='#00c9e4', GradientType=1);
+            border-color: #007bff;
+        }
+
+        .btn-primary:not(:disabled):not(.disabled).active,
+        .btn-primary:not(:disabled):not(.disabled):active,
+        .show>.btn-primary.dropdown-toggle {
+            color: #fff;
+            background-color: #0062cc;
+            border-color: #005cbf;
+        }
+
+        .form-control,
+        .btn {
+            font-size: 13px;
+        }
+
+        .btn-group-lg>.btn,
+        .btn-lg {
+            padding: 0.5rem 1rem;
+            font-size: 15px;
+            color: #fff;
+            border-radius: 0.3rem;
+            text-decoration: none;
+            margin-top: 15px !important;
+            font-family: 'Josefin Sans', sans-serif;
+        }
     </style>
 </head>
 
@@ -353,8 +365,8 @@
 
                 If you think this is a problem with us, please tell us.<strong class="sep-two"></strong></h2>
 
-                <a href="/" class="btn btn-primary btn-lg">Go Back</a>
-            </div>
+            <a href="/" class="btn btn-primary btn-lg">Go Back</a>
+        </div>
 
     </div>
 </body>
