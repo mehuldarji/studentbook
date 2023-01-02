@@ -40,6 +40,20 @@
                             </div>
 
                             <div class="row">
+                                    <div class="col-md-12">
+                                            <div class="card">
+                                                    <div class="card-header">
+                                                            <div class="card-title">Description</div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                            <textarea class="content richText-initial" name="description" >{{old('description')}}</textarea>
+                                                    </div>
+                                            </div>
+                                    </div>
+                            </div>
+                            
+                            
+<!--                            <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-label">Description<span class="text-danger">*</span></label>
@@ -47,7 +61,7 @@
                                         <div class="help-block with-errors error"></div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                         <div class="card-footer text-right">
                             <button class="btn btn-primary">Save</button>

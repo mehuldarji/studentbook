@@ -38,16 +38,21 @@
 
 
                         </div>
-
+                        
+                        
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-label">Description</label>
-                                    <textarea rows="15" class="form-control"  placeholder="Description" data-error="Please enter Description" name="description" required>{{$posts[0]->desc}}</textarea>
-                                    <div class="help-block with-errors error"></div>
-                                </div>
+                                    <div class="col-md-12">
+                                            <div class="card">
+                                                    <div class="card-header">
+                                                            <div class="card-title">Description</div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                            <textarea class="content richText-initial" name="description"  description>{{$posts[0]->desc}}</textarea>
+                                                    </div>
+                                            </div>
+                                    </div>
                             </div>
-                        </div>
+
                     </div>
                     <div class="card-footer text-right">
                         <button class="btn btn-primary">Updated</button>

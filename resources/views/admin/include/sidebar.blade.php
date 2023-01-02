@@ -28,6 +28,12 @@ $value = \App\Models\Websitetable::where(['type' => 'brand_logo'])->first()->log
         <li class="slide">
             <a class="side-menu__item"  href="{{ route('admin.post')  }}"><i class="side-menu__icon si si-briefcase"></i><span class="side-menu__label">Post</span></a>
         </li>
+        <li class="slide">
+            <a class="side-menu__item"  href="{{ route('admin.cms')  }}"><i class="side-menu__icon si si-drawer"></i><span class="side-menu__label">Cms</span></a>
+        </li>
+        <li class="slide">
+            <a class="side-menu__item"  href="{{ route('admin.help-center')  }}"><i class="side-menu__icon si si-support"></i><span class="side-menu__label">Help Center</span></a>
+        </li>
         
     </ul>
 </aside>

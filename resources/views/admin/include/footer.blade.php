@@ -91,8 +91,8 @@
 <script src="{{ asset('assets_admin/js/index4.js') }}"></script>
 
 <!-- WYSIWYG Editor js -->
-<script src="../assets_admin/plugins/wysiwyag/jquery.richtext.js"></script>
-<script src="../assets_admin/plugins/wysiwyag/richText1.js"></script>
+<script src="{{ asset('assets_admin/plugins/wysiwyag/jquery.richtext.js') }}"></script>
+<script src="{{ asset('assets_admin/plugins/wysiwyag/richText1.js') }}"></script>
 
         
 <script>

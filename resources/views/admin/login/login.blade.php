@@ -31,8 +31,8 @@
 								
 									<div class="text-left">
 										<button type="submit" class="btn btn-primary">Login</button>
-                                                                                <a href="#">
-                                                                                    <button type="submit" class="btn btn-danger">Cancel</button></a>
+<!--                                                                                <a href="#">
+                                                                                    <button type="submit" class="btn btn-danger">Cancel</button></a>-->
 									</div>
                                                                     </form>
                                                                         <br><br>
