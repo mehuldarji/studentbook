@@ -13,21 +13,8 @@
         @foreach($comment as $row)
         @if($row->comment !='')
         <?php
-        $seconds_ago = (time() - strtotime($row->created_at));
-        $timeago = "";
-        if ($seconds_ago >= 31536000) {
-            $timeago =   intval($seconds_ago / 31536000) . "y";
-        } elseif ($seconds_ago >= 2419200) {
-            $timeago =   intval($seconds_ago / 2419200) . "m";
-        } elseif ($seconds_ago >= 86400) {
-            $timeago =  intval($seconds_ago / 86400) . "d";
-        } elseif ($seconds_ago >= 3600) {
-            $timeago =  intval($seconds_ago / 3600) . "h";
-        } elseif ($seconds_ago >= 60) {
-            $timeago =  intval($seconds_ago / 60) . "m";
-        } else {
-            $timeago =  "1m";
-        }
+        
+        $timeago = App\Http\Controllers\Controller::get_timeago(strtotime($row->created_at));
         ?>
        
         <div class="">
@@ -35,7 +22,7 @@
                 <div class="d-flex comment">
                     <img class="rounded-circle comment-img" src="{{ asset('upload/users') }}/{{ $row->photo }}">
                     <div class="flex-grow-1 ms-3 postComment">
-                        <div class="mb-1" style="color:#0172BD;font-weight:bold"> {{ $row->name }} <span class="ml-auto small" style="float: right;color: #000;">{{ $timeago }} ago</span></div>
+                        <div class="mb-1" style="color:#0172BD;font-weight:bold"> {{ $row->name }} <span class="ml-auto small" style="float: right;color: #000;">{{ $timeago }} </span></div>
                         <div class="mb-2">{{ $row->comment }}</div>
                         <!-- <div class="hstack align-items-center mb-2">
                             <a class="link-primary me-2" href="#"><i class="fa fa-thumbs-up"></i></a>

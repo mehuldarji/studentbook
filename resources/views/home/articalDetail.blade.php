@@ -5,6 +5,11 @@
 use App\Http\Controllers\HomeController;
 ?>
 <style>
+    .osahan-post-body img {
+        width: 100% !important;
+    background-color: antiquewhite;
+    height: 300px;
+}
     .articleDetail img {
         width: 100% !important;
         object-fit: cover;

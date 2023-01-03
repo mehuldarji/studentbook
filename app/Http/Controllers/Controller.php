@@ -87,14 +87,11 @@ class Controller extends BaseController
 
     public static function countFormat($n) {
         $n = $n + rand();
-        // first strip any formatting;
         $n = (0 + str_replace(",", "", $n));
     
-        // is this a number?
         if (!is_numeric($n))
             return false;
-    
-        // now filter it;
+        
         if ($n > 1000000000000)
             return round(($n / 1000000000000), 2) . 'T';
         else if ($n > 1000000000)
