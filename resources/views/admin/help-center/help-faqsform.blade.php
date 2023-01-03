@@ -7,7 +7,7 @@
 
         <div class="mb-4">
             <div class="page-header  mb-0">
-                <h4 class="page-title">Help Center Categories</h4>
+                <h4 class="page-title">Add Question</h4>
 
             </div>
         </div>
@@ -19,7 +19,7 @@
                  <div class="card">
                <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-6 col-md-6">
+                                <div class="col-lg-12">
                                      <div class="form-group">
                                          <input type="text" value="{{$id}}" name="id" hidden>
                                         <label class="form-label">Question<span class="text-danger">*</span></label>
@@ -29,21 +29,34 @@
                                     
                                 </div>
                                 
-                                <div class="col-sm-6 col-md-6">
-                                     <div class="form-group">
+<!--                                     <div class="form-group">
                                         <label class="form-label">Answer<span class="text-danger">*</span></label>
+                                        <textarea class="content richText-initial" name="content" ></textarea>
                                         <input type="text" class="form-control" placeholder="Answer" data-error="Please enter Answer" value="" name="answer" required>
                                         <div class="help-block with-errors error "></div><br>
-                                    </div>
-                                    
-                                </div>
+                                    </div>-->
+                          
                                 
+                            </div>
+                   
+                            <div class="row">
+                                    <div class="col-md-12">
+                                            <div class="card">
+                                                    <div class="card-header">
+                                                            <div class="card-title">Answer</div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                            <textarea class="content richText-initial" data-error="Please enter Answer" name="answer" ></textarea>
+                                                    </div>
+                                            </div>
+                                    </div>
                             </div>
 
                             
                         </div>
                      
                 <div class="card-footer text-right">
+                    <a href="{{ route('admin.help-faqs-cancle',[$id]) }}" class="btn btn-danger">Cancle</a>
                             <button class="btn btn-primary">Save</button>
                         </div>
             </div>

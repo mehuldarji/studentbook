@@ -40,6 +40,13 @@ class HelpController extends Controller
             return view('admin/help-center/help-edit', compact('faq_categorie'));
         }
         
+        public function help_cancle() {
+  
+             return redirect('admin/help-center');
+             
+        }
+        
+        
          public function help_update(Request $request , $id) {
             
             $faq_categories = array('name' => $request->name , 'updated_at' => date('Y-m-d H:i:s'));
@@ -75,6 +82,13 @@ class HelpController extends Controller
                 
                 return redirect()->to('admin/help-faqs/'.$request->id);
             }
+            
+            public function helpfaqs_cancle($id) {
+
+                return redirect()->to('admin/help-faqs/'.$id);
+                
+            }
+            
             
             public function helpfaqs_edit($id) {
                 

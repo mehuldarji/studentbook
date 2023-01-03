@@ -33,6 +33,7 @@
                         </div>
                      
                 <div class="card-footer text-right">
+                    <a href="{{ route('admin.help-cancle') }}" class="btn btn-danger">Cancle</a>
                             <button class="btn btn-primary">Update</button>
                         </div>
             </div>

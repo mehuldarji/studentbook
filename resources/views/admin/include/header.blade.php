@@ -102,6 +102,14 @@ $value = \App\Models\Websitetable::where(['type' => 'brand_logo'])->first()->log
         border-color:var(--theme-color);
     }
 
+    
+    table tbody tr td .fe{
+        border: 1px solid;
+        padding: 7px;
+        border-radius: 7px;
+}
+    
+    
 </style>
 
 @include('include/msg')

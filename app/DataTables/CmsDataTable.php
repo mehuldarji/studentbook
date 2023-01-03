@@ -60,7 +60,7 @@ class CmsDataTable extends DataTable
     protected function getColumns(): array
     {
         return [
-                Column::make('slug'),
+//                Column::make('slug'),
 //                Column::make('content'),
                 Column::make('page_name'),
                 Column::make('action'),

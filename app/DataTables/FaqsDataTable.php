@@ -61,7 +61,6 @@ class FaqsDataTable extends DataTable
     {
         return [
             Column::make('question'),
-            Column::make('answer'),
             Column::make('action'),
         ];
     }

@@ -43,6 +43,7 @@ Route::group(['middleware' => ['Adminlogin']], function () {
         Route::get('help-center', [HelpController::class, 'help_center'])->name('help-center');
         Route::get('help-add', [HelpController::class, 'help_add'])->name('help-add');
         Route::post('help-store', [HelpController::class, 'help_store'])->name('help-store');
+        Route::get('help-cancle', [HelpController::class, 'help_cancle'])->name('help-cancle');
         Route::get('help-edit/{id}', [HelpController::class, 'help_edit'])->name('help-edit');
         Route::get('help-delete/{id}', [HelpController::class, 'help_delete'])->name('help-delete');
         Route::post('help-update/{id}', [HelpController::class, 'help_update'])->name('help-update');
@@ -51,6 +52,7 @@ Route::group(['middleware' => ['Adminlogin']], function () {
         Route::get('help-faqs/{id}', [HelpController::class, 'help_faqs'])->name('help-faqs');
         Route::get('help-faqs-add/{id}', [HelpController::class, 'helpfaqs_add'])->name('help-faqs-add');
         Route::post('help-faqs-store', [HelpController::class, 'helpfaqs_store'])->name('help-faqs-store');
+        Route::get('help-faqs-cancle/{id}', [HelpController::class, 'helpfaqs_cancle'])->name('help-faqs-cancle');
         Route::get('help-faqs-edit/{id}', [HelpController::class, 'helpfaqs_edit'])->name('help-faqs-edit');
         Route::get('help-faqs-delete/{id}', [HelpController::class, 'helpfaqs_delete'])->name('help-faqs-delete');
         Route::post('help-faqs-update/{id}', [HelpController::class, 'helpfaqs_update'])->name('help-faqs-update');
