@@ -81,7 +81,16 @@
                             <div class="position-relative icon-form-control mb-2">
                                 <i class="feather-lock position-absolute"></i>
                                 <input placeholder="Enter your new password" type="password" class="form-control" id="new_password" name="new_password" value="">
+                            
                             </div>
+                            <div id="message">
+                                    <h6>Password must contain the following:</h6>
+                                    <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+                                    <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+                                    <p id="number" class="invalid">A <b>number</b></p>
+                                    <p id="special" class="invalid">A <b>special</b> letter</b></p>
+                                    <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+                                </div>
                             <div class="position-relative icon-form-control mb-2">
                                 <i class="feather-lock position-absolute"></i>
                                 <input placeholder="Enter your confirm password" type="password" class="form-control" id="confirm_password" name="confirm_password" value="">
@@ -404,5 +413,6 @@
         </div>
     </div>
 </div>
+@include('auth.javascript')
 @include('profile.javascript')
 @include('include.footer')

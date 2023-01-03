@@ -4,7 +4,7 @@
 <div class="bg-theme">
     <div class="container">
         <div class="row justify-content-center align-items-center d-flex vh-100">
-            <div class="col-md-5 mx-auto loginDe bg-white" >
+            <div class="col-md-5 mx-auto loginDe bg-white">
                 <div class="osahan-login py-4">
                     <div class="text-center mb-4">
                         <a href="/"><img src="{{ asset('img/logo.png') }}" alt="" style="width: 100px;"></a>
@@ -22,7 +22,7 @@
                                 <i class="feather-user position-absolute"></i>
                                 <input id="email" placeholder="Enter your email address." type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $_GET['email'] ?? old('email') }}" required autocomplete="email" autofocus>
 
-                               
+
                             </div>
                         </div>
 
@@ -30,22 +30,30 @@
                             <label class="mb-1">{{ __('Password') }}</label>
                             <div class="position-relative icon-form-control">
                                 <i class="feather-unlock position-absolute"></i>
-                                <input id="password" placeholder="Enter your password." type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required autocomplete="password" autofocus>
+                                <input pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" id="password" placeholder="Enter your password." type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required autocomplete="password" autofocus>
+                                
 
-                               
                             </div>
+                            <div id="message">
+                                    <h6>Password must contain the following:</h6>
+                                    <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+                                    <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+                                    <p id="number" class="invalid">A <b>number</b></p>
+                                    <p id="special" class="invalid">A <b>special</b> letter</b></p>
+                                    <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+                                </div>
                         </div>
 
                         <div class="form-group">
                             <label class="mb-1">{{ __('Confirm Password') }}</label>
                             <div class="position-relative icon-form-control">
                                 <i class="feather-unlock position-absolute"></i>
-                                <input id="password-confirm" type="password" placeholder="Enter your confirm password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                           
-                               
+                                <input pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" id="password-confirm" type="password" placeholder="Enter your confirm password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+
+
                             </div>
                         </div>
-                       
+
 
 
                         <div class="row mb-0">
@@ -61,6 +69,5 @@
         </div>
     </div>
 </div>
+@include('auth.javascript')
 @endsection
-
-
