@@ -303,6 +303,7 @@ input[type="checkbox"] {
     padding: 8px 8px 8px 8px;
     border-radius: 0 8px 8px 8px;
     border: 1px solid #F2F2F2;
+    margin-right: 15px;
 }
 
 .sectionSticky {

@@ -25,7 +25,9 @@ $cms = \App\Models\Cms::all();
                 </ul>
             </div>
             <div class="col-lg-3 col-md-3 col-xs-12 col-sm-12  pl-5">
+                @if(COUNT($cms) > 0)
                 <h4 class="widget-title">Browse</h4>
+                @endif
                 <ul id="menu-footer-menu-links-1" class="menu">
                     @if(COUNT($cms) > 0)
                     @foreach($cms as $cmsP)
@@ -91,6 +93,11 @@ $cms = \App\Models\Cms::all();
         $(".loader").fadeOut("slow");
     });
 </script>
+
+
+<!-- Start of studentbookhelp Zendesk Widget script -->
+<script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=fff5c5d5-4cc6-43bd-a244-dbc1e6bd7f1e"> </script><!-- End of studentbookhelp Zendesk Widget script -->
+
 
 </body>
 

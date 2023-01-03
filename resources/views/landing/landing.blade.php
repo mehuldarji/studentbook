@@ -87,5 +87,4 @@
 
 </section>
 
-
 @include('landing.footer')

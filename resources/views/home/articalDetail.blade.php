@@ -1,6 +1,7 @@
 @include('include.header')
 <link href="{{ asset('css/post.css') }}" rel="stylesheet" type="text/css">
 <?php
+
 use App\Http\Controllers\HomeController;
 ?>
 <style>
@@ -148,7 +149,7 @@ use App\Http\Controllers\HomeController;
             <p class="mb-0 posts box" id="descshow{{ $row->id }}">{!! $row->desc !!}
             </p>
             @if($row->type != 'article')
-            <p class="mb-0 posts box " style="display: none" id="descless{{ $row->id }}">{!! $row->desc !!} 
+            <p class="mb-0 posts box " style="display: none" id="descless{{ $row->id }}">{!! $row->desc !!}
             </p>
             @endif
             @endif
@@ -230,10 +231,12 @@ use App\Http\Controllers\HomeController;
 
         <div class="p-3 border-bottom osahan-post-footer">
             <a href="javascript:void()" data-count="<?= COUNT($like) ?>" data-is-like="<?= @$likeIS ?>" data-id="<?= @$row->id  ?>" class="mr-3 text-secondary clickLike"><i class="<?= @$icon ?> text-danger icon<?= @$row->id  ?>" data-toggle="tooltip" data-placement="top" data-original-title="Like & Unlike"></i><span class="value<?= @$row->id  ?>"> <?php if (COUNT($like) > 0) {
-                                                                                                                                                                                                                                                                                                                                                                    echo COUNT($like);
+                                                                                                                                                                                                                                                                                                                                                                    $count = App\Http\Controllers\Controller::countFormat(COUNT($like));
+                                                                                                                                                                                                                                                                                                                                                                    echo $count;
                                                                                                                                                                                                                                                                                                                                                                 } ?></span></a>
             <a href="javascript:void()" data-toggle="tooltip" data-placement="top" data-original-title="Comments" class="mr-3 text-secondary opencomment" data-id="<?= @$row->id  ?>"><i class="feather-message-square"></i> <?php if (COUNT($comment) > 0) {
-                                                                                                                                                                                                                                    echo COUNT($comment);
+                                                                                                                                                                                                                                    $countcomment = App\Http\Controllers\Controller::countFormat(COUNT($comment));
+                                                                                                                                                                                                                                    echo $countcomment;
                                                                                                                                                                                                                                 } ?></a>
 
 
@@ -278,7 +281,7 @@ use App\Http\Controllers\HomeController;
             <p class="mb-0 posts box" id="descshow{{ $row->id }}">{!! $row->desc !!}
             </p>
             @if($row->type != 'article')
-            <p class="mb-0 posts box " style="display: none" id="descless{{ $row->id }}">{!! $row->desc !!} 
+            <p class="mb-0 posts box " style="display: none" id="descless{{ $row->id }}">{!! $row->desc !!}
             </p>
             @endif
             @endif
@@ -295,10 +298,13 @@ use App\Http\Controllers\HomeController;
 
         <div class="p-3 border-bottom osahan-post-footer">
             <a href="javascript:void()" data-count="<?= COUNT($like) ?>" data-is-like="<?= @$likeIS ?>" data-id="<?= @$row->id  ?>" class="mr-3 text-secondary clickLike"><i class="<?= @$icon ?> text-danger icon<?= @$row->id  ?>" data-toggle="tooltip" data-placement="top" data-original-title="Like & Unlike"></i><span class="value<?= @$row->id  ?>"> <?php if (COUNT($like) > 0) {
-                                                                                                                                                                                                                                                                                                                                                                    echo COUNT($like);
+
+                                                                                                                                                                                                                                                                                                                                                                    $count = App\Http\Controllers\Controller::countFormat(COUNT($like));
+                                                                                                                                                                                                                                                                                                                                                                    echo $count;
                                                                                                                                                                                                                                                                                                                                                                 } ?></span></a>
             <a href="javascript:void()" data-toggle="tooltip" data-placement="top" data-original-title="Comments" class="mr-3 text-secondary opencomment" data-id="<?= @$row->id  ?>"><i class="feather-message-square"></i> <?php if (COUNT($comment) > 0) {
-                                                                                                                                                                                                                                    echo COUNT($comment);
+                                                                                                                                                                                                                                    $countcomment = App\Http\Controllers\Controller::countFormat(COUNT($comment));
+                                                                                                                                                                                                                                    echo $countcomment;
                                                                                                                                                                                                                                 } ?> </a>
 
 

@@ -1,12 +1,13 @@
-
 <script>
     $(document).ready(function() {
         var limit = "{{ config('constant.CONNECTION_URL_LIMIT'); }}";
+        var limit = parseInt(limit);
         var start = 0;
         var action = 'inactive';
         $(document).on('click', '#home-tab', function() {
             $('#load_data').html('');
-            limit = 9;
+            limit = "{{ config('constant.CONNECTION_URL_LIMIT'); }}";
+            limit = parseInt(limit);
             start = 0;
             action = 'inactive';
             load_country_data(limit, start);
@@ -15,7 +16,7 @@
 
 
         function load_country_data(limit, start) {
-
+            
             var url = '{{ route("connection.user") }}';
             var peram = {
                 limit: limit,
@@ -69,11 +70,14 @@
     });
     $(document).ready(function() {
         var limit1 = "{{ config('constant.CONNECTION_URL_LIMIT'); }}";
+        var limit1 = parseInt(limit1);
         var start1 = 0;
         var action1 = 'inactive';
         // 
         $(document).on('click', '#profile-tab', function() {
+
             limit1 = "{{ config('constant.CONNECTION_URL_LIMIT'); }}";
+            limit1 = parseInt(limit1);
             start1 = 0;
             action1 = 'inactive';
             $('#connection_data').html('');
@@ -85,7 +89,7 @@
 
 
         function load_connection_data(limit1, start1) {
-
+           
             var url = '{{ route("connection.my-contacts") }}';
             var peram = {
                 limit: limit1,
@@ -140,6 +144,8 @@
         });
 
     });
+
+    
 
 
     $(document).on('click', '.accept', function() {

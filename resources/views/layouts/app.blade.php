@@ -30,19 +30,20 @@
         }
 
         .bg-theme {
-    background-color: #F3F2EF!important;
-}
+            background-color: #F3F2EF !important;
+        }
+
         .loginDe {
             box-shadow: 0 0px 25px rgb(0 0 0 / 7%);
             border-radius: 15px;
             padding: 30px;
         }
 
-        @media (max-width:768px){
+        @media (max-width:768px) {
             .loginDe {
-            
-            padding: 5px;
-        }
+
+                padding: 5px;
+            }
         }
     </style>
 </head>
@@ -51,9 +52,9 @@
 
 
     <main>
-    <div class="loader" ></div>
-<div class="blur-bg"></div>
-    @include('include.msg')
+        <div class="loader"></div>
+        <div class="blur-bg"></div>
+        @include('include.msg')
         @yield('content')
     </main>
     <script src="{{ asset('vendor/jquery/jquery.min.js')}}" type="28ed724a0bfe3d065bf5b69f-text/javascript"></script>
@@ -67,16 +68,16 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
-     $("document").ready(function() {
+    $("document").ready(function() {
         $(".loader").fadeOut("slow");
 
     });
 
-    function clickSubmit(){
+    function clickSubmit() {
         $('.loader').show();
     }
-    
 </script>
+
 </html>
 </body>
 

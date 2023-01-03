@@ -96,16 +96,22 @@ class ProfileController extends Controller
             $User->language = $input['language'];
 
             UserEducation::where('user_id', auth()->user()->id)->delete();
-            for ($i = 0; $i < COUNT($input['from']); $i++) {
-
-                $UserE = new UserEducation();
-                $UserE->user_id = auth()->user()->id;
-                $UserE->from = $input['from'][$i];
-                $UserE->to = $input['to'][$i];
-                $UserE->institute = $input['institute'][$i];
-                $UserE->position = $input['position'][$i];
-                $UserE->created_at = date('Y-m-d H:i:s');
-                $UserE->save();
+            if (@$input['from']) {
+                if (COUNT($input['from']) > 0) {
+                    for ($i = 0; $i < COUNT($input['from']); $i++) {
+                        if($input['from'][$i] != '' && $input['to'][$i] != '' && $input['institute'][$i] != '' && $input['position'][$i] != ''){
+                            $UserE = new UserEducation();
+                            $UserE->user_id = auth()->user()->id;
+                            $UserE->from = $input['from'][$i];
+                            $UserE->to = $input['to'][$i];
+                            $UserE->institute = $input['institute'][$i];
+                            $UserE->position = $input['position'][$i];
+                            $UserE->created_at = date('Y-m-d H:i:s');
+                            $UserE->save();
+                        }
+                        
+                    }
+                }
             }
         }
 

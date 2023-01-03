@@ -1,12 +1,46 @@
 @include('include.header')
 <script src="https://cdn.ckeditor.com/4.8.0/full-all/ckeditor.js"></script>
 <link href="{{ asset('css/post.css') }}" rel="stylesheet" type="text/css">
-
-<div class="py-4">
+<style>
+/* .bbb::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 425px;
+    height: 300px;
+    filter: blur(200px);
+    background: #F2652D;
+    border-radius: 100%;
+}
+.sss::after {
+    content: "";
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    background: #275570;
+    width: 372px;
+    height: 250px;
+    filter: blur(200px);
+    border-radius: 100%;
+}
+.sss::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 30%;
+    background: #F2652D;
+    width: 306px;
+    height: 200px;
+    filter: blur(200px);
+    border-radius: 100%;
+} */
+    </style>
+<div class="py-4 bbb">
     <div class="container">
-        <div class="row">
+        <div class="row sss">
 
-            <main class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12" data-aos="fade-down">
+            <main class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12 " data-aos="fade-down">
                 <div class="box shadow-sm border rounded bg-white mb-3 osahan-share-post" data-aos="fade-down">
                     <ul class="nav nav-justified border-bottom osahan-line-tab" id="myTab" role="tablist">
                         <li class="nav-item">

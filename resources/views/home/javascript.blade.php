@@ -273,6 +273,7 @@
 <script>
     $(document).ready(function() {
         var limit = "{{ config('constant.POST_LIMIT'); }}";
+        var limit = parseInt(limit);
         var start = 0;
         var action = 'inactive';
 

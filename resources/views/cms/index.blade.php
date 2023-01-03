@@ -14,6 +14,14 @@
     letter-spacing: 1px;
     text-align: justify;
     }
+    div{
+        font-size: 15px;
+    }
+    div,
+    p,
+    h3{
+        font-family: "Poppins", Arial, Helvetica, sans-serif !important;
+    }
 </style>
 <div class="py-5 bg-primary">
     <div class="container">
@@ -30,7 +38,7 @@
         <div class="row">
             <div class="col-md-12 mx-auto">
                 <div class="bg-white p-5 shadow-sm box border rounded" style="white-space: pre-line; text-align: justify;">
-                {{ $recode->content }}
+                {!! $recode->content !!}
                 </div>
             </div>
         </div>
