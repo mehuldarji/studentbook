@@ -14,15 +14,24 @@
 
         <div class="row">
             <div class="col-md-12 col-lg-12">
-                <form data-toggle="validator" method="post" action="{{ route('admin.help-store') }}">
+                <form data-toggle="validator" method="post" action="{{ route('admin.help-faqs-update',[$faqs_data[0]->id]) }}">
                     @csrf
                  <div class="card">
                <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-sm-6 col-md-6">
                                      <div class="form-group">
-                                        <label class="form-label">Name<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" placeholder="Name" data-error="Please enter name" value="{{old('name')}}" name="name" required>
+                                        <label class="form-label">Question<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" placeholder="Question" data-error="Please enter Question" value="{{$faqs_data[0]->question}}" name="question" required>
+                                        <div class="help-block with-errors error "></div><br>
+                                    </div>
+                                    
+                                </div>
+                                
+                                <div class="col-sm-6 col-md-6">
+                                     <div class="form-group">
+                                        <label class="form-label">Answer<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" placeholder="Answer" data-error="Please enter Answer" value="{{$faqs_data[0]->answer}}" name="answer" required>
                                         <div class="help-block with-errors error "></div><br>
                                     </div>
                                     

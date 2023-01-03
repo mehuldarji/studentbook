@@ -7,7 +7,7 @@
 
         <div class="mb-4">
             <div class="page-header  mb-0">
-                <h4 class="page-title">Help Center</h4>
+                <h4 class="page-title">Help Center Categories</h4>
 
             </div>
         </div>
@@ -19,7 +19,7 @@
                  <div class="card">
                <div class="card-body">
                            <div class="row">
-                                <div class="col-sm-6 col-md-6">
+                                <div class="col-lg-12">
                                      <div class="form-group">
                                         <label class="form-label">Name<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" placeholder="Name" data-error="Please enter name"  value="{{$faq_categorie[0]->name}}" name="name" required>
@@ -30,7 +30,6 @@
                                 
                             </div>
 
-                            
                         </div>
                      
                 <div class="card-footer text-right">

@@ -409,9 +409,11 @@ mark, .mark {
 	padding-left: 0;
 	list-style: none;
 }
+/*
 .list-unstyled li {
 	border-bottom: 1px solid rgba(0, 40, 100, 0.12);
-}
+}*/
+
 .list-inline {
 	padding-left: 0;
 	list-style: none;

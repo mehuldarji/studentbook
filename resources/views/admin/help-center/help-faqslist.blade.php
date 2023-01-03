@@ -18,8 +18,7 @@
                     <div class="card-header">
                         <div class="card-title">Help Center Categories</div>
                         <div class="card-options">
-                            <a class="btn btn-primary" href="{{ route('admin.help-add')  }}">Add Category Name</a>
-                            
+                            <a class="btn btn-primary" href="{{ route('admin.help-faqs-add',[$id]) }}">Add Question</a>
                         </div>
                     </div>
                       <div class="card-body">

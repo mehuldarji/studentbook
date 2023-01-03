@@ -61,7 +61,6 @@ class Faq_categoriesDataTable extends DataTable
     protected function getColumns(): array
     {
         return [
-            Column::make('id'),
             Column::make('name'),
             Column::make('action'),
         ];

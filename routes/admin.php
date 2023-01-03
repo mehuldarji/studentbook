@@ -49,8 +49,11 @@ Route::group(['middleware' => ['Adminlogin']], function () {
         
         
         Route::get('help-faqs/{id}', [HelpController::class, 'help_faqs'])->name('help-faqs');
+        Route::get('help-faqs-add/{id}', [HelpController::class, 'helpfaqs_add'])->name('help-faqs-add');
         Route::post('help-faqs-store', [HelpController::class, 'helpfaqs_store'])->name('help-faqs-store');
-        
+        Route::get('help-faqs-edit/{id}', [HelpController::class, 'helpfaqs_edit'])->name('help-faqs-edit');
+        Route::get('help-faqs-delete/{id}', [HelpController::class, 'helpfaqs_delete'])->name('help-faqs-delete');
+        Route::post('help-faqs-update/{id}', [HelpController::class, 'helpfaqs_update'])->name('help-faqs-update');
         
        
     });

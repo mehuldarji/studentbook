@@ -69,12 +69,27 @@
                                 <div class="d-flex">
                                     <div>
                                         <h6 class="mb-1">Current Year Users</h6>
+                                        
+
+                                    
+                                        
                                         <h3 class="mb-2 font-weight-semibold text-dark">{{$current_year}}
-                                            @if($total>=0)
-                                            <span class="text-success fs-14 ml-2">(+{{$total}}%)</span>
-                                            @else
-                                            <span class="text-danger fs-14 ml-2">({{$total}}%)</span>
-                                            @endif
+                                            
+                                            
+                                            @if($previous_year > $current_year)
+                                                <?php
+                                                    $calculation =  (100/$previous_year )  * ($previous_year -  $current_year); 
+                                                ?>
+                                                    <span class="text-danger fs-14 ml-2">(-{{round($calculation,2)}}%)</span>
+
+                                                    @else
+                                                <?php  
+                                                    $calculation =  (100/$previous_year )  * ($current_year -  $previous_year) ;
+                                                ?>
+                                                    <span class="text-success fs-14 ml-2">(+{{$calculation}}%)</span>
+                                                 
+                                                @endif
+
                                         </h3>
                                     </div>
                                     <div class="float-right text-right ml-auto">

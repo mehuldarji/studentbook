@@ -20,7 +20,10 @@ class FaqsDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'faqs.action')
+            ->addColumn('action', function($row) {
+                            return '<a href="' . route('admin.help-faqs-edit', $row->id) . '"><i class="fe fe-edit"></i></a>
+                                    <a href="' . route('admin.help-faqs-delete', $row->id) . '" id="delete"><i class="fe fe-trash-2" style="color:red"></i></a>';
+                        })
             ->setRowId('id');
     }
 
@@ -32,7 +35,7 @@ class FaqsDataTable extends DataTable
      */
     public function query(Faq $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->where('category_id','=',$this->id)->newQuery();
     }
 
     /**
@@ -45,8 +48,7 @@ class FaqsDataTable extends DataTable
         return $this->builder()
                     ->setTableId('faqs-table')
                     ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->orderBy(1);
+                    ->minifiedAjax();
                     
     }
 
@@ -58,7 +60,9 @@ class FaqsDataTable extends DataTable
     protected function getColumns(): array
     {
         return [
-             Column::make('id')
+            Column::make('question'),
+            Column::make('answer'),
+            Column::make('action'),
         ];
     }
 
