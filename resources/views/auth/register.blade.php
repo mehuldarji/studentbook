@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="bg-theme">
     <div class="container">
         <div class="row justify-content-center align-items-center d-flex vh-100">
@@ -19,7 +20,7 @@
                                 <i class="feather-user position-absolute"></i>
                                 <input id="name" placeholder="Enter your full name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-                               
+
                             </div>
                         </div>
                         <div class="form-group">
@@ -28,16 +29,24 @@
                                 <i class="feather-at-sign position-absolute"></i>
                                 <input id="email" placeholder="Enter your email address." type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
-                               
+
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="mb-1">{{ __('Password') }}</label>
                             <div class="position-relative icon-form-control">
                                 <i class="feather-unlock position-absolute"></i>
-                                <input id="password" placeholder="Enter password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required autocomplete="password" autofocus>
+                                <input pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" id="password" placeholder="Enter password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required autocomplete="password" autofocus>
 
-                                
+
+                            </div>
+                            <div id="message">
+                                <h6>Password must contain the following:</h6>
+                                <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+                                <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+                                <p id="number" class="invalid">A <b>number</b></p>
+                                <p id="special" class="invalid">A <b>special</b> letter</b></p>
+                                <p id="length" class="invalid">Minimum <b>8 characters</b></p>
                             </div>
                         </div>
 
@@ -45,7 +54,7 @@
                             <label class="mb-1">{{ __('Confirm Password') }}</label>
                             <div class="position-relative icon-form-control">
                                 <i class="feather-unlock position-absolute"></i>
-                                <input id="password-confirm" placeholder="Reenter your password" type="password" class="form-control " name="password_confirmation" value="{{ old('password_confirmation') }}" required autocomplete="new-password" autofocus>
+                                <input pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" id="password-confirm" placeholder="Reenter your password" type="password" class="form-control " name="password_confirmation" value="{{ old('password_confirmation') }}" required autocomplete="new-password" autofocus>
 
 
                             </div>
@@ -53,7 +62,7 @@
                         <div class="form-group">
                             <label class="mb-1">You agree to the Osahanin <a href="#">User Agreement</a>, <a href="#">Privacy Policy</a>, and <a href="#">Cookie Policy</a>.</label>
                         </div>
-                        <button class="btn btn-primary btn-block text-uppercase "  type="submit"> Agree & Join </button>
+                        <button class="btn btn-primary btn-block text-uppercase " type="submit"> Agree & Join </button>
 
                         <div class="py-3 d-flex align-item-center">
                             <a href="/forgot-password">Forgot password?</a>
@@ -67,5 +76,5 @@
         </div>
     </div>
 </div>
-
+@include('auth.javascript')
 @endsection
