@@ -16,7 +16,7 @@
             <div class="col-md-12 col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Category Name</div>
+                        <div class="card-title">{{$name}}</div>
                         <div class="card-options">
                             <a class="btn btn-primary" href="{{ route('admin.help-faqs-add',[$id]) }}">Add Question</a>
                         </div>

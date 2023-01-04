@@ -13,7 +13,7 @@
 							<div class="row">
 								<div class="col-md-12">
                                                                         <?php
-                                                                            $value = \App\Models\Websitetable::where(['type' => 'brand_logo'])->first()->logo;
+                                                                            $value = \App\Models\Websitetable::first()->logo;
                                                                         ?>
 									<img src="{{ asset('/assets_admin/upload/')}}/{{$value}}" class="mb-4 mt-2 mt-lg-0 h-8" alt="logo">
 									<h4 class="text-center text-dark fs-20 font-weight-semibold mb-1">Login to your Account</h4>

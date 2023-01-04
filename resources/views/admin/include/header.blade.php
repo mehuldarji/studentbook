@@ -1,5 +1,5 @@
 <?php
-$value = \App\Models\Websitetable::where(['type' => 'brand_logo'])->first()->logo;
+$value = \App\Models\Websitetable::first()->logo;
 ?>
 
 <head>

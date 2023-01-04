@@ -64,8 +64,11 @@ class HelpController extends Controller
         
             
             public function help_faqs(FaqsDataTable $datatable , $id) {
+                
+                 $faq_categorie = FaqCategory::where(['id' => $id])->get();
+                 $name = $faq_categorie[0]->name;
 
-                return $datatable->with('id', $id)->render('admin/help-center/help-faqslist', ['id' => $id]);
+                return $datatable->with('id', $id)->render('admin/help-center/help-faqslist', ['id' => $id],['name'=>$name]);
 
             }
             public function helpfaqs_add($id) {
